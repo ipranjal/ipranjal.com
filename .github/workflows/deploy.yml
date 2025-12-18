@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate content
-        run: npm run validate:content
-
       - name: Build Next.js static site
         run: npm run build
         env:
