@@ -5,7 +5,7 @@
     {
       "type": "email",
       "label": "Email",
-      "value": "pranjal@example.com",
+      "value": "hello@ipranjal.com",
       "primary": true,
       "ariaLabel": "Send email to Pranjal Pandey"
     },
