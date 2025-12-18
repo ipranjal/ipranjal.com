@@ -1,6 +1,6 @@
 # Pranjal's Personal Website
 
-[![Deploy to GitHub Pages](https://github.com/OWNER/REPO/actions/workflows/deploy.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/ipranjal/ipranjal.com/actions/workflows/deploy.yml/badge.svg)](https://github.com/ipranjal/ipranjal.com/actions/workflows/deploy.yml)
 
 A modern, static personal website built with Next.js 16, TypeScript, and Tailwind CSS v4. Features a clean, typography-first design with markdown-based content management.
 
