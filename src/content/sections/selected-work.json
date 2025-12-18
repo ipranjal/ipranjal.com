@@ -1,0 +1,59 @@
+{
+  "heading": "Selected Work & Engagements",
+  "intro": "System architecture, product execution, applied AI, and open-source design across founder-led products and client engagements.",
+  "workTypes": [
+    "Founder-led product architecture and execution",
+    "Open-source framework design under real-world usage constraints",
+    "End-to-end system design for production platforms",
+    "Applied AI integrations focused on reliability and measurable outcomes",
+    "Backend systems, internal tools, and automation pipelines",
+    "Mobile and web platforms built under real delivery pressure"
+  ],
+  "engagements": [
+    {
+      "name": "Corpusvision Technologies",
+      "description": "Ex-Founder and CTO, leading system architecture and product execution across client platforms",
+      "url": "https://corpusvision.com"
+    },
+    {
+      "name": "Ordercoro",
+      "description": "Designed architecture for hyper-local food delivery platform with mobile apps and backend systems",
+      "url": "https://ordercoro.com"
+    },
+   {
+      "name": "Scrawler",
+      "description": "Open-source framework for structured data extraction with focus on correctness and extensibility",
+      "url": "https://github.com/scrawler-labs"
+    },
+    {
+      "name": "PureSoftware",
+      "description": "Enterprise engagements involving internal portals, backend APIs, and production AI integrations",
+      "url": "https://puresoftware.com"
+    },
+    {
+      "name": "Nextus",
+      "description": "System architecture and execution for mobile applications and backend services",
+      "url": null
+    },
+    {
+      "name": "Akkado",
+      "description": "Cloud infrastructure setup and map-based mobile applications focused on scalability",
+      "url": "https://www.ocsipl.com/businesses/akkado/"
+    },
+    {
+      "name": "Whizcrow Technologies",
+      "description": "Early technical guide shaping architecture decisions and building product prototypes",
+      "url": "https://whizcrow.com"
+    },
+    {
+      "name": "TG Connect",
+      "description": "Built offline WiFi-based content distribution system deployed on buses",
+      "url": "https://www.tgconnectmediaservices.com"
+    },
+    {
+      "name": "Ernstaa",
+      "description": "Technical leader building MVPs and early client-facing products",
+      "url": "https://ernstaa.com/"
+    }
+  ]
+}

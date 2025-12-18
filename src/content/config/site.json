@@ -1,0 +1,24 @@
+{
+  "name": "Pranjal Pandey",
+  "title": "Pranjal Pandey – Systems Architect & Engineering Leader",
+  "description": "Helping teams build products, strong systems, and practical AI integrations. Research-backed thinking. Real-world execution. Decisions that age well.",
+  "url": "https://ipranjal.com",
+  "locale": "en_US",
+  "author": {
+    "name": "Pranjal Pandey",
+    "email": "pranjal@example.com",
+    "linkedin": "https://www.linkedin.com/in/ipranjal"
+  },
+  "seo": {
+    "keywords": [
+      "systems architecture",
+      "engineering leadership",
+      "technical consulting",
+      "AI integration",
+      "software architecture",
+      "technical strategy"
+    ],
+    "ogImage": "/og-image.png",
+    "twitterHandle": "@ipranjal"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "heading": "What I Do",
+  "pillars": [
+    {
+      "id": "system-architecture",
+      "title": "System Architecture",
+      "description": "Designing systems that scale with teams, not just traffic",
+      "points": [
+        "Architecture decisions grounded in correctness, complexity, and long-term trade-offs",
+        "Focus on systems that evolve with business needs",
+        "Balance theoretical rigor with real-world constraints"
+      ]
+    },
+    {
+      "id": "engineering-execution",
+      "title": "Engineering Execution",
+      "description": "Turning unclear problem spaces into reliable delivery",
+      "points": [
+        "Reducing tech debt and execution friction in growing codebases",
+        "Structured approach to complex problem decomposition",
+        "Mentoring teams on execution discipline"
+      ]
+    },
+    {
+      "id": "applied-ai",
+      "title": "Applied AI (Practical)",
+      "description": "AI integrations that solve real problems",
+      "points": [
+        "From PoCs to production-ready systems",
+        "Focus on reliability and measurable outcomes",
+        "No hype, no buzzwords—practical implementation"
+      ]
+    },
+    {
+      "id": "technical-leadership",
+      "title": "Technical Leadership",
+      "description": "Mentoring engineers and early teams",
+      "points": [
+        "Helping founders make better technical decisions early",
+        "Building engineering culture that values clarity and rigor",
+        "Advisory and hands-on engagement models"
+      ]
+    }
+  ]
+}

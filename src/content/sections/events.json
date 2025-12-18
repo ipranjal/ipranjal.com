@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "id": "iit-jodhpur-2025",
+      "title": "SOTA : Fair and Efficient Allocation",
+      "date": "December 15, 2025",
+      "location": "IIT Jodhpur",
+      "active": true,
+      "featured": true
+    },
+     {
+      "id": "blitz-epcf",
+      "title": "Introduction to Extendable PCF Components",
+      "date": "October 21, 2025",
+      "location": "Blitz - Happiest Minds",
+      "active": true,
+      "featured": false
+    },
+    {
+      "id": "summer-school-approximation-algorithms",
+      "title": "Summer School on Approximation Algorithm",
+      "date": "May 21, 2025",
+      "location": "IISc, Bengaluru",
+      "active": true,
+      "featured": false
+    }
+  ]
+}

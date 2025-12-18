@@ -1,0 +1,28 @@
+{
+  "heading": "Research & Education",
+  "intro": "Formal training in computer science combined with practical system-building.",
+  "credentials": [
+    {
+      "institution": "Indian Institute of Technology Jodhpur",
+      "degree": "PhD",
+      "field": "Theoretical Computer Science",
+      "period": "2025–2028",
+      "focus": [
+        "Correctness and complexity in real-world system design",
+        "Foundational problem-solving applied to scalable systems",
+        "Long-term trade-off analysis in system decisions"
+      ]
+    },
+    {
+      "institution": "Indian Institute of Technology Jodhpur",
+      "degree": "MTech",
+      "field": "Artificial Intelligence",
+      "period": "2023–2025",
+      "focus": [
+        "Research-driven thinking applied to production AI",
+        "Scalable systems and practical deployments",
+        "Trade-offs in AI integration and system design"
+      ]
+    }
+  ]
+}

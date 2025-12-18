@@ -1,0 +1,27 @@
+{
+  "heading": "Contact",
+  "intro": "Let's talk about your system challenges.",
+  "methods": [
+    {
+      "type": "email",
+      "label": "Email",
+      "value": "pranjal@example.com",
+      "primary": true,
+      "ariaLabel": "Send email to Pranjal Pandey"
+    },
+    {
+      "type": "linkedin",
+      "label": "LinkedIn",
+      "value": "https://www.linkedin.com/in/its-pranjalpandey/",
+      "primary": false,
+      "ariaLabel": "Visit Pranjal Pandey's LinkedIn profile"
+    },
+    {
+      "type": "github",
+      "label": "GitHub",
+      "value": "https://github.com/ipranjal",
+      "primary": false,
+      "ariaLabel": "Visit Pranjal Pandey's Github profile"
+    }
+  ]
+}

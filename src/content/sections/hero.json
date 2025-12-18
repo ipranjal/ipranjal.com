@@ -1,0 +1,19 @@
+{
+  "headline": "Helping teams build products, strong systems, and practical AI integrations",
+  "subheadline": "Systems Architect & Engineering Leader · IITian · Ex-Founder",
+  "supportingLine": "Research-backed thinking. Real-world execution. Decisions that age well.",
+  "ctas": [
+    {
+      "label": "Start a conversation",
+      "href": "#contact",
+      "primary": true,
+      "ariaLabel": "Navigate to contact section"
+    },
+    {
+      "label": "How I work",
+      "href": "#how-i-work",
+      "primary": false,
+      "ariaLabel": "Navigate to how I work section"
+    }
+  ]
+}

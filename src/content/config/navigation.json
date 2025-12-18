@@ -1,0 +1,52 @@
+{
+  "sections": [
+    {
+      "id": "hero",
+      "label": "Start",
+      "href": "#hero",
+      "order": 1
+    },
+    {
+      "id": "what-i-do",
+      "label": "What I Do",
+      "href": "#what-i-do",
+      "order": 2
+    },
+    {
+      "id": "how-i-work",
+      "label": "How I Work",
+      "href": "#how-i-work",
+      "order": 3
+    },
+    {
+      "id": "selected-work",
+      "label": "Selected Work",
+      "href": "#selected-work",
+      "order": 4
+    },
+    {
+      "id": "background",
+      "label": "Background",
+      "href": "#background",
+      "order": 5
+    },
+    {
+      "id": "research-education",
+      "label": "Research & Education",
+      "href": "#research-education",
+      "order": 6
+    },
+    {
+      "id": "who-should-reach-out",
+      "label": "Who Should Reach Out",
+      "href": "#who-should-reach-out",
+      "order": 7
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "href": "#contact",
+      "order": 8
+    }
+  ]
+}

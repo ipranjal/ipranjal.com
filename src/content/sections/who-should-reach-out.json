@@ -1,0 +1,21 @@
+{
+  "heading": "Who Should Reach Out",
+  "intro": "I work best with specific types of teams and challenges.",
+  "goodFit": {
+    "heading": "Good fit if:",
+    "criteria": [
+      "You're building a system that needs to scale",
+      "You're stuck on architecture or execution decisions",
+      "You want AI to work reliably in production",
+      "You value long-term thinking over quick hacks"
+    ]
+  },
+  "notFit": {
+    "heading": "Not a fit if:",
+    "criteria": [
+      "You're looking for quick freelance output",
+      "You prioritize speed over correctness",
+      "You want buzzword-driven demos"
+    ]
+  }
+}
