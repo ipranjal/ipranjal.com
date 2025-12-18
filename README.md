@@ -1,4 +1,4 @@
-# Personal Positioning Website
+# Pranjal's Personal Website
 
 [![Deploy to GitHub Pages](https://github.com/OWNER/REPO/actions/workflows/deploy.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/deploy.yml)
 
