@@ -75,7 +75,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </p>
 
         {article.date && (
-          <p className="text-sm text-muted/70 mb-12">
+          <p className="text-sm text-muted mb-12">
             {article.date}
           </p>
         )}

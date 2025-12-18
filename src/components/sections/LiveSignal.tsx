@@ -24,7 +24,7 @@ export async function LiveSignal() {
             <p className="text-sm text-muted/90">
               <span className="text-accent font-medium">Latest:</span> {latestEvent.title}
             </p>
-            <p className="text-xs text-muted/70 mt-1">
+            <p className="text-xs text-muted mt-1">
               {latestEvent.date} · {latestEvent.location}
             </p>
           </div>

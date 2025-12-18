@@ -44,15 +44,15 @@ export function WhoShouldReachOut({ data }: WhoShouldReachOutProps) {
         </div>
         
         {/* Not Fit - Reduced Visual Weight */}
-        <div className="p-8 rounded-xl border-l-2 border-muted/30 bg-surface/10 opacity-75">
-          <Heading level={3} className="mb-6 text-2xl text-muted/80">
+        <div className="p-8 rounded-xl border-l-2 border-muted/30 bg-surface/20">
+          <Heading level={3} className="mb-6 text-2xl text-muted/90">
             {data.notFit.heading}
           </Heading>
           <ul className="space-y-4">
             {data.notFit.criteria.map((criterion, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="text-muted/60 mt-1.5 flex-shrink-0 text-lg">×</span>
-                <span className="text-muted/70 leading-relaxed">{criterion}</span>
+                <span className="text-muted/70 mt-1.5 flex-shrink-0 text-lg">×</span>
+                <span className="text-muted leading-relaxed">{criterion}</span>
               </li>
             ))}
           </ul>

@@ -55,7 +55,7 @@ export default function WritingPage() {
                 </p>
                 
                 {piece.date && (
-                  <p className="text-sm text-muted/70 mb-4">
+                  <p className="text-sm text-muted mb-4">
                     {piece.date}
                   </p>
                 )}
