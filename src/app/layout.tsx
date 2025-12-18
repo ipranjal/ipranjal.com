@@ -64,9 +64,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
-        <a href="#main-content" className="skip-to-content">
-          Skip to main content
-        </a>
         <Navigation />
         <main id="main-content">
           {children}
