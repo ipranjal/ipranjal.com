@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run generate:og-image && next build",
     "start": "next start",
     "lint": "eslint",
     "validate:content": "tsx scripts/validate-content.ts",
+    "generate:og-image": "node scripts/generate-og-image.mjs",
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
