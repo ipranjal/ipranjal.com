@@ -32,35 +32,35 @@ export default function WritingPage() {
       {pieces.length === 0 ? (
         <p className="text-muted">No content currently available.</p>
       ) : (
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pieces.map((piece) => (
             <Link
               key={piece.id}
               href={`/writing/${piece.id}`}
               className="block"
             >
-              <article className="border border-border p-8 md:p-10 rounded-xl bg-surface hover:bg-surface/80 hover:border-accent/30 transition-all group cursor-pointer">
+              <article className="border border-border p-6 rounded-xl bg-surface hover:bg-surface/80 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 group cursor-pointer h-full flex flex-col">
                 {piece.tag && (
-                  <div className="inline-block px-3 py-1 rounded-full bg-accent-secondary/10 text-accent-secondary text-sm font-medium mb-4">
+                  <div className="inline-block px-3 py-1 rounded-full bg-accent-secondary/10 text-accent-secondary text-xs font-medium mb-3 w-fit">
                     {piece.tag}
                   </div>
                 )}
                 
-                <Heading level={2} className="text-2xl md:text-3xl text-foreground mb-4 group-hover:text-accent transition-colors">
+                <Heading level={2} className="text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
                   {piece.title}
                 </Heading>
                 
-                <p className="text-lg text-muted leading-relaxed mb-4 max-w-3xl">
+                <p className="text-base text-muted leading-relaxed mb-4 flex-grow">
                   {piece.premise}
                 </p>
                 
                 {piece.date && (
-                  <p className="text-sm text-muted mb-4">
+                  <p className="text-xs text-muted mb-3">
                     {piece.date}
                   </p>
                 )}
                 
-                <div className="inline-flex items-center gap-2 text-accent group-hover:text-accent-hover transition-colors font-medium">
+                <div className="inline-flex items-center gap-2 text-accent group-hover:text-accent-hover transition-colors font-medium text-sm">
                   Read Article
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </div>

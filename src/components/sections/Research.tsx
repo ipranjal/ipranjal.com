@@ -14,7 +14,7 @@ interface ResearchProps {
 
 export function Research({ data }: ResearchProps) {
   return (
-    <Section id="research-education">
+    <Section id="research-education" width="wide">
       <Heading level={2} id="research-education-heading" className="mb-4 text-4xl md:text-5xl">
         {data.heading}
       </Heading>
@@ -22,12 +22,12 @@ export function Research({ data }: ResearchProps) {
       <div className="section-divider mb-8"></div>
       
       {data.intro && (
-        <p className="text-foreground/80 mb-10 text-lg max-w-[65ch] leading-loose">
+        <p className="text-foreground/80 mb-10 text-lg max-w-3xl leading-loose">
           {data.intro}
         </p>
       )}
       
-      <div className="space-y-10 max-w-[65ch]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {data.credentials.map((credential, index) => (
           <div key={index} className="border-l-4 border-accent-secondary/30 pl-8 py-2">
             <div className="mb-4">

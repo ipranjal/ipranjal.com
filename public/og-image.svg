@@ -1,8 +1,8 @@
 <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="headlineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#5CC8E6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8B7CFF;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#E6EAF0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5CC8E6;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="dividerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#5CC8E6;stop-opacity:1" />

@@ -36,6 +36,10 @@ export interface HeroSection {
   subheadline: string
   /** Additional supporting line (10-100 characters) */
   supportingLine: string
+  /** Optional profile image URL */
+  profileImage?: string
+  /** Alt text for profile image */
+  profileAlt?: string
   /** Call-to-action buttons (1-3 items) */
   ctas: CTA[]
 }

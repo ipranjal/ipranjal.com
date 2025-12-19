@@ -1,10 +1,12 @@
 {
   "headline": "Helping teams build products, strong systems, and practical AI integrations",
-  "subheadline": "Systems Architect & Engineering Leader · IITian · Ex-Founder",
-  "supportingLine": "Research-backed thinking. Real-world execution. Decisions that age well.",
+  "subheadline": "Systems Architect & Engineering Leader · IIT Jodhpur · Ex-Founder",
+  "supportingLine": "Research-backed thinking paired with real-world execution. Decisions that age well.",
+  "profileImage": "/images/profile.jpg",
+  "profileAlt": "Pranjal Pandey - Systems Architect and Engineering Leader",
   "ctas": [
     {
-      "label": "Start a conversation",
+      "label": "Start a conversation →",
       "href": "#contact",
       "primary": true,
       "ariaLabel": "Navigate to contact section"
