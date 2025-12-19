@@ -31,14 +31,13 @@ export function Hero({ data }: HeroProps) {
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-accent-secondary/12 via-transparent to-accent/12 blur-lg"></div>
               
               {/* Image container */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent/40 shadow-2xl shadow-accent/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-background/30 via-background/15 to-transparent z-10"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/8 to-accent-secondary/8 z-10 mix-blend-overlay"></div>
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent/30 shadow-2xl shadow-accent/10">
+                <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/5 to-transparent z-10"></div>
                 <Image
                   src={data.profileImage}
                   alt={data.profileAlt || 'Profile photo'}
                   fill
-                  className="object-cover scale-105"
+                  className="object-cover"
                   priority
                   sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
                 />
