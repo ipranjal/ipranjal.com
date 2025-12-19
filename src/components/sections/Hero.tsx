@@ -26,13 +26,12 @@ export function Hero({ data }: HeroProps) {
         {data.profileImage && (
           <div className="relative flex-shrink-0 md:order-1 md:-mt-12 lg:-mt-16">
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              {/* Multi-layer gradient effects */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/20 via-accent-secondary/15 to-accent/10 blur-xl animate-pulse" style={{ animationDuration: '4s' }}></div>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-accent-secondary/12 via-transparent to-accent/12 blur-lg"></div>
+              {/* Subtle gradient glow */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/10 via-accent-secondary/8 to-transparent blur-2xl"></div>
               
               {/* Image container */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent/30 shadow-2xl shadow-accent/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/5 to-transparent z-10"></div>
+              <div className="relative w-full h-full rounded-full overflow-hidden border border-accent/20 shadow-xl shadow-black/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-background/15 to-transparent z-10"></div>
                 <Image
                   src={data.profileImage}
                   alt={data.profileAlt || 'Profile photo'}
