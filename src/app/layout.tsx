@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import "./globals.css";
 import Navigation from '@/components/Navigation';
 
@@ -63,6 +64,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TYBVMJLK06"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TYBVMJLK06');
+          `}
+        </Script>
+      </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         <Navigation />
         <main id="main-content">
