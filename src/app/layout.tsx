@@ -23,15 +23,15 @@ const jetbrainsMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL('https://ipranjal.com'),
   title: 'Pranjal Pandey – Systems Architect & Engineering Leader',
-  description: 'Helping teams build products, strong systems, and practical AI integrations. Research-backed thinking. Real-world execution. Decisions that age well.',
-  keywords: ['systems architecture', 'engineering leadership', 'technical consulting', 'AI integration', 'IIT'],
+  description: 'Engineering leader and systems architect shaping systems and practical AI. IIT Jodhpur alumnus and ex-founder.',
+  keywords: ['Pranjal Pandey', 'Pranjal Pandey IIT', 'engineering leader', 'systems architect', 'AI systems'],
   authors: [{ name: 'Pranjal Pandey' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://ipranjal.com',
     title: 'Pranjal Pandey – Systems Architect & Engineering Leader',
-    description: 'Research-backed thinking. Real-world execution. Decisions that age well.',
+    description: 'Engineering leader and systems architect shaping systems and practical AI. IIT Jodhpur alumnus and ex-founder.',
     siteName: 'Pranjal Pandey',
     images: [{
       url: '/og-image.png',
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pranjal Pandey – Systems Architect',
-    description: 'Helping teams build scalable systems and practical AI',
+    title: 'Pranjal Pandey – Engineering Leader & Systems Architect',
+    description: 'Engineering leader and systems architect shaping systems and practical AI. IIT Jodhpur alumnus and ex-founder.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -81,27 +81,52 @@ export default function RootLayout({
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
+            "@id": "https://ipranjal.com/#person",
             "name": "Pranjal Pandey",
-            "jobTitle": "Systems Architect & Engineering Leader",
+            "alternateName": [
+              "Pranjal Pandey IIT",
+              "Pranjal Pandey Engineer",
+              "Pranjal Pandey Systems Architect"
+            ],
             "url": "https://ipranjal.com",
+            "image": "https://ipranjal.com/og-image.png",
+            "jobTitle": "Engineering Leader and Systems Architect",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Independent / Advisory"
+            },
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Indian Institute of Technology Jodhpur"
+            },
+            "founderOf": [
+              {
+                "@type": "Organization",
+                "name": "Corpusvision Technologies Pvt. Ltd.",
+                "url": "https://corpusvision.com"
+              },
+              {
+                "@type": "Product",
+                "name": "Ordercoro",
+                "url": "https://ordercoro.com"
+              }
+            ],
             "sameAs": [
               "https://www.linkedin.com/in/its-pranjalpandey/",
               "https://github.com/ipranjal"
             ],
-            "alumniOf": {
-              "@type": "EducationalOrganization",
-              "name": "Indian Institute of Technology Jodhpur"
-            },
             "knowsAbout": [
               "Systems Architecture",
-              "AI Integration",
               "Engineering Leadership",
-              "Software Engineering",
-              "Technical Consulting"
+              "Artificial Intelligence",
+              "Distributed Systems",
+              "Software Architecture",
+              "AI Systems"
             ],
-            "description": "Engineering leader shaping systems and practical AI. Research-backed thinking grounded in real systems and constraints."
+            "description": "Pranjal Pandey is an engineering leader and systems architect, founder of Corpusvision Technologies and Ordercoro, focused on building resilient systems and practical AI. IIT Jodhpur alumnus and ex-founder."
           })}
         </Script>
+
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         <Navigation />
