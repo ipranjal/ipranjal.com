@@ -7,11 +7,11 @@ import { AISecurityDeliverables } from '@/components/sections/ai-security/AISecu
 import { AISecurityCTA } from '@/components/sections/ai-security/AISecurityCTA';
 
 export const metadata: Metadata = {
-  title: 'AI Security & Compliance Review | Pranjal Nadhani',
-  description: 'Expert systems-level security review for AI/ML systems. Identify prompt injection risks, data leakage, compliance gaps, and operational safety issues before they become problems.',
+  title: 'AI Security & Compliance Review | Pranjal Pandey',
+  description: ' A systems-level review of AI-driven products to identify security risks, misuse vectors, and compliance gaps.',
   openGraph: {
-    title: 'AI Security & Compliance Review | Pranjal Nadhani',
-    description: 'Expert systems-level security review for AI/ML systems. Identify prompt injection risks, data leakage, compliance gaps, and operational safety issues before they become problems.',
+    title: 'AI Security & Compliance Review | Pranjal Pandey',
+    description: ' A systems-level review of AI-driven products to identify security risks, misuse vectors, and compliance gaps.',
     type: 'website',
   },
 };
