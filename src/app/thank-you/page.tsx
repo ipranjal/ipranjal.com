@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ThankYou() {
   return (
-    <Section id="thank-you" width="narrow" className="!py-20">
+    <Section id="thank-you" className="!py-20">
       <div className="text-center max-w-2xl mx-auto">
         {/* Success icon */}
         <div className="mb-8 flex justify-center">
@@ -24,7 +24,9 @@ export default function ThankYou() {
           Thank You!
         </Heading>
         
-        <div className="section-divider mx-auto mb-8"></div>
+        <div className="flex justify-center mb-4">
+          <div className="section-divider"></div>
+        </div>
         
         <p className="text-xl text-muted mb-6">
           I&apos;ve received your Architecture Review request.
