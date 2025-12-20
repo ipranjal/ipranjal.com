@@ -1,11 +1,35 @@
 {
-  "heading": "How I Work",
-  "intro": "My approach is grounded in clarity, rigor, and practical delivery.",
+  "heading": "How I Work With Teams",
+  "intro": "My work is grounded in clarity, rigor, and practical delivery — balancing long-term system thinking with real execution constraints.",
+  "principlesHeading": "Principles",
   "principles": [
-    "I tend to work best with teams building something non-trivial",
-    "I get involved where architecture and execution decisions matter",
+    "I work best with teams building something non-trivial",
+    "I get involved where architecture and execution decisions materially affect outcomes",
     "I balance research rigor with real delivery constraints",
     "I prioritize clarity over cleverness in every decision",
-    "Engagements can be advisory, hands-on, or hybrid — based on what the system needs"
-  ]
+    "Engagements may be advisory, hands-on, or hybrid — based on what the system needs"
+  ],
+  "engagementPath": {
+    "heading": "Engagement Model",
+    "points": [
+      {
+        "description": "Start with a focused System & AI Architecture Review to identify architectural risks, AI fragility, and execution bottlenecks."
+      },
+      {
+        "description": "Align system direction with team capability and realistic growth constraints."
+      },
+      {
+        "description": "Step in with short-term, focused support to stabilize systems or take AI from PoC to reliable production — only when clear blockers exist."
+      },
+      {
+        "description": "Exit cleanly, leaving the team with clarity, artifacts, and decision frameworks that continue to work without me."
+      }
+    ],
+    "cta": {
+      "label": "Learn about the Architecture Review →",
+      "href": "/architecture-review",
+      "ariaLabel": "Learn more about the System & AI Architecture Review"
+    },
+    "ctaSubtext": "The standard entry point for most engagements."
+  }
 }

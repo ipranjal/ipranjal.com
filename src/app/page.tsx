@@ -5,25 +5,25 @@
  */
 
 import dynamic from 'next/dynamic';
-import { Hero } from '@/components/sections/Hero';
-import { LiveSignal } from '@/components/sections/LiveSignal';
-import { WhatIDo } from '@/components/sections/WhatIDo';
-import { HowIWork } from '@/components/sections/HowIWork';
-import { WritingNotes } from '@/components/sections/WritingNotes';
-import { SelectedWork } from '@/components/sections/SelectedWork';
+import { Hero } from '@/components/sections/home/Hero';
+import { LiveSignal } from '@/components/sections/home/LiveSignal';
+import { WhatIDo } from '@/components/sections/home/WhatIDo';
+import { HowIWork } from '@/components/sections/home/HowIWork';
+import { WritingNotes } from '@/components/sections/home/WritingNotes';
+import { SelectedWork } from '@/components/sections/home/SelectedWork';
 import { loadSectionContent } from '@/lib/content';
 
 // Lazy load below-fold sections for better performance
-const Background = dynamic(() => import('@/components/sections/Background').then(mod => ({ default: mod.Background })), {
+const Background = dynamic(() => import('@/components/sections/home/Background').then(mod => ({ default: mod.Background })), {
   loading: () => <div className="min-h-[400px]" />,
 });
-const Research = dynamic(() => import('@/components/sections/Research').then(mod => ({ default: mod.Research })), {
+const Research = dynamic(() => import('@/components/sections/home/Research').then(mod => ({ default: mod.Research })), {
   loading: () => <div className="min-h-[400px]" />,
 });
-const WhoShouldReachOut = dynamic(() => import('@/components/sections/WhoShouldReachOut').then(mod => ({ default: mod.WhoShouldReachOut })), {
+const WhoShouldReachOut = dynamic(() => import('@/components/sections/home/WhoShouldReachOut').then(mod => ({ default: mod.WhoShouldReachOut })), {
   loading: () => <div className="min-h-[400px]" />,
 });
-const Contact = dynamic(() => import('@/components/sections/Contact'), {
+const Contact = dynamic(() => import('@/components/sections/home/Contact'), {
   loading: () => <div className="min-h-[400px]" />,
 });
 import type {

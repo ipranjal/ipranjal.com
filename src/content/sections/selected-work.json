@@ -55,5 +55,9 @@
       "description": "Technical leader building MVPs and early client-facing products",
       "url": "https://ernstaa.com/"
     }
-  ]
+  ],
+  "socialProof": {
+    "heading": "Trusted by teams at:",
+    "companies": ["Corpusvision", "PureSoftware", "Whizcrow", "Ernstaa", "TG Connect", "Akkado"]
+  }
 }

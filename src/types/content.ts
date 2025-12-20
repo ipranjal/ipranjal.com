@@ -40,6 +40,12 @@ export interface HeroSection {
   profileImage?: string
   /** Alt text for profile image */
   profileAlt?: string
+  /** Architecture Review CTA (shown prominently) */
+  architectureReviewCTA?: {
+    text: string
+    subtext?: string
+    href: string
+  }
   /** Call-to-action buttons (1-3 items) */
   ctas: CTA[]
 }
@@ -76,8 +82,32 @@ export interface HowIWorkSection {
   heading: string
   /** Optional introductory text (20-150 characters) */
   intro?: string
+  /** Optional sub-heading for principles */
+  principlesHeading?: string
   /** Exactly 5 working principles (30-150 characters each) */
   principles: [string, string, string, string, string]
+  /** Optional engagement path information */
+  engagementPath?: {
+    heading: string
+    points?: Array<{
+      title: string
+      description: string
+    }>
+    cta: CTA
+    ctaSubtext?: string
+  }
+}
+
+/**
+ * Engagement Path Section - How engagements typically start
+ */
+export interface EngagementPathSection {
+  /** Section heading */
+  heading: string
+  /** Description of typical engagement flow */
+  description: string
+  /** Call-to-action */
+  cta: CTA
 }
 
 /**
@@ -104,6 +134,11 @@ export interface SelectedWorkSection {
   workTypes: string[]
   /** Representative client engagements (3-10 items) */
   engagements: Engagement[]
+  /** Optional social proof */
+  socialProof?: {
+    heading: string
+    companies: string[]
+  }
 }
 
 /**
@@ -422,6 +457,7 @@ export type SectionId =
   | 'live-signal'
   | 'what-i-do'
   | 'how-i-work'
+  | 'engagement-path'
   | 'writing'
   | 'selected-work'
   | 'background'

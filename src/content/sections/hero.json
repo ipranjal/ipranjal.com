@@ -4,15 +4,14 @@
   "supportingLine": "Research-backed thinking paired with real-world execution. Decisions that age well.",
   "profileImage": "/images/profile.jpg",
   "profileAlt": "Pranjal Pandey - Systems Architect and Engineering Leader",
+  "architectureReviewCTA": {
+    "text": "System & AI Architecture Review →",
+    "subtext": "Identify architectural risks before they stall execution.",
+    "href": "/architecture-review"
+  },
   "ctas": [
     {
-      "label": "Start a conversation →",
-      "href": "#contact",
-      "primary": true,
-      "ariaLabel": "Navigate to contact section"
-    },
-    {
-      "label": "How I work",
+      "label": "Not sure? See how I work →",
       "href": "#how-i-work",
       "primary": false,
       "ariaLabel": "Navigate to how I work section"

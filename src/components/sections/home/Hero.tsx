@@ -61,7 +61,23 @@ export function Hero({ data }: HeroProps) {
             {data.supportingLine}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center sm:items-start">
+            {data.architectureReviewCTA && (
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <Button
+                  href={data.architectureReviewCTA.href}
+                  primary={true}
+                  ariaLabel="Learn about System & AI Architecture Review"
+                >
+                  {data.architectureReviewCTA.text}
+                </Button>
+                {data.architectureReviewCTA.subtext && (
+                  <p className="text-sm text-muted/70 italic max-w-xs text-center sm:text-left">
+                    {data.architectureReviewCTA.subtext}
+                  </p>
+                )}
+              </div>
+            )}
             {data.ctas.map((cta) => (
               <Button
                 key={cta.href}
