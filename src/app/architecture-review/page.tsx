@@ -16,7 +16,7 @@ import { ArchitectureCTA } from '@/components/sections/architecture/Architecture
 
 export const metadata: Metadata = {
   title: 'System & AI Architecture Review | Pranjal Pandey',
-  description: 'A focused, senior-level engagement to identify what will break in your system—and how to fix it—before scale, AI, or team growth makes it expensive.',
+  description: 'A focused, senior-level engagement to identify what will break as you scale. Designed for teams building non-trivial products who want architecture and AI decisions that age well.',
 };
 
 export default function ArchitectureReview() {
