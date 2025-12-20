@@ -2,20 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ipranjal.com/</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-12-21</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ipranjal.com/writing/</loc>
-    <lastmod>2025-12-18</lastmod>
+    <loc>https://ipranjal.com/architecture-review</loc>
+    <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ipranjal.com/ai-security-review</loc>
+    <lastmod>2025-12-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ipranjal.com/writing</loc>
+    <lastmod>2025-12-21</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ipranjal.com/events/</loc>
-    <lastmod>2025-12-18</lastmod>
+    <loc>https://ipranjal.com/writing/ai-integration-insurance</loc>
+    <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ipranjal.com/writing/crypto-exchange-serverless-notes</loc>
+    <lastmod>2024-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ipranjal.com/writing/fair-efficient-allocation-sota</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ipranjal.com/writing/reusable-extendable-pcf</loc>
+    <lastmod>2023-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ipranjal.com/events</loc>
+    <lastmod>2025-12-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

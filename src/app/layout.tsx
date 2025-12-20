@@ -77,6 +77,31 @@ export default function RootLayout({
             gtag('config', 'G-TYBVMJLK06');
           `}
         </Script>
+        <Script id="structured-data" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Pranjal Pandey",
+            "jobTitle": "Systems Architect & Engineering Leader",
+            "url": "https://ipranjal.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/its-pranjalpandey/",
+              "https://github.com/ipranjal"
+            ],
+            "alumniOf": {
+              "@type": "EducationalOrganization",
+              "name": "Indian Institute of Technology Jodhpur"
+            },
+            "knowsAbout": [
+              "Systems Architecture",
+              "AI Integration",
+              "Engineering Leadership",
+              "Software Engineering",
+              "Technical Consulting"
+            ],
+            "description": "Engineering leader shaping systems and practical AI. Research-backed thinking grounded in real systems and constraints."
+          })}
+        </Script>
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         <Navigation />

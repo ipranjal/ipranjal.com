@@ -12,6 +12,17 @@ import type { EventsSection } from '@/types/content';
 export const metadata = {
   title: 'Speaking & Events – Pranjal Pandey',
   description: 'Speaking engagements, conferences, and events featuring Pranjal Pandey on system architecture, AI, and engineering leadership.',
+  openGraph: {
+    title: 'Speaking & Events – Pranjal Pandey',
+    description: 'Talks, workshops, and conversations on system architecture, AI integration, and technical decision-making.',
+    type: 'website',
+    url: 'https://ipranjal.com/events',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Speaking & Events – Pranjal Pandey',
+    description: 'Talks on system architecture, AI integration, and engineering leadership.',
+  },
 };
 
 export default async function EventsPage() {

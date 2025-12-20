@@ -13,6 +13,17 @@ import { getAllArticles } from '@/lib/markdown';
 export const metadata = {
   title: 'Writing & Notes – Pranjal Pandey',
   description: 'Essays, technical notes, and architecture writeups on system design, AI integration, and long-term engineering decisions.',
+  openGraph: {
+    title: 'Writing & Notes – Pranjal Pandey',
+    description: 'Technical notes and essays on systems, architecture, and engineering decisions that age well.',
+    type: 'website',
+    url: 'https://ipranjal.com/writing',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Writing & Notes – Pranjal Pandey',
+    description: 'Technical notes on system design, AI integration, and engineering decisions.',
+  },
 };
 
 export default function WritingPage() {
