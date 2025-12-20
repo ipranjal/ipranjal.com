@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, FormEvent, useRef, useEffect } from 'react'
+import { useState, FormEvent, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Section } from '@/components/ui/Section'
 import { Heading } from '@/components/ui/Heading'
 import Script from 'next/script'
 
-export default function RequestReview() {
+function RequestReviewForm() {
   const searchParams = useSearchParams()
   const [reviewType, setReviewType] = useState<'architecture' | 'ai-security'>('architecture')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -309,5 +309,23 @@ export default function RequestReview() {
         </div>
       </Section>
     </>
+  )
+}
+
+export default function RequestReview() {
+  return (
+    <Suspense fallback={
+      <Section width='wide' id="form" className="!pt-16 !pb-20">
+        <Heading level={1} className="mb-3 text-4xl md:text-5xl text-center">
+          Request a Review
+        </Heading>
+        <div className="flex justify-center mb-3">
+          <div className="section-divider"></div>
+        </div>
+        <p className="text-lg text-muted text-center mb-10">Loading form...</p>
+      </Section>
+    }>
+      <RequestReviewForm />
+    </Suspense>
   )
 }

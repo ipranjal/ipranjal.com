@@ -1,11 +1,12 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Section } from '@/components/ui/Section'
 import { Heading } from '@/components/ui/Heading'
 import { Button } from '@/components/ui/Button'
 
-export default function ThankYou() {
+function ThankYouContent() {
   const searchParams = useSearchParams()
   const reviewType = searchParams.get('type') === 'ai-security' ? 'ai-security' : 'architecture'
   
@@ -82,5 +83,22 @@ export default function ThankYou() {
         </div>
       </div>
     </Section>
+  )
+}
+
+export default function ThankYou() {
+  return (
+    <Suspense fallback={
+      <Section id="thank-you" className="!py-20">
+        <div className="text-center max-w-2xl mx-auto">
+          <Heading level={1} className="mb-4 text-4xl md:text-5xl">
+            Thank You!
+          </Heading>
+          <p className="text-lg text-muted">Loading...</p>
+        </div>
+      </Section>
+    }>
+      <ThankYouContent />
+    </Suspense>
   )
 }
