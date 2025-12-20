@@ -8,6 +8,7 @@ import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllArticleIds, getArticleById } from '@/lib/markdown';
 
 interface ArticlePageProps {
@@ -33,9 +34,32 @@ export async function generateMetadata({ params }: ArticlePageProps) {
     };
   }
 
+  const ogImage = article.featuredImage || '/og-image.png';
+  const url = `https://ipranjal.com/writing/${slug}`;
+
   return {
     title: `${article.title} – Pranjal Pandey`,
     description: article.premise,
+    openGraph: {
+      title: article.title,
+      description: article.premise,
+      type: 'article',
+      url,
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: article.title,
+      }],
+      ...(article.date && { publishedTime: article.date }),
+      ...(article.tag && { tags: [article.tag] }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.premise,
+      images: [ogImage],
+    },
   };
 }
 
@@ -81,6 +105,21 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         )}
 
         <div className="section-divider mb-12"></div>
+
+        {/* Featured Image */}
+        {article.featuredImage && (
+          <div className="mb-12 rounded-lg overflow-hidden border border-border/30 relative">
+            <Image
+              src={article.featuredImage}
+              alt={article.title}
+              width={1200}
+              height={630}
+              className="w-full h-auto"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+        )}
 
         {/* Article Content */}
         <div 

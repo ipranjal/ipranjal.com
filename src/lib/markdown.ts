@@ -16,8 +16,10 @@ export interface ArticleMetadata {
   id: string;
   title: string;
   premise: string;
-  tag?: 'Architecture' | 'AI' | 'Systems' | 'Leadership' | 'Engineering';
+  tag?: 'Architecture' | 'AI' | 'Systems' | 'Leadership' | 'Engineering' | 'Case Study';
   date?: string;
+  featuredImage?: string;
+  featured?: boolean;
 }
 
 export interface Article extends ArticleMetadata {
@@ -51,6 +53,8 @@ export function getAllArticles(): ArticleMetadata[] {
       premise: data.premise,
       tag: data.tag,
       date: data.date,
+      featuredImage: data.featuredImage,
+      featured: data.featured || false,
     };
   });
 
@@ -83,6 +87,8 @@ export async function getArticleById(id: string): Promise<Article | null> {
       premise: data.premise,
       tag: data.tag,
       date: data.date,
+      featuredImage: data.featuredImage,
+      featured: data.featured || false,
       content,
       htmlContent,
     };

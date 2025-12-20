@@ -2,130 +2,56 @@
 id: reusable-extendable-pcf
 title: Building a Reusable and Extendable PCF Component Framework
 premise: Designing EPCF to bridge low-code speed with enterprise-grade control.
+featuredImage: /images/articles/epcf.jpg
+featured: true
 tag: Architecture
 date: March 2025
 ---
 
-Power Platform promises rapid delivery, but breaks down quickly once systems demand reuse, customization, and API-driven behavior. Standard components work until they don’t—at which point teams are forced to either accept limitations or rebuild everything from scratch.
 
-This case study documents how we designed **EPCF (Extended PowerApps Component Framework)** to solve that exact gap: enabling reusable, extensible, and production-ready UI components inside Power Pages without sacrificing developer control or maintainability.
+Low-code platforms tend to fail quietly. They work well at first. Delivery is fast, demos look convincing, and early iterations feel productive. Over time, though, systems begin to resist change. Reuse becomes awkward. Custom behavior leaks into places it doesn’t belong. Teams either accept the constraints or start rebuilding the same logic again and again in slightly different forms.
 
----
+Power Platform followed this exact pattern. Standard Power Pages components were sufficient until real systems demanded more—multiple APIs, richer interaction models, variation across portals, and evolution without constant rewrites. At that point, the choice became binary: stay within the platform’s limits, or abandon its abstractions entirely.
 
-## The problem: low-code ceilings in real systems
+EPCF emerged from the refusal to accept that tradeoff.
 
-In real enterprise products, UI components are rarely static. They need to:
-- Integrate with multiple backend APIs
-- Support sorting, filtering, pagination, and formatting
-- Adapt across portals, entities, and business contexts
-- Evolve without repeated rewrites
+The intent was not to replace low-code tooling, but to restore architectural leverage where it mattered. The question was simple but uncomfortable: how do you keep the speed of Power Pages while regaining control over reuse, extensibility, and long-term maintenance?
 
-Power Pages’ default components are intentionally constrained. Building custom PCFs from scratch, on the other hand, is time-consuming and leads to duplicated logic across teams and projects.
+The answer turned out not to be “more flexibility,” but *better boundaries*.
 
-The core tension was clear: **speed versus control**.
+In enterprise systems, UI components are rarely static. They integrate with APIs that change over time, adapt to different business contexts, and accumulate edge cases through real usage. When every new requirement forces a rewrite, the problem is not missing features—it is missing structure.
 
----
+EPCF was shaped around a single constraint: one component should work across many systems without becoming rigid or fragile. That immediately ruled out one-off PCFs and ad-hoc customization. It also ruled out exposing unlimited configuration that would slowly turn into an untyped programming layer.
 
-## Design goal: one component, many systems
+Instead, structure had to carry the weight.
 
-EPCF was designed with three non-negotiable goals:
+Internally, EPCF introduced separation where the base platform intentionally stayed flat. Rendering, data flow, formatting, event handling, and extensibility were no longer entangled. A stable core coordinated lifecycle and state, while everything that changed frequently lived at the edges. The goal was not abstraction for its own sake, but insulation—so that new behavior could be added without destabilizing existing ones.
 
-1. **High reuse without rigidity**  
-   A single component should adapt across portals, entities, and APIs.
+This separation paid off most clearly when APIs entered the picture.
 
-2. **Clear extension points**  
-   Custom behavior should be additive, not invasive.
+Rather than binding components to specific backend contracts, EPCF treated APIs as interchangeable inputs. Behavior was driven through a structured configuration layer that defined columns, filters, sorting semantics, pagination behavior, and formatting rules. Changing an API no longer meant rebuilding the component; it meant changing how the component was *described*.
 
-3. **No-code for users, full control for developers**  
-   Business users configure behavior via metadata, while developers retain code-level authority when needed.
+Configuration stopped being a workaround and became a control surface.
 
----
+As EPCF was used across products, repetition became visible. Pagination logic appeared everywhere. Sorting rules were reimplemented repeatedly. Filters behaved inconsistently across teams. These were not hard problems, just expensive ones to keep solving.
 
-## Architectural approach
+Those patterns were folded into the framework deliberately—not to be clever, but to remove choice. Defaults encoded the common case, so developers didn’t have to keep re-deciding the same things. Less code was written, but more importantly, fewer decisions were left to chance.
 
-At its core, EPCF sits on top of the **Power Pages Component Framework**, but introduces a structured internal architecture that separates concerns cleanly :contentReference[oaicite:1]{index=1}.
+Extensibility presented its own risk. Reusable systems often die by a thousand flags and conditionals, each added to satisfy one more edge case. EPCF avoided this by pushing all custom behavior outward. Instead of modifying the core, extensions lived as plugins—additive, isolated, and explicit.
 
-The system is organized around:
-- A **core engine** responsible for API-driven rendering, lifecycle management, and state coordination
-- **Views** that define table structure, columns, headers, and cell rendering
-- **Managers** that encapsulate HTTP communication, event handling, and data flow
-- **Formatters** that standardize date, number, and currency rendering
-- **Plugins** that extend column behavior without modifying core logic
+That decision mattered more over time than it did initially. The core stayed stable not because no one touched it, but because there was rarely a reason to.
 
-This separation ensured that extending behavior never meant touching the core rendering engine.
+None of this would have mattered if the framework only worked in theory. EPCF was validated under production pressure: multiple enterprise portals, different domains, distinct data models, and hundreds of active users. The same framework instance survived backend evolution, feature growth, and changing teams without fragmenting.
 
----
+That was the real test.
 
-## Configuration-driven behavior
+The most important lessons were not specific to Power Platform. Configuration had to be constrained, or it would become chaos. Extension points had to be documented, or they would be misused. Backward compatibility had to be treated as a first-class concern, or reuse would collapse over time.
 
-A key decision was to make EPCF **API-agnostic by design**. Instead of binding tightly to specific backend contracts, EPCF relies on a JSON configuration layer that defines:
-- Column definitions and mappings
-- Filter types and UI behavior
-- Sorting and pagination semantics
-- Data formatting rules
+EPCF did not succeed because it was flexible. It succeeded because it was *selectively inflexible* in the right places.
 
-This allowed the same component to integrate with multiple REST APIs simply by changing configuration—no PCF rebuild required :contentReference[oaicite:2]{index=2}.
+It did not try to escape low-code abstractions. It met them halfway—preserving speed while reintroducing structure where systems actually age.
 
----
+The broader lesson extends beyond PCF. Reusable systems don’t win by solving every edge case. They win by encoding good defaults, exposing intentional extension points, and reducing the cost of being consistent over time.
 
-## Built-in capabilities that reduced duplication
-
-Several features were deliberately built into the framework because they appeared repeatedly across products:
-
-- **Pagination**: Automatic injection of page index and page size parameters, adaptable to query or header-based APIs
-- **Sorting**: Consistent handling of `orderBy` and sort direction across backends
-- **Filtering**: Metadata-driven filter UI generation with correct payload formatting per data type
-- **Data binding and formatting**: Automatic mapping of API responses to UI without custom glue code
-
-Each of these removed dozens of lines of repetitive logic per implementation.
-
----
-
-## Extensibility without core modification
-
-Rather than adding flags or conditional logic, EPCF uses a **plugin model** for extending behavior. Examples include:
-- Text rendering with clipboard support
-- Date formatting with tooltips and badges
-- Action menus for row-level operations
-- Custom column renderers defined entirely outside the core
-
-This kept the core engine stable while enabling rapid feature growth :contentReference[oaicite:3]{index=3}.
-
----
-
-## Production adoption and validation
-
-EPCF is not a theoretical framework. It has been deployed in multiple enterprise-grade products, including:
-- Servicer Portal
-- Producer Portal
-
-Across deployments, EPCF powers:
-- Multiple portals
-- Dozens of reusable UI components
-- Several distinct data entities
-- Hundreds of active production users :contentReference[oaicite:4]{index=4}
-
-This real-world usage validated the original design assumption: **reusability only matters if it survives production pressure**.
-
----
-
-## What worked—and what didn’t
-
-**What worked well**
-- Configuration over customization dramatically reduced long-term maintenance
-- Plugin-based extensibility prevented core logic decay
-- API-agnostic design made EPCF resilient to backend evolution
-
-**What required discipline**
-- Configuration schemas had to be carefully constrained to avoid becoming a second programming language
-- Clear documentation was essential to prevent misuse of extension points
-- Backward compatibility needed to be treated as a first-class concern
-
----
-
-## Closing perspective
-
-EPCF was not built to replace Power Platform abstractions—it was built to **extend them responsibly**. The goal was never flexibility for its own sake, but *repeatability under real constraints*.
-
-The broader lesson applies beyond PCF: reusable systems succeed when they encode the right defaults, expose intentional extension points, and resist the temptation to solve every edge case upfront.
-
+In complex products, flexibility is not about how much you allow.  
+It’s about how carefully you decide **where** to allow it.

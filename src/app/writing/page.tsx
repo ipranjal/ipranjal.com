@@ -7,6 +7,7 @@
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllArticles } from '@/lib/markdown';
 
 export const metadata = {
@@ -39,16 +40,30 @@ export default function WritingPage() {
               href={`/writing/${piece.id}`}
               className="block"
             >
-              <article className="border border-border p-6 rounded-xl bg-surface hover:bg-surface/80 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 group cursor-pointer h-full flex flex-col">
-                {piece.tag && (
-                  <div className="inline-block px-3 py-1 rounded-full bg-accent-secondary/10 text-accent-secondary text-xs font-medium mb-3 w-fit">
-                    {piece.tag}
+              <article className="border border-border rounded-xl bg-surface hover:bg-surface/80 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 group cursor-pointer h-full flex flex-col overflow-hidden">
+                {piece.featuredImage && (
+                  <div className="relative w-full h-48 mb-4">
+                    <Image
+                      src={piece.featuredImage}
+                      alt={piece.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
                   </div>
                 )}
                 
-                <Heading level={2} className="text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
-                  {piece.title}
-                </Heading>
+                <div className="p-6 flex flex-col flex-grow">
+                  {piece.tag && (
+                    <div className="inline-block px-3 py-1 rounded-full bg-accent-secondary/10 text-accent-secondary text-xs font-medium mb-3 w-fit">
+                      {piece.tag}
+                    </div>
+                  )}
+                  
+                  <Heading level={2} className="text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
+                    {piece.title}
+                  </Heading>
                 
                 <p className="text-base text-muted leading-relaxed mb-4 flex-grow">
                   {piece.premise}
@@ -60,9 +75,10 @@ export default function WritingPage() {
                   </p>
                 )}
                 
-                <div className="inline-flex items-center gap-2 text-accent group-hover:text-accent-hover transition-colors font-medium text-sm">
-                  Read Article
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                  <div className="inline-flex items-center gap-2 text-accent group-hover:text-accent-hover transition-colors font-medium text-sm">
+                    Read Article
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </div>
                 </div>
               </article>
             </Link>
