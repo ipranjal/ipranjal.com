@@ -72,7 +72,7 @@ export function SelectedWork({ data }: SelectedWorkProps) {
       
       {data.socialProof && (
         <div className="mt-16 text-center">
-          <p className="text-sm uppercase tracking-wider text-muted/60 mb-4">
+          <p className="text-sm uppercase tracking-wider text-muted/80 mb-4">
             {data.socialProof.heading}
           </p>
           <p className="text-lg text-foreground/80">

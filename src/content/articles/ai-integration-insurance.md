@@ -2,7 +2,7 @@
 id: ai-integration-insurance
 title: AI Integration in the Insurance Domain
 premise: Turning operational complexity into decision leverage without breaking compliance or trust.
-featuredImage: /images/articles/ai-insurance.jpg
+featuredImage: /images/articles/ai-insurance.webp
 tag: Case Study
 date: February 2025
 featured: true

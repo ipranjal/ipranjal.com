@@ -7,7 +7,7 @@
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import Link from 'next/link';
-import Image from 'next/image';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { getAllArticles } from '@/lib/markdown';
 
 export function WritingNotes() {
@@ -51,11 +51,12 @@ export function WritingNotes() {
             <article className="border border-border rounded-xl bg-surface hover:bg-surface/80 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 group cursor-pointer h-full flex flex-col overflow-hidden">
               {piece.featuredImage && (
                 <div className="relative w-full h-48 mb-4">
-                  <Image
+                  <OptimizedImage
                     src={piece.featuredImage}
                     alt={piece.title}
                     fill
                     className="object-cover"
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-black/10" />

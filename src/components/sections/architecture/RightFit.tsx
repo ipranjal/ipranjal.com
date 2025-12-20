@@ -38,7 +38,7 @@ export function RightFit() {
         <div className="pl-8 pr-6 py-8">
           <div className="mb-6">
             <span className="text-muted/40 text-4xl mb-4 block">✗</span>
-            <Heading level={3} className="text-2xl md:text-3xl text-muted/60">
+            <Heading level={3} className="text-2xl md:text-3xl text-muted/75">
               Not a Fit If:
             </Heading>
           </div>

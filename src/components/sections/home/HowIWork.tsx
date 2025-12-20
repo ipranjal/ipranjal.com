@@ -120,7 +120,7 @@ export function HowIWork({ data }: HowIWorkProps) {
               {data.engagementPath.cta.label}
             </Button>
             {data.engagementPath.ctaSubtext && (
-              <p className="text-sm text-muted/60 mt-3">
+              <p className="text-sm text-muted/75 mt-3">
                 {data.engagementPath.ctaSubtext}
               </p>
             )}

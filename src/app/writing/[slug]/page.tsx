@@ -6,9 +6,9 @@
 
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getAllArticleIds, getArticleById } from '@/lib/markdown';
 
 interface ArticlePageProps {
@@ -109,13 +109,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Featured Image */}
         {article.featuredImage && (
           <div className="mb-12 rounded-lg overflow-hidden border border-border/30 relative">
-            <Image
+            <OptimizedImage
               src={article.featuredImage}
               alt={article.title}
               width={1200}
               height={630}
               className="w-full h-auto"
-              priority
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-black/10" />
           </div>

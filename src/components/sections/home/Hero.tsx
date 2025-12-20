@@ -38,6 +38,7 @@ export function Hero({ data }: HeroProps) {
                   fill
                   className="object-cover"
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
                 />
               </div>

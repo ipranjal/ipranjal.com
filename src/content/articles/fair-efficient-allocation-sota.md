@@ -2,7 +2,7 @@
 id: fair-efficient-allocation-sota
 title: State of the Art – Fair and Efficient Allocation
 premise: Where fairness meets efficiency, computation, and structural constraints.
-featuredImage: /images/articles/sota-fair-allocation.jpg
+featuredImage: /images/articles/sota-fair-allocation.webp
 tag: Fair Allocation
 date: December 2025
 ---

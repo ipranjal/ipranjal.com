@@ -58,7 +58,7 @@ export function AISecurityCTA() {
             Request a Security Review →
           </Button>
           
-          <p className="text-sm text-muted/60 italic mt-4">
+          <p className="text-sm text-muted/75 italic mt-4">
             This is a paid, senior-level engagement
           </p>
           

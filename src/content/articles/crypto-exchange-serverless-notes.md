@@ -2,7 +2,7 @@
 id: crypto-exchange-serverless-notes
 title: Building a Crypto Exchange Using Serverless Functions
 premise: Using serverless boundaries and Appwrite to scale complexity without scaling teams.
-featuredImage: /images/articles/crypto-exchange.jpg
+featuredImage: /images/articles/crypto-exchange.webp
 featured: true
 tag: Architecture
 date: November 2025

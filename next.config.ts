@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
   },
   trailingSlash: true, // Better compatibility with static hosting
   basePath: process.env.NODE_ENV === 'production' ? '' : '',
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Target modern browsers to reduce JavaScript bundle size
+  transpilePackages: [],
+  experimental: {
+    optimizePackageImports: ['react-icons'],
+  },
 };
 
 export default withBundleAnalyzer(nextConfig);

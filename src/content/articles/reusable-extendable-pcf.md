@@ -2,7 +2,7 @@
 id: reusable-extendable-pcf
 title: Building a Reusable and Extendable PCF Component Framework
 premise: Designing EPCF to bridge low-code speed with enterprise-grade control.
-featuredImage: /images/articles/epcf.jpg
+featuredImage: /images/articles/epcf.webp
 featured: true
 tag: Architecture
 date: March 2025

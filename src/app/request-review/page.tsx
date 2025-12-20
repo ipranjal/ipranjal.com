@@ -303,7 +303,7 @@ function RequestReviewForm() {
             </div>
           </form>
           
-          <p className="text-center text-sm text-muted/60 mt-6">
+          <p className="text-center text-sm text-muted/75 mt-6">
             I&apos;ll respond within 48 hours to discuss your specific needs.
           </p>
         </div>
