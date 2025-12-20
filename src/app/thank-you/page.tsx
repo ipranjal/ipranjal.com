@@ -1,13 +1,14 @@
+'use client'
+
+import { useSearchParams } from 'next/navigation'
 import { Section } from '@/components/ui/Section'
 import { Heading } from '@/components/ui/Heading'
 import { Button } from '@/components/ui/Button'
 
-export const metadata = {
-  title: 'Thank You | Pranjal Pandey',
-  description: 'Thank you for your architecture review request. I\'ll respond within 48 hours.',
-}
-
 export default function ThankYou() {
+  const searchParams = useSearchParams()
+  const reviewType = searchParams.get('type') === 'ai-security' ? 'ai-security' : 'architecture'
+  
   return (
     <Section id="thank-you" className="!py-20">
       <div className="text-center max-w-2xl mx-auto">
@@ -29,7 +30,7 @@ export default function ThankYou() {
         </div>
         
         <p className="text-xl text-muted mb-6">
-          I&apos;ve received your Architecture Review request.
+          I&apos;ve received your {reviewType === 'ai-security' ? 'AI Security & Compliance' : 'Architecture'} Review request.
         </p>
         
         <p className="text-lg text-muted/80 mb-8">
@@ -59,9 +60,25 @@ export default function ThankYou() {
           <Button href="/" primary={true}>
             Back to Home
           </Button>
-          <Button href="/architecture-review" primary={false}>
-            Learn More About Review
-          </Button>
+          {reviewType === 'ai-security' ? (
+            <>
+              <Button href="/ai-security-review" primary={false}>
+                Learn More About AI Security Review
+              </Button>
+              <Button href="/architecture-review" primary={false}>
+                Architecture Review
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button href="/architecture-review" primary={false}>
+                Learn More About Architecture Review
+              </Button>
+              <Button href="/ai-security-review" primary={false}>
+                AI Security Review
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </Section>

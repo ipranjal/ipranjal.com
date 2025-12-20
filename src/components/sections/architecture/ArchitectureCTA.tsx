@@ -50,7 +50,7 @@ export function ArchitectureCTA() {
             </div>
           </div>
           
-          <Button href="/request-review" primary={true}>
+          <Button href="/request-review?type=architecture" primary={true}>
             Request a Review Conversation →
           </Button>
           

@@ -81,7 +81,7 @@ export function ArchitectureHero() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center sm:items-start">
             <div className="flex flex-col items-center sm:items-start gap-2">
-              <Button href="/request-review" primary={true}>
+              <Button href="/request-review?type=architecture" primary={true}>
                 Request a Review Conversation →
               </Button>
               <p className="text-sm text-muted/70 italic max-w-xs text-center sm:text-left">

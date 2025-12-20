@@ -57,12 +57,28 @@ export function Hero({ data }: HeroProps) {
           
           <div className="section-divider mx-auto md:mx-0"></div>
           
-          <p className="text-lg md:text-xl text-muted/80 mb-10 max-w-2xl mx-auto md:mx-0">
+          <p className="text-lg md:text-xl text-muted/80 mb-4 max-w-2xl mx-auto md:mx-0">
             {data.supportingLine}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center sm:items-start">
-            {data.architectureReviewCTA && (
+          {data.clarifyingLine && (
+            <p className="text-base md:text-lg text-foreground/90 mb-8 max-w-2xl mx-auto md:mx-0 font-medium">
+              {data.clarifyingLine}
+            </p>
+          )}
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center sm:items-start flex-wrap">
+            {data.dualCTAs && data.dualCTAs.map((cta) => (
+              <Button
+                key={cta.href}
+                href={cta.href}
+                primary={cta.primary}
+                ariaLabel={cta.ariaLabel}
+              >
+                {cta.label}
+              </Button>
+            ))}
+            {data.architectureReviewCTA && !data.dualCTAs && (
               <div className="flex flex-col items-center sm:items-start gap-2">
                 <Button
                   href={data.architectureReviewCTA.href}

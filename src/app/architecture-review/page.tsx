@@ -12,6 +12,7 @@ import { HowItWorks } from '@/components/sections/architecture/HowItWorks';
 import { Deliverables } from '@/components/sections/architecture/Deliverables';
 import { AfterReview } from '@/components/sections/architecture/AfterReview';
 import { RightFit } from '@/components/sections/architecture/RightFit';
+import { AISystemsCrossLink } from '@/components/sections/architecture/AISystemsCrossLink';
 import { ArchitectureCTA } from '@/components/sections/architecture/ArchitectureCTA';
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function ArchitectureReview() {
       <Deliverables />
       <AfterReview />
       <RightFit />
+      <AISystemsCrossLink />
       <ArchitectureCTA />
     </>
   );

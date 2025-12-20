@@ -1,15 +1,28 @@
 'use client'
 
 import { useState, FormEvent, useRef, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Section } from '@/components/ui/Section'
 import { Heading } from '@/components/ui/Heading'
 import Script from 'next/script'
 
 export default function RequestReview() {
+  const searchParams = useSearchParams()
+  const [reviewType, setReviewType] = useState<'architecture' | 'ai-security'>('architecture')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const [turnstileLoaded, setTurnstileLoaded] = useState(false)
   const turnstileWidgetId = useRef<string | null>(null)
+  
+  useEffect(() => {
+    // Get review type from URL parameter
+    const type = searchParams.get('type')
+    if (type === 'ai-security') {
+      setReviewType('ai-security')
+    } else {
+      setReviewType('architecture')
+    }
+  }, [searchParams])
   
   useEffect(() => {
     // Initialize Turnstile when script loads
@@ -73,6 +86,7 @@ export default function RequestReview() {
       'team-size': formData.get('team-size'),
       situation: formData.get('situation'),
       concerns: formData.get('concerns'),
+      'review-type': formData.get('review-type'),
       website: formData.get('website'), // honeypot
       'cf-turnstile-response': turnstileToken
     }
@@ -87,8 +101,8 @@ export default function RequestReview() {
       const result = await response.json()
       
       if (result.success) {
-        // Redirect to thank you page
-        window.location.href = '/thank-you'
+        // Redirect to thank you page with review type
+        window.location.href = `/thank-you?type=${reviewType}`
       } else {
         setMessage({ 
           type: 'error', 
@@ -124,7 +138,10 @@ export default function RequestReview() {
       {/* Form Section */}
       <Section width='wide' id="form" className="!pt-16 !pb-20">
         <Heading level={1} className="mb-3 text-4xl md:text-5xl text-center">
-          Request a System & AI Architecture Review
+          {reviewType === 'ai-security' 
+            ? 'Request an AI Security & Compliance Review'
+            : 'Request a System & AI Architecture Review'
+          }
         </Heading>
         
         <div className="flex justify-center mb-3">
@@ -149,6 +166,9 @@ export default function RequestReview() {
           )}
           
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Hidden field for review type */}
+            <input type="hidden" name="review-type" value={reviewType} />
+            
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                 Name *
@@ -235,6 +255,9 @@ export default function RequestReview() {
                 <option value="architecture-slowing">Architecture is slowing execution</option>
                 <option value="ai-not-production">AI integration not production-ready</option>
                 <option value="scaling-concerns">Scaling concerns</option>
+                <option value="ai-security-risks">AI security or misuse risks</option>
+                <option value="compliance-requirements">Compliance or regulatory requirements</option>
+                <option value="prompt-injection-concerns">Prompt injection or data leakage concerns</option>
                 <option value="exploring-proactively">Exploring proactively</option>
               </select>
             </div>

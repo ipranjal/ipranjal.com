@@ -1,35 +1,38 @@
 {
   "heading": "How I Work With Teams",
-  "intro": "My work is grounded in clarity, rigor, and practical delivery — balancing long-term system thinking with real execution constraints.",
-  "principlesHeading": "Principles",
-  "principles": [
-    "I work best with teams building something non-trivial",
-    "I get involved where architecture and execution decisions materially affect outcomes",
-    "I balance research rigor with real delivery constraints",
-    "I prioritize clarity over cleverness in every decision",
-    "Engagements may be advisory, hands-on, or hybrid — based on what the system needs"
-  ],
-  "engagementPath": {
-    "heading": "Engagement Model",
-    "points": [
+  "intro": "I work with teams building non-trivial systems, focusing on decisions that materially affect architecture, AI reliability, and long-term execution — balancing research rigor with real delivery constraints.",
+  "engagementModel": {
+    "intro": "Most engagements begin through one of two focused review tracks, depending on the team's current risk surface.",
+    "reviewTracks": [
       {
-        "description": "Start with a focused System & AI Architecture Review to identify architectural risks, AI fragility, and execution bottlenecks."
+        "title": "System & AI Architecture Review",
+        "subtitle": "For teams designing, scaling, or integrating AI into production systems",
+        "points": [
+          "Identify key architectural risks, AI fragility, and execution bottlenecks",
+          "Align system direction with team capability and realistic constraints",
+          "Establish decision frameworks that scale beyond the engagement"
+        ],
+        "cta": {
+          "label": "Learn about the Architecture Review",
+          "href": "/architecture-review"
+        }
       },
       {
-        "description": "Align system direction with team capability and realistic growth constraints."
-      },
-      {
-        "description": "Step in with short-term, focused support to stabilize systems or take AI from PoC to reliable production — only when clear blockers exist."
-      },
-      {
-        "description": "Exit cleanly, leaving the team with clarity, artifacts, and decision frameworks that continue to work without me."
+        "title": "AI Security & Compliance Review",
+        "subtitle": "For teams deploying AI systems that must withstand misuse, failure modes, and regulatory scrutiny",
+        "points": [
+          "Analyze AI threat surfaces, system boundaries, and misuse vectors",
+          "Identify security, governance, and compliance gaps in AI workflows",
+          "Provide practical, risk-prioritized mitigation guidance"
+        ],
+        "cta": {
+          "label": "Learn about the AI Security & Compliance Review",
+          "href": "/ai-security-review"
+        }
       }
     ],
-    "cta": {
-      "label": "Learn about the Architecture Review →",
-      "href": "/architecture-review",
-      "ariaLabel": "Learn more about the System & AI Architecture Review"
-    },
-    "ctaSubtext": "The standard entry point for most engagements."
+    "beyondReview": {
+      "text": "Beyond the Review (When Needed): Step in with short-term, focused support to stabilize systems or take AI from PoC to reliable production — only when clear blockers exist. Exit cleanly, leaving the team with clarity, artifacts, and decision frameworks that continue to work without me."
+    }
   }
 }

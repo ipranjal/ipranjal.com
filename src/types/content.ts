@@ -36,6 +36,8 @@ export interface HeroSection {
   subheadline: string
   /** Additional supporting line (10-100 characters) */
   supportingLine: string
+  /** Optional clarifying line about dual tracks */
+  clarifyingLine?: string
   /** Optional profile image URL */
   profileImage?: string
   /** Alt text for profile image */
@@ -46,6 +48,8 @@ export interface HeroSection {
     subtext?: string
     href: string
   }
+  /** Dual CTAs for both review tracks */
+  dualCTAs?: CTA[]
   /** Call-to-action buttons (1-3 items) */
   ctas: CTA[]
 }
@@ -84,9 +88,9 @@ export interface HowIWorkSection {
   intro?: string
   /** Optional sub-heading for principles */
   principlesHeading?: string
-  /** Exactly 5 working principles (30-150 characters each) */
-  principles: [string, string, string, string, string]
-  /** Optional engagement path information */
+  /** Working principles (optional, for legacy support) */
+  principles?: string[]
+  /** Optional engagement path information (legacy) */
   engagementPath?: {
     heading: string
     points?: Array<{
@@ -95,6 +99,26 @@ export interface HowIWorkSection {
     }>
     cta: CTA
     ctaSubtext?: string
+  }
+  /** New dual engagement model with review tracks */
+  engagementModel?: {
+    heading: string
+    intro: string
+    reviewTracks: Array<{
+      icon?: string
+      title: string
+      subtitle: string
+      points: string[]
+      cta: {
+        label: string
+        href: string
+      }
+    }>
+    beyondReview: {
+      heading?: string
+      points?: string[]
+      text?: string
+    }
   }
 }
 
