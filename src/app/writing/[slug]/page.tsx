@@ -117,7 +117,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               className="w-full h-auto"
               priority
             />
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-black/10" />
           </div>
         )}
 
