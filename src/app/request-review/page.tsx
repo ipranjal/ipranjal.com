@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useRef, useEffect } from 'react'
 import { Section } from '@/components/ui/Section'
 import { Heading } from '@/components/ui/Heading'
 import Script from 'next/script'
@@ -8,6 +8,40 @@ import Script from 'next/script'
 export default function RequestReview() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
+  const [turnstileLoaded, setTurnstileLoaded] = useState(false)
+  const turnstileWidgetId = useRef<string | null>(null)
+  
+  useEffect(() => {
+    // Initialize Turnstile when script loads
+    const initTurnstile = () => {
+      if ((window as any).turnstile && !turnstileWidgetId.current) {
+        const widgetId = (window as any).turnstile.render('#turnstile-widget', {
+          sitekey: '0x4AAAAAACHv5aA-CgYKT_E2',
+          theme: 'dark',
+          appearance: 'interaction-only', // Managed mode
+          callback: function() {
+            setTurnstileLoaded(true)
+          }
+        })
+        turnstileWidgetId.current = widgetId
+      }
+    }
+    
+    // Check if script is already loaded
+    if ((window as any).turnstile) {
+      initTurnstile()
+    } else {
+      // Wait for script to load
+      const checkInterval = setInterval(() => {
+        if ((window as any).turnstile) {
+          initTurnstile()
+          clearInterval(checkInterval)
+        }
+      }, 100)
+      
+      return () => clearInterval(checkInterval)
+    }
+  }, [])
   
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -16,8 +50,15 @@ export default function RequestReview() {
     
     const formData = new FormData(e.currentTarget)
     
-    // Get Turnstile token
-    const turnstileToken = (window as any).turnstile?.getResponse()
+    // Get Turnstile token - try both methods
+    let turnstileToken = (window as any).turnstile?.getResponse(turnstileWidgetId.current)
+    
+    if (!turnstileToken) {
+      // Fallback: check if token is in hidden input
+      const turnstileInput = document.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement
+      turnstileToken = turnstileInput?.value
+    }
+    
     if (!turnstileToken) {
       setMessage({ type: 'error', text: 'Please complete the security verification' })
       setIsSubmitting(false)
@@ -53,12 +94,20 @@ export default function RequestReview() {
           type: 'error', 
           text: result.errors?.join(', ') || result.message 
         })
+        // Reset Turnstile on error
+        if ((window as any).turnstile && turnstileWidgetId.current) {
+          (window as any).turnstile.reset(turnstileWidgetId.current)
+        }
       }
     } catch (error) {
       setMessage({ 
         type: 'error', 
         text: 'Failed to submit request. Please try again.' 
       })
+      // Reset Turnstile on error
+      if ((window as any).turnstile && turnstileWidgetId.current) {
+        (window as any).turnstile.reset(turnstileWidgetId.current)
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -217,11 +266,7 @@ export default function RequestReview() {
             
             {/* Cloudflare Turnstile */}
             <div className="flex justify-center">
-              <div 
-                className="cf-turnstile" 
-                data-sitekey="0x4AAAAAAAzYN8KI_wDlP8oN"
-                data-theme="dark"
-              ></div>
+              <div id="turnstile-widget"></div>
             </div>
             
             <div className="flex justify-center pt-4">
