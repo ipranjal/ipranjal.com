@@ -2,10 +2,10 @@
   "heading": "How I Work With Teams",
   "intro": "I work with teams building non-trivial systems, focusing on decisions that materially affect architecture, AI reliability, and long-term execution — balancing research rigor with real delivery constraints.",
   "engagementModel": {
-    "intro": "Most engagements begin through one of two focused review tracks, depending on the team's current risk surface.",
+    "intro": "These are current ways I engage with teams today. Most engagements begin through one of two focused review tracks, depending on the team's current risk surface.",
     "reviewTracks": [
       {
-        "title": "System & AI Architecture Review",
+        "title": "Dedicated Architecture Review Track",
         "subtitle": "For teams designing, scaling, or integrating AI into production systems",
         "points": [
           "Identify key architectural risks, AI fragility, and execution bottlenecks",
@@ -18,7 +18,7 @@
         }
       },
       {
-        "title": "AI Security & Compliance Review",
+        "title": "Focused AI Security Review Track",
         "subtitle": "For teams deploying AI systems that must withstand misuse, failure modes, and regulatory scrutiny",
         "points": [
           "Analyze AI threat surfaces, system boundaries, and misuse vectors",

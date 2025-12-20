@@ -2,9 +2,23 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Navigation() {
   const pathname = usePathname();
+  const [currentHash, setCurrentHash] = useState('');
+
+  useEffect(() => {
+    // Update hash on client side only
+    setCurrentHash(window.location.hash);
+    
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -56,6 +70,16 @@ export default function Navigation() {
               }`}
             >
               Events
+            </Link>
+            <Link
+              href="/#how-i-work"
+              className={`text-sm font-medium transition-colors duration-200 ${
+                pathname === '/' && currentHash === '#how-i-work'
+                  ? 'text-accent'
+                  : 'text-muted hover:text-foreground'
+              }`}
+            >
+              Collaborate
             </Link>
           </div>
         </div>

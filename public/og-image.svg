@@ -22,25 +22,29 @@
   <circle cx="1150" cy="50" r="250" fill="url(#orbGradient)"/>
   
   <!-- Main content container -->
-  <g transform="translate(80, 140)">
+  <g transform="translate(80, 120)">
+    <!-- Name -->
+    <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#E6EAF0">
+      Pranjal Pandey
+    </text>
+    
     <!-- Headline - multi-line with gradient -->
-    <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="62" font-weight="700" fill="url(#headlineGradient)" style="line-height: 1.1">
-      <tspan x="0" dy="0">Helping teams build products,</tspan>
-      <tspan x="0" dy="70">strong systems, and practical</tspan>
-      <tspan x="0" dy="70">AI integrations</tspan>
+    <text x="0" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="700" fill="url(#headlineGradient)" style="line-height: 1.1">
+      <tspan x="0" dy="0">Engineering leader shaping</tspan>
+      <tspan x="0" dy="72">systems and practical AI</tspan>
     </text>
     
     <!-- Subheadline -->
-    <text x="0" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="300" fill="#B8C0CC">
-      Systems Architect &amp; Engineering Leader · IITian · Ex-Founder
+    <text x="0" y="255" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="300" fill="#B8C0CC">
+      Systems Architect · Engineering Leadership · IIT Jodhpur · Ex-Founder
     </text>
     
     <!-- Divider -->
-    <rect x="0" y="305" width="120" height="3" fill="url(#dividerGradient)"/>
+    <rect x="0" y="310" width="120" height="3" fill="url(#dividerGradient)"/>
     
     <!-- Supporting line -->
-    <text x="0" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#9BA4B0">
-      Research-backed thinking. Real-world execution. Decisions that age well.
+    <text x="0" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="26" fill="#9BA4B0">
+      Research-backed thinking grounded in real systems and constraints.
     </text>
   </g>
   

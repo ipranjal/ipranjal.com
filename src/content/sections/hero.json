@@ -1,30 +1,23 @@
 {
-  "headline": "Helping teams build products, strong systems, and practical AI integrations",
-  "subheadline": "Systems Architect & Engineering Leader · IIT Jodhpur · Ex-Founder",
-  "supportingLine": "Research-backed thinking paired with real-world execution. Decisions that age well.",
-  "clarifyingLine": "I work with teams across two critical tracks: system architecture & AI security.",
+  "headline": "Engineering leader shaping systems and practical AI",
+  "subheadline": "Systems Architect · Engineering Leadership · IIT Jodhpur · Ex-Founder",
+  "supportingLine": "Research-backed thinking grounded in real systems and constraints.",
   "profileImage": "/images/profile.jpg",
   "profileAlt": "Pranjal Pandey - Systems Architect and Engineering Leader",
   "dualCTAs": [
     {
-      "label": "System & AI Architecture Review →",
-      "href": "/architecture-review",
+      "label": "See how I work with teams →",
+      "href": "#how-i-work",
       "primary": true,
-      "ariaLabel": "Learn about System & AI Architecture Review"
-    },
-    {
-      "label": "AI Security & Compliance Review →",
-      "href": "/ai-security-review",
-      "primary": true,
-      "ariaLabel": "Learn about AI Security & Compliance Review"
+      "ariaLabel": "Navigate to how I work with teams"
     }
   ],
   "ctas": [
     {
-      "label": "Not sure? See how I work →",
-      "href": "#how-i-work",
+      "label": "Explore my thinking / Writing →",
+      "href": "/writing",
       "primary": false,
-      "ariaLabel": "Navigate to how I work section"
+      "ariaLabel": "Read my writing"
     }
   ]
 }

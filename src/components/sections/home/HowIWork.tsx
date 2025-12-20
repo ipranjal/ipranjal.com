@@ -37,7 +37,7 @@ export function HowIWork({ data }: HowIWorkProps) {
               {data.engagementModel.heading}
             </Heading>
           )}
-          <p className="text-foreground/80 mb-10 leading-relaxed max-w-3xl">
+          <p className="text-foreground/80 mb-4 leading-relaxed max-w-3xl">
             {data.engagementModel.intro}
           </p>
           
