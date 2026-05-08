@@ -6,6 +6,7 @@
 
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/sections/home/Hero';
+import { VentureServices } from '@/components/sections/home/VentureServices';
 import { LiveSignal } from '@/components/sections/home/LiveSignal';
 import { WhatIDo } from '@/components/sections/home/WhatIDo';
 import { HowIWork } from '@/components/sections/home/HowIWork';
@@ -61,6 +62,7 @@ export default async function Home() {
   return (
     <>
       <Hero data={heroResult.data} />
+      <VentureServices />
       <LiveSignal />
       <WhatIDo data={whatIDoResult.data} />
       <HowIWork data={howIWorkResult.data} />
