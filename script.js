@@ -38,7 +38,7 @@
   }
 
   function seekToShownTime() {
-    if (seeking || video.readyState < 2 || Math.abs(video.currentTime - shownTime) <= 0.035) return;
+    if (seeking || video.readyState < 1 || Math.abs(video.currentTime - shownTime) <= 0.035) return;
     seeking = true;
     video.currentTime = shownTime;
   }
@@ -68,6 +68,48 @@
   }), { threshold: 0.14 });
   document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
+  const timelineObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add('is-active');
+  }), { threshold: 0.42 });
+  document.querySelectorAll('.timeline-item').forEach((item) => timelineObserver.observe(item));
+
+  const story = document.querySelector('#story');
+  const timeline = story && story.querySelector('.timeline');
+  if (story && timeline) {
+    const viewport = document.createElement('div');
+    viewport.className = 'timeline-viewport';
+    timeline.parentNode.insertBefore(viewport, timeline);
+    viewport.appendChild(timeline);
+    const baseStoryHeight = story.offsetHeight;
+    const stickyTop = parseFloat(getComputedStyle(viewport).top) || 0;
+    const timelineStart = 24;
+
+    function syncStoryHeight() {
+      const travel = Math.max(0, timeline.scrollWidth - viewport.clientWidth);
+      story.style.height = `${Math.max(baseStoryHeight, timelineStart + viewport.offsetHeight + travel)}px`;
+    }
+
+    function updateStoryTimeline() {
+      const travel = Math.max(0, timeline.scrollWidth - viewport.clientWidth);
+      const startScroll = story.offsetTop;
+      const progress = Math.min(1, Math.max(0, (window.scrollY - startScroll) / Math.max(1, travel)));
+      timeline.style.transform = `translate3d(${-travel * progress}px, 0, 0)`;
+    }
+
+    window.addEventListener('scroll', updateStoryTimeline, { passive: true });
+    window.addEventListener('resize', () => { syncStoryHeight(); updateStoryTimeline(); });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      syncStoryHeight();
+      updateStoryTimeline();
+    }));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        syncStoryHeight();
+        updateStoryTimeline();
+      });
+    }
+  }
+
   const lensCopy = document.querySelector('#lens-copy');
   const lensText = {
     correctness: 'Make the important thing true before making it fast.',
@@ -83,13 +125,4 @@
     lensCopy.textContent = lensText[button.dataset.lens];
   }));
 
-  const form = document.querySelector('#contact-form');
-  const success = document.querySelector('.form-success');
-  const formNote = document.querySelector('.form-note');
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    form.reset();
-    success.hidden = false;
-    formNote.hidden = true;
-  });
 }());
