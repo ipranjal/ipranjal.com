@@ -21,24 +21,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+      - name: Stage static site
+        run: |
+          rm -rf _site
+          mkdir -p _site/assets
+          cp index.html styles.css script.js _site/
+          cp -R assets/. _site/assets/
+          touch _site/.nojekyll
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Next.js static site
-        run: npm run build
-        env:
-          NODE_ENV: production
+      - name: Validate staged site
+        run: |
+          test -f _site/index.html
+          test -f _site/styles.css
+          test -f _site/script.js
+          test -f _site/assets/hero-scroll.mp4
+          test -f _site/assets/hero-poster.png
+          test -f _site/assets/pranjal-theme.png
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./_site
 
   deploy:
     environment:

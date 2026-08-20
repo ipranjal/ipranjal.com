@@ -10,15 +10,20 @@
   let seeking = false;
   let lastBand = -1;
   let lastRender = performance.now();
+  let renderFrameId = 0;
+  let heroVisible = true;
 
   function markVideoReady() {
-    if (video.readyState >= 2) media.classList.add('video-ready');
+    if (video.readyState >= 2) {
+      media.classList.add('video-ready');
+      media.classList.remove('video-error');
+    }
   }
 
   video.addEventListener('loadedmetadata', markVideoReady);
   video.addEventListener('loadeddata', markVideoReady);
   video.addEventListener('canplay', markVideoReady);
-  video.addEventListener('error', () => media.classList.remove('video-ready'));
+  video.addEventListener('error', () => media.classList.add('video-error'));
 
   function updateHero() {
     const maxScroll = Math.max(1, hero.offsetHeight - window.innerHeight);
@@ -35,6 +40,7 @@
       count.textContent = String(bandIndex + 1).padStart(2, '0');
       lastBand = bandIndex;
     }
+    requestRender();
   }
 
   function seekToShownTime() {
@@ -45,70 +51,76 @@
 
   video.addEventListener('seeked', () => {
     seeking = false;
-    seekToShownTime();
+    requestRender();
   });
 
   function renderFrame(now) {
+    renderFrameId = 0;
     const deltaTime = Math.min(0.05, (now - lastRender) / 1000);
     lastRender = now;
     const delta = targetTime - shownTime;
     const smoothing = reduceMotion ? 1 : 1 - Math.pow(0.0001, deltaTime);
     shownTime += delta * smoothing;
     seekToShownTime();
-    requestAnimationFrame(renderFrame);
+    if (heroVisible && Math.abs(targetTime - shownTime) > 0.002) requestRender();
+  }
+
+  function requestRender() {
+    if (heroVisible && !renderFrameId) renderFrameId = requestAnimationFrame(renderFrame);
   }
 
   window.addEventListener('scroll', updateHero, { passive: true });
   window.addEventListener('resize', updateHero);
+  new IntersectionObserver(([entry]) => {
+    heroVisible = entry.isIntersecting;
+    if (heroVisible) requestRender();
+    else if (renderFrameId) cancelAnimationFrame(renderFrameId);
+  }).observe(hero);
   updateHero();
-  requestAnimationFrame(renderFrame);
+  requestRender();
 
   const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
     if (entry.isIntersecting) entry.target.classList.add('is-visible');
   }), { threshold: 0.14 });
   document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
-  const timelineObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
-    if (entry.isIntersecting) entry.target.classList.add('is-active');
-  }), { threshold: 0.42 });
-  document.querySelectorAll('.timeline-item').forEach((item) => timelineObserver.observe(item));
+  document.querySelectorAll('.story .timeline-item').forEach((item, index) => {
+    item.style.setProperty('--timeline-index', index);
+    revealObserver.observe(item);
+  });
 
-  const story = document.querySelector('#story');
-  const timeline = story && story.querySelector('.timeline');
-  if (story && timeline) {
-    const viewport = document.createElement('div');
-    viewport.className = 'timeline-viewport';
-    timeline.parentNode.insertBefore(viewport, timeline);
-    viewport.appendChild(timeline);
-    const baseStoryHeight = story.offsetHeight;
-    const stickyTop = parseFloat(getComputedStyle(viewport).top) || 0;
-    const timelineStart = 24;
 
-    function syncStoryHeight() {
-      const travel = Math.max(0, timeline.scrollWidth - viewport.clientWidth);
-      story.style.height = `${Math.max(baseStoryHeight, timelineStart + viewport.offsetHeight + travel)}px`;
-    }
-
-    function updateStoryTimeline() {
-      const travel = Math.max(0, timeline.scrollWidth - viewport.clientWidth);
-      const startScroll = story.offsetTop;
-      const progress = Math.min(1, Math.max(0, (window.scrollY - startScroll) / Math.max(1, travel)));
-      timeline.style.transform = `translate3d(${-travel * progress}px, 0, 0)`;
-    }
-
-    window.addEventListener('scroll', updateStoryTimeline, { passive: true });
-    window.addEventListener('resize', () => { syncStoryHeight(); updateStoryTimeline(); });
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      syncStoryHeight();
-      updateStoryTimeline();
-    }));
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        syncStoryHeight();
-        updateStoryTimeline();
+  const timeline = document.querySelector('#story .timeline');
+  if (timeline) {
+    const items = [...timeline.querySelectorAll('.timeline-item')];
+    let selectedItem = items.find((item) => item.classList.contains('is-current')) || items[0];
+    const selectMoment = (item) => {
+      selectedItem = item;
+      items.forEach((candidate) => {
+        const selected = candidate === item;
+        candidate.classList.toggle('is-selected', selected);
+        candidate.setAttribute('aria-pressed', String(selected));
       });
-    }
+    };
+    items.forEach((item) => {
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      if (item.querySelector('a, button, input, textarea, select, [role="button"]')) {
+        item.setAttribute('role', 'group');
+        item.removeAttribute('tabindex');
+        item.removeAttribute('aria-pressed');
+      }
+      item.addEventListener('click', () => selectMoment(item));
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          selectMoment(item);
+        }
+      });
+    });
+    if (selectedItem) selectMoment(selectedItem);
   }
+
 
   const lensCopy = document.querySelector('#lens-copy');
   const lensText = {
@@ -116,13 +128,39 @@
     complexity: 'Know what the system will ask of the team later.',
     delivery: 'Leave the team with a path they can actually move on.'
   };
-  document.querySelectorAll('.lens-button').forEach((button) => button.addEventListener('click', () => {
-    document.querySelectorAll('.lens-button').forEach((item) => {
+  const lensButtons = [...document.querySelectorAll('.lens-button')];
+  lensButtons.forEach((button) => {
+    button.id ||= `lens-${button.dataset.lens}`;
+  });
+  lensCopy.setAttribute('role', 'tabpanel');
+  lensCopy.setAttribute('aria-live', 'polite');
+  lensCopy.tabIndex = 0;
+  const selectLens = (button, moveFocus = false) => {
+    lensButtons.forEach((item) => {
       const selected = item === button;
       item.classList.toggle('is-selected', selected);
-      item.setAttribute('aria-selected', selected);
+      item.setAttribute('aria-selected', String(selected));
+      item.tabIndex = selected ? 0 : -1;
     });
     lensCopy.textContent = lensText[button.dataset.lens];
-  }));
+    lensCopy.setAttribute('aria-labelledby', button.id);
+    if (moveFocus) button.focus();
+  };
+  lensButtons.forEach((button, index) => {
+    button.addEventListener('click', () => selectLens(button));
+    button.addEventListener('keydown', (event) => {
+      const key = event.key;
+      if (!['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+      event.preventDefault();
+      const nextIndex = key === 'Home' ? 0 : key === 'End' ? lensButtons.length - 1 : (index + (key === 'ArrowRight' || key === 'ArrowDown' ? 1 : -1) + lensButtons.length) % lensButtons.length;
+      selectLens(lensButtons[nextIndex], true);
+    });
+  });
+  if (lensButtons[0]) selectLens(lensButtons.find((button) => button.classList.contains('is-selected')) || lensButtons[0]);
+
+  document.querySelectorAll('img:not(.hero-poster)').forEach((image) => {
+    image.loading = 'lazy';
+    image.decoding = 'async';
+  });
 
 }());
