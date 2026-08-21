@@ -1,5 +1,6 @@
 (function () {
   const hero = document.querySelector('.hero');
+  const header = document.querySelector('.site-header');
   const video = document.querySelector('#hero-video');
   const media = document.querySelector('.hero-media');
   const bands = [...document.querySelectorAll('.hero-band')];
@@ -43,6 +44,12 @@
     requestRender();
   }
 
+  function updateHeader() {
+    if (!header || reduceMotion) return;
+    const currentScrollY = window.scrollY;
+    header.classList.toggle('is-hidden', currentScrollY > 24);
+  }
+
   function seekToShownTime() {
     if (seeking || video.readyState < 1 || Math.abs(video.currentTime - shownTime) <= 0.035) return;
     seeking = true;
@@ -69,7 +76,10 @@
     if (heroVisible && !renderFrameId) renderFrameId = requestAnimationFrame(renderFrame);
   }
 
-  window.addEventListener('scroll', updateHero, { passive: true });
+  window.addEventListener('scroll', () => {
+    updateHero();
+  }, { passive: true });
+  document.addEventListener('scroll', updateHeader, { passive: true });
   window.addEventListener('resize', updateHero);
   new IntersectionObserver(([entry]) => {
     heroVisible = entry.isIntersecting;
@@ -77,6 +87,7 @@
     else if (renderFrameId) cancelAnimationFrame(renderFrameId);
   }).observe(hero);
   updateHero();
+  updateHeader();
   requestRender();
 
   const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {

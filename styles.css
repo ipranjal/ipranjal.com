@@ -1067,6 +1067,11 @@ body:after {
   -webkit-backdrop-filter: blur(14px);
   color: var(--color-frost-glow);
   mix-blend-mode: normal;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.site-header.is-hidden {
+  transform: translateY(-100%);
 }
 .brand {
   font: 500 18px/1 var(--font-ui);
