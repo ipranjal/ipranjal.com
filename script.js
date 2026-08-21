@@ -46,8 +46,19 @@
 
   function updateHeader() {
     if (!header || reduceMotion) return;
-    const currentScrollY = window.scrollY;
+    const scrollingElement = document.scrollingElement || document.documentElement;
+    const currentScrollY = Math.max(window.scrollY || 0, scrollingElement.scrollTop || 0);
     header.classList.toggle('is-hidden', currentScrollY > 24);
+  }
+
+  if (header && !reduceMotion && 'IntersectionObserver' in window) {
+    const headerSentinel = document.createElement('div');
+    headerSentinel.className = 'header-scroll-sentinel';
+    headerSentinel.setAttribute('aria-hidden', 'true');
+    document.body.prepend(headerSentinel);
+    new IntersectionObserver(([entry]) => {
+      header.classList.toggle('is-hidden', !entry.isIntersecting);
+    }).observe(headerSentinel);
   }
 
   function seekToShownTime() {
@@ -78,9 +89,13 @@
 
   window.addEventListener('scroll', () => {
     updateHero();
+    updateHeader();
   }, { passive: true });
   document.addEventListener('scroll', updateHeader, { passive: true });
-  window.addEventListener('resize', updateHero);
+  window.addEventListener('resize', () => {
+    updateHero();
+    updateHeader();
+  });
   new IntersectionObserver(([entry]) => {
     heroVisible = entry.isIntersecting;
     if (heroVisible) requestRender();
