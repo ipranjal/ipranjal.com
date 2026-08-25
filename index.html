@@ -8,7 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=motion-header-2">
+  <link rel="stylesheet" href="styles.css?v=motion-header-3">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('motion-pending');
+      // Never let a failed or blocked script.js leave the page hidden.
+      setTimeout(function () { root.classList.remove('motion-pending'); }, 3000);
+    }());
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#top">Skip to main content</a>
@@ -47,6 +55,6 @@
     <section id="contact" class="contact section-pad reveal"><div class="section-label">06 / START HERE</div><div class="contact-grid"><div><h2>Have a system<br><em>or a company to build?</em></h2><p>Choose the channel that suits you. I am easiest to reach by email, LinkedIn, or GitHub.</p></div><div class="contact-links"><a class="contact-link contact-link-primary" href="mailto:hello@ipranjal.com"><span>Email</span><small>hello@ipranjal.com</small><b>↗</b></a><a class="contact-link" href="https://www.linkedin.com/in/its-pranjalpandey/" target="_blank" rel="noreferrer"><span>LinkedIn</span><small>Connect professionally</small><b>↗</b></a><a class="contact-link" href="https://github.com/ipranjal" target="_blank" rel="noreferrer"><span>GitHub</span><small>See the code and experiments</small><b>↗</b></a></div></div></section>
   </main>
   <footer class="site-footer"><div><strong>Pranjal Pandey</strong><span>Systems architecture, engineering leadership, and practical AI.</span></div><div class="footer-links"><a href="https://ipranjal.com/writing" target="_blank" rel="noreferrer">Writing</a><a href="https://www.linkedin.com/in/its-pranjalpandey/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/ipranjal" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:hello@ipranjal.com">Email</a></div></footer>
-  <script src="script.js?v=motion-header-2"></script>
+  <script src="script.js?v=motion-header-3"></script>
 </body>
 </html>

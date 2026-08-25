@@ -1073,14 +1073,6 @@ body:after {
 .site-header.is-hidden {
   transform: translateY(-100%);
 }
-.header-scroll-sentinel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-}
 .brand {
   font: 500 18px/1 var(--font-ui);
   letter-spacing: 0.02em;
@@ -3696,5 +3688,24 @@ nav a,
   .site-header {
     transform: none !important;
     transition: none !important;
+  }
+
+  .motion-ready body {
+    animation: none;
+  }
+}
+
+.motion-pending body {
+  visibility: hidden;
+}
+.motion-ready body {
+  animation: site-reveal 0.5s ease both;
+}
+@keyframes site-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

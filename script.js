@@ -44,21 +44,19 @@
     requestRender();
   }
 
-  function updateHeader() {
-    if (!header || reduceMotion) return;
+  function readScrollY() {
     const scrollingElement = document.scrollingElement || document.documentElement;
-    const currentScrollY = Math.max(window.scrollY || 0, scrollingElement.scrollTop || 0);
-    header.classList.toggle('is-hidden', currentScrollY > 24);
+    return Math.max(window.scrollY || 0, scrollingElement.scrollTop || 0, document.body.scrollTop || 0);
   }
 
-  if (header && !reduceMotion && 'IntersectionObserver' in window) {
-    const headerSentinel = document.createElement('div');
-    headerSentinel.className = 'header-scroll-sentinel';
-    headerSentinel.setAttribute('aria-hidden', 'true');
-    document.body.prepend(headerSentinel);
-    new IntersectionObserver(([entry]) => {
-      header.classList.toggle('is-hidden', !entry.isIntersecting);
-    }).observe(headerSentinel);
+  function updateHeader() {
+    if (!header || reduceMotion) return;
+    header.classList.toggle('is-hidden', readScrollY() > 24);
+  }
+
+  function syncMotion() {
+    updateHero();
+    updateHeader();
   }
 
   function seekToShownTime() {
@@ -87,15 +85,23 @@
     if (heroVisible && !renderFrameId) renderFrameId = requestAnimationFrame(renderFrame);
   }
 
-  window.addEventListener('scroll', () => {
-    updateHero();
-    updateHeader();
-  }, { passive: true });
-  document.addEventListener('scroll', updateHeader, { passive: true });
-  window.addEventListener('resize', () => {
-    updateHero();
-    updateHeader();
-  });
+  window.addEventListener('scroll', syncMotion, { passive: true });
+  document.addEventListener('scroll', syncMotion, { passive: true });
+  window.addEventListener('resize', syncMotion);
+  window.addEventListener('orientationchange', syncMotion);
+  window.addEventListener('pageshow', syncMotion);
+  document.addEventListener('visibilitychange', syncMotion);
+
+  // Scroll events are throttled or dropped by some browsers and bfcache restores; compare the position every frame instead.
+  let watchedScrollY = -1;
+  (function watchScroll() {
+    const currentScrollY = readScrollY();
+    if (currentScrollY !== watchedScrollY) {
+      watchedScrollY = currentScrollY;
+      syncMotion();
+    }
+    window.requestAnimationFrame(watchScroll);
+  }());
   new IntersectionObserver(([entry]) => {
     heroVisible = entry.isIntersecting;
     if (heroVisible) requestRender();
@@ -188,5 +194,32 @@
     image.loading = 'lazy';
     image.decoding = 'async';
   });
+
+  let motionRevealed = false;
+  function revealSite() {
+    if (motionRevealed) return;
+    motionRevealed = true;
+    syncMotion();
+    document.documentElement.classList.remove('motion-pending');
+    document.documentElement.classList.add('motion-ready');
+  }
+
+  const poster = document.querySelector('.hero-poster');
+  const posterReady = poster && !poster.complete
+    ? new Promise((resolve) => {
+        poster.addEventListener('load', resolve, { once: true });
+        poster.addEventListener('error', resolve, { once: true });
+      })
+    : Promise.resolve();
+  const fontsReady = document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve();
+  const settleCap = new Promise((resolve) => window.setTimeout(resolve, 1200));
+
+  Promise.race([Promise.all([posterReady, fontsReady]), settleCap]).then(revealSite);
+  window.addEventListener('load', revealSite);
+  // A backgrounded tab clamps timers and suspends frames; never leave it blank once it is looked at.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') revealSite();
+  });
+  window.setTimeout(revealSite, 2500);
 
 }());
