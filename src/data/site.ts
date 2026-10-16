@@ -11,6 +11,7 @@ export const site = {
   sessions: 'https://topmate.io/itspranjal/',
   kitAction: 'https://app.kit.com/forms/10053825/subscriptions',
   kitUid: '1a8706f0e9',
+  kitHosted: 'https://pranjal-pandey.kit.com/9529f267b9',
 };
 
 export const timeline = [

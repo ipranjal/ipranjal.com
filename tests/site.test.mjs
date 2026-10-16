@@ -75,6 +75,17 @@ test('homepage guide section uses the prominent signup panel and one real Kit fo
   assert(!section.includes('guide-title-card'));
 });
 
+test('every signup surface includes the hosted Kit fallback without automatic navigation', async () => {
+  for (const path of ['index.html', 'guides/index.html', 'writing/index.html', 'writing/why-ai-pilots-fail/index.html', 'writing/which-tasks-to-automate-with-ai/index.html']) {
+    const html = await readFile(`dist/${path}`, 'utf8');
+    assert(html.includes('href="https://pranjal-pandey.kit.com/9529f267b9"'));
+    assert(html.includes('subscription-unavailable'));
+    assert(html.includes('Open signup on Kit'));
+    assert(html.includes('Use the Kit signup link above'));
+    assert(!html.includes('http-equiv="refresh"'));
+  }
+});
+
 test('unpublished essays and provider confirmation pages stay out of the sitemap', async () => {
   const sitemap = await readFile('dist/sitemap.xml', 'utf8');
   for (const path of ['/guide/', '/thanks/', '/welcome/', '/call/', '/session/', '/newsletter/']) assert(!sitemap.includes(`<loc>https://ipranjal.com${path}</loc>`));
