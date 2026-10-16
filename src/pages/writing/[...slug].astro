@@ -9,11 +9,15 @@ export async function getStaticPaths() {
 }
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const audience = entry.data.audience === 'research' ? 'all' : entry.data.audience;
 ---
-<Layout title={entry.data.seo_title ?? `${entry.data.title} | Pranjal Pandey`} description={entry.data.description} article={{ headline: entry.data.title, tags: entry.data.tags, published: entry.data.published, updated: entry.data.updated }}>
+<Layout title={entry.data.seo_title ?? `${entry.data.title} | Pranjal Pandey`} description={entry.data.description} audience={audience} hasSignup article={{ headline: entry.data.title, tags: entry.data.tags, published: entry.data.published, updated: entry.data.updated }}>
   <article class="wrap essay">
     <header class="essay-heading"><a class="text-link" href="/writing/">All writing</a><p class="eyebrow">Practical AI / {entry.data.author}</p><h1>{entry.data.title}</h1><p class="lead">{entry.data.description}</p><p class="fine-print"><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time>{entry.data.updated && <> / Updated <time datetime={entry.data.updated.toISOString()}>{formatDate(entry.data.updated)}</time></>}</p></header>
     <div class="essay-body"><Content /></div>
-    <aside class="essay-subscribe guide-signup-panel" aria-labelledby="article-signup-title"><h2 id="article-signup-title">Keep thinking with me.</h2><p>Get the AI Strategy Starter and my monthly letter.</p><Signup id="article-email" /></aside>
+    <aside class="essay-subscribe guide-signup-panel" aria-labelledby="article-signup-title"><p class="mono audience-label">{entry.data.audience}</p>
+      {entry.data.audience === 'individuals' ? <><h2 id="article-signup-title">Want ten more workflows like this?</h2><div class="actions"><a class="text-link" href="/kit/">Get the free kit</a><a class="text-link" href="/career/">Book a career session</a></div></> : entry.data.audience === 'business' ? <><h2 id="article-signup-title">If this sounded like your team, I'm happy to talk.</h2><div class="actions"><a class="text-link" href="/call/">Book a call</a><a class="text-link" href="/guide/">Get the free guide</a></div></> : <><h2 id="article-signup-title">Keep exploring Practical AI.</h2><div class="actions"><a class="text-link" href="/research/">Explore the research</a><a class="text-link" href="/guides/">Get the free guides</a></div></>}
+      <Signup id="article-email" audience={audience} />
+    </aside>
   </article>
 </Layout>

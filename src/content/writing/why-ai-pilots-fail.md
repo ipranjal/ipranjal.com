@@ -5,6 +5,7 @@ description: "AI pilots stall on ownership, messy data, security and missing met
 published: 2026-10-16
 draft: false
 author: Pranjal Pandey
+audience: business
 tags: [AI strategy, AI pilots, AI adoption, AI implementation, leadership]
 ---
 
@@ -88,7 +89,7 @@ The companies getting real value from AI usually aren't the ones with the flashi
 
 Less exciting than a demo. Much more likely to still be alive in six months.
 
-For a complementary risk-management reference, see the [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework). For the task-design side, read [which tasks to automate with AI](/writing/which-tasks-to-automate-with-ai/), or explore [how I work with teams](/work/).
+For a complementary risk-management reference, see the [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework). For the task-design side, read [which tasks to automate with AI](/writing/which-tasks-to-automate-with-ai/), or explore [how I work with teams](/business/).
 
 ## FAQ
 

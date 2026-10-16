@@ -4,6 +4,8 @@ import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 export default defineConfig({
   site: 'https://ipranjal.com',
   output: 'static',
+  // Rasterize only the repository-authored social cards; no remote SVG sources are accepted.
+  image: { dangerouslyProcessSVG: true },
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [{

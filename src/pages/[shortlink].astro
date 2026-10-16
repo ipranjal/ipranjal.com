@@ -4,13 +4,30 @@ import { site } from '../data/site';
 export function getStaticPaths() {
   return [
     { params: { shortlink: 'call' }, props: { target: site.call, label: 'Book your free company intro call', provider: 'Cal.com' } },
-    { params: { shortlink: 'session' }, props: { target: site.career, label: 'Book your career & portfolio session', provider: 'Topmate' } },
+    { params: { shortlink: 'session' }, props: { target: site.sessions, label: 'Choose your working session', provider: 'Topmate' } },
+    { params: { shortlink: 'strategy' }, props: { target: site.strategy, label: 'Book your AI strategy session', provider: 'Topmate' } },
+    { params: { shortlink: 'career' }, props: { target: site.career, label: 'Book your career & portfolio session', provider: 'Topmate' } },
+    { params: { shortlink: 'playbook' }, props: { target: '/guides/', label: 'Explore the guides', provider: 'the guides page' } },
     { params: { shortlink: 'newsletter' }, props: { target: '/writing/', label: 'Read about Practical AI', provider: 'the writing page' } },
+    { params: { shortlink: 'work' }, props: { target: '/business/', label: 'AI that works for your business', provider: 'the business page' } },
   ];
 }
 const { target, label, provider } = Astro.props;
 ---
 <Layout title={`${label} | Pranjal Pandey`} description={`Continue to ${provider}.`} minimal noindex>
-  <meta slot="head" http-equiv="refresh" content={`0;url=${target}`} />
-  <div class="wrap"><div class="redirect"><h1>{label}</h1><p>Taking you to {provider}. If you're not redirected, use the link below.</p><a class="button" href={target}>Continue to {provider} <span aria-hidden="true">&#8599;</span></a></div></div>
+  <noscript slot="head"><meta http-equiv="refresh" content={`0;url=${target}`} /></noscript>
+  <div class="wrap"><div class="redirect"><h1>{label}</h1><p>Taking you to {provider}. If you're not redirected, use the link below.</p><a class="button" data-redirect-target href={target}>Continue to {provider} <span aria-hidden="true">&#8599;</span></a></div></div>
+  <script>
+    const link = document.querySelector<HTMLAnchorElement>('[data-redirect-target]');
+    if (link) {
+      const target = new URL(link.href);
+      const incoming = new URLSearchParams(location.search);
+      incoming.forEach((value, key) => {
+        if (target.origin === location.origin || /^utm_(source|medium|campaign|id|term|content)$/.test(key)) target.searchParams.set(key, value);
+      });
+      if (!target.hash) target.hash = location.hash;
+      link.href = target.href;
+      location.replace(target.href);
+    }
+  </script>
 </Layout>

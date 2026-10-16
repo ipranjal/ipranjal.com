@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#05060F"/>
+  <path d="M64 112H1136M64 534H1136" stroke="#9DA7BA"/>
+  <g font-family="sans-serif" fill="#D8ECF8">
+    <text x="64" y="82" font-size="28">Pranjal Pandey / Practical AI</text>
+    <text x="64" y="220" font-size="24" fill="#B6D9FC">FOR INDIVIDUALS</text>
+    <text x="64" y="320" font-size="64">AI that works for you,</text>
+    <text x="64" y="400" font-size="64">at work and in life.</text>
+    <text x="64" y="496" font-size="28" fill="#9DA7BA">Workflows. Guides. Career help.</text>
+    <text x="64" y="584" font-size="24">ipranjal.com/individuals</text>
+  </g>
+</svg>

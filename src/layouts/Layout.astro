@@ -7,6 +7,11 @@ import '../styles/global.css';
 import { site } from '../data/site';
 import { getImage } from 'astro:assets';
 import portrait from '../../assets/pranjal-theme.png';
+import Analytics from '../components/Analytics.astro';
+import Signup from '../components/Signup.astro';
+import businessCard from '../../assets/social-business.svg';
+import individualsCard from '../../assets/social-individuals.svg';
+import kitCard from '../../assets/social-kit.svg';
 
 interface Props {
   title: string;
@@ -14,13 +19,19 @@ interface Props {
   minimal?: boolean;
   noindex?: boolean;
   home?: boolean;
+  audience?: 'business' | 'individuals' | 'all';
+  hasSignup?: boolean;
+  campaign?: boolean;
+  social?: 'business' | 'individuals' | 'kit';
   article?: { headline: string; tags: string[]; published: Date; updated?: Date };
 }
-const { title, description, minimal = false, noindex = false, home = false, article } = Astro.props;
+const { title, description, minimal = false, noindex = false, home = false, article, audience = 'all', hasSignup = false, campaign = false, social: socialCard } = Astro.props;
 const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, site.url);
-const social = await getImage({ src: portrait, width: 1200, height: 630, fit: 'cover', format: 'jpeg', quality: 80 });
+const cards = { business: businessCard, individuals: individualsCard, kit: kitCard };
+const social = await getImage({ src: socialCard ? cards[socialCard] : portrait, width: 1200, height: 630, fit: 'cover', format: socialCard ? 'png' : 'jpeg', quality: 80 });
+const headerAction = audience === 'individuals' ? ['/kit/', 'Get the free kit'] : ['/call/', 'Book a call'];
 const navigation = [
-  ['/work/', 'Work with me'], ['/guides/', 'Guides'], ['/writing/', 'Writing'], ['/about/', 'About'],
+  ['/business/', 'Business'], ['/individuals/', 'Individuals'], ['/guides/', 'Guides'], ['/writing/', 'Writing'], ['/about/', 'About'],
 ];
 ---
 <!doctype html>
@@ -52,7 +63,7 @@ const navigation = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(social.src, site.url)} />
-    <meta property="og:image:alt" content="Pranjal Pandey" />
+    <meta property="og:image:alt" content={socialCard ? title : 'Pranjal Pandey'} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -65,39 +76,40 @@ const navigation = [
       sameAs: [site.linkedin, site.github],
     }).replace(/</g, '\\u003c')} />}
     <slot name="head" />
+    <Analytics />
   </head>
   <body data-home={home ? 'true' : undefined}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    {!campaign && <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Pranjal Pandey home"><span class="brand-mark">PP<span>/</span></span><span class="brand-name">Pranjal Pandey</span></a>
         {!minimal && <>
           <nav class="desktop-nav" aria-label="Main navigation">
             {navigation.map(([href, text]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{text}</a>)}
           </nav>
-          <a class="header-cta" href="/call/">Book a call <span aria-hidden="true">&#8599;</span></a>
+          <a class="header-cta" href={headerAction[0]}>{headerAction[1]} <span aria-hidden="true">&#8599;</span></a>
           <details class="mobile-nav">
             <summary>Menu <span aria-hidden="true">+</span></summary>
             <nav aria-label="Mobile navigation">
               {navigation.map(([href, text]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{text}</a>)}
-              <a href="/research/">Research</a><a href="/call/">Book a call</a>
+              <a href="/research/">Research</a><a href={headerAction[0]}>{headerAction[1]}</a>
             </nav>
           </details>
         </>}
         {minimal && <a class="quiet-link" href="/">Back to the website</a>}
       </div>
-    </header>
+    </header>}
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer wrap">
-      {!minimal && <div class="footer-top">
+      {!minimal && !hasSignup && <div class="footer-top">
         <div><p class="mono">Practical AI, once a month.</p><h2>A useful next thought.<br />Not more noise.</h2></div>
-        <a class="text-link" href="/guides/#free-guide">Get the guide & monthly letter <span aria-hidden="true">&#8599;</span></a>
+        <div class="footer-signup"><Signup id="footer-email" audience={audience} button="Subscribe" /></div>
       </div>}
       <div class="footer-bottom">
-        <p>Pranjal Pandey<br /><span>Practical AI strategy for founders & leaders.</span></p>
+        <p>Pranjal Pandey<br /><span>Practical AI for your business and your life.</span></p>
         <nav aria-label="Footer navigation">
-          {!minimal && <><a href="/research/">Research</a><a href="/press/">Press</a><a href={site.taskflo}>Taskflo AI</a><a href={site.linkedin}>LinkedIn</a><a href={site.github}>GitHub</a></>}
-          <a href={`mailto:${site.email}`}>{site.email}</a><a href="/privacy/">Privacy</a>
+          {!minimal && <><a href="/business/">Business</a><a href="/individuals/">Individuals</a><a href="/guides/">Guides</a><a href="/writing/">Writing</a><a href="/research/">Research</a><a href="/press/">Press</a><a href={site.taskflo}>Taskflo AI</a><a href={site.linkedin}>LinkedIn</a><a href={site.github}>GitHub</a></>}
+          {!campaign && <a href={`mailto:${site.email}`}>{site.email}</a>}<a href="/privacy/">Privacy</a>{!campaign && <a href="/privacy/#tracking">Tracking settings</a>}
         </nav>
       </div>
       <p class="colophon">Written by a human. Typos are mine.</p>

@@ -23,7 +23,7 @@ export async function verifyBuild(directory = 'dist') {
   const root = resolve(directory);
   const files = await walk(root);
   const paths = new Set(files.map(file => relative(root, file)));
-  const required = ['index.html', '404.html', 'work/index.html', 'about/index.html', 'guides/index.html', 'guide/index.html', 'thanks/index.html', 'welcome/index.html', 'writing/index.html', 'research/index.html', 'press/index.html', 'links/index.html', 'privacy/index.html', 'call/index.html', 'session/index.html', 'newsletter/index.html', 'rss.xml', 'sitemap.xml', 'robots.txt', 'CNAME', '.nojekyll'];
+  const required = ['index.html', '404.html', 'work/index.html', 'business/index.html', 'individuals/index.html', 'kit/index.html', 'about/index.html', 'guides/index.html', 'guide/index.html', 'thanks/index.html', 'welcome/index.html', 'writing/index.html', 'research/index.html', 'press/index.html', 'links/index.html', 'privacy/index.html', 'call/index.html', 'session/index.html', 'strategy/index.html', 'career/index.html', 'playbook/index.html', 'newsletter/index.html', 'files/ai-strategy-starter.pdf', 'files/personal-ai-starter-kit.pdf', 'files/practical-ai-free-guides.zip', 'rss.xml', 'sitemap.xml', 'robots.txt', 'CNAME', '.nojekyll'];
   for (const path of required) assert(paths.has(path), `Missing required output: ${path}`);
   for (const name of ['syne', 'ibm-plex-sans', 'ibm-plex-mono', 'lenis', 'gsap-core', 'CSSPlugin', 'ScrollTrigger', 'Observer']) assert(paths.has(`licenses/${name}.txt`), `Missing bundled license: ${name}`);
   for (const path of paths) {
@@ -34,6 +34,8 @@ export async function verifyBuild(directory = 'dist') {
   const html = new Map();
   for (const path of paths) if (path.endsWith('.html')) html.set(path, await readFile(resolve(root, path), 'utf8'));
   for (const [path, source] of html) {
+    if (path !== 'welcome/index.html') assert(!/href="\/files\/[^"]+\.(?:pdf|zip)"/.test(source), `Guide downloads must only be linked from Welcome: ${path}`);
+    assert(!source.includes('href="/work/'), `Public links must use /business/: ${path}`);
     assert.equal((source.match(/<h1\b/g) || []).length, 1, `Expected one h1: ${path}`);
     assert(!source.includes('\u2014'), `Em dash in shipped copy: ${path}`);
     assert(!/href=["']#["']/.test(source), `Dead link: ${path}`);
@@ -54,7 +56,7 @@ export async function verifyBuild(directory = 'dist') {
   }
   const thanks = html.get('thanks/index.html');
   assert(thanks?.includes('noindex,follow'), 'Thanks page must be noindex');
-  assert(thanks?.includes("Opening it alone"), 'Thanks page must not assert provider success');
+  assert(thanks?.includes('If you just signed up'), 'Thanks must give conditional email-confirmation directions');
   assert(!thanks?.includes('download='), 'Thanks page must not offer the guide download before confirmation');
   assert(html.get('welcome/index.html')?.includes('noindex,follow'), 'Welcome page must be noindex');
   const home = html.get('index.html');

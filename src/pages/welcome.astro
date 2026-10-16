@@ -1,21 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
-import guideUrl from '../../assets/ai-strategy-starter.pdf?url';
 ---
-<Layout title="Your AI Strategy Starter guide | Pranjal Pandey" description="Download your AI Strategy Starter for Founders & Leaders and find your next step." minimal noindex>
+<Layout title="Your free Practical AI guides | Pranjal Pandey" description="Download the AI Strategy Starter for your business, the Personal AI Starter Kit for yourself, or both." minimal noindex>
   <div class="wrap">
-    <header class="page-heading"><p class="eyebrow">Welcome to Practical AI</p><h1>You're in. Here's your guide.</h1><p class="lead">Start with the five questions before choosing your first AI workflow.</p><a class="button" href={guideUrl} download="ai-strategy-starter.pdf">Download the AI Strategy Starter guide (PDF)</a></header>
+    <header class="page-heading"><p class="eyebrow">Welcome to Practical AI</p><h1>You're in.<br />Pick your free guides.</h1><p class="lead">Take one, or take both. No second email needed.</p></header>
+    <div class="download-picker">
+      <section class="download-card"><p class="mono">For your business</p><h2>AI Strategy Starter for Founders & Leaders</h2><p>Where AI actually fits in your company: the five questions, your first three workflows, and why pilots stall.</p><a class="button" href="/files/ai-strategy-starter.pdf" download="ai-strategy-starter.pdf" data-guide="business">Download the business guide (PDF)</a><p class="fine-print">Start with the five questions before choosing your first AI workflow.</p></section>
+      <section class="download-card"><p class="mono">For you</p><h2>The Personal AI Starter Kit</h2><p>Ten copy-paste AI workflows for your week. Works with Claude, ChatGPT or Gemini.</p><a class="button" href="/files/personal-ai-starter-kit.pdf" download="personal-ai-starter-kit.pdf" data-guide="personal">Download the personal kit (PDF)</a><p class="fine-print">Try workflow #1 this Sunday. Set aside 20 minutes to plan your week.</p></section>
+    </div>
+    <div class="download-both"><a class="button button-secondary" href="/files/practical-ai-free-guides.zip" download="practical-ai-free-guides.zip" data-guide="both">Download both (ZIP)</a></div>
     <div class="reading">
-      <p>You'll also get <em>Practical AI</em>, my monthly letter on making AI work in a business. Move my emails to your primary inbox so the letter doesn't land in promotions. You can unsubscribe anytime.</p>
+      <p>You'll also get <em>Practical AI</em>, my monthly letter with a business section and a section for you. Move my emails to your primary inbox so the letter doesn't land in promotions. You can unsubscribe anytime.</p>
       <h2>Want to go further?</h2>
       <ul>
-        <li><strong>Founders:</strong> <em>AI for Startups</em> is an upcoming playbook. It's not for sale yet. <a href="/guides/">Explore the guides</a>.</li>
+        <li><strong>Keep reading:</strong> <a href="/writing/">Explore the latest practical AI essays</a>.</li>
         <li><strong>Leading a team or company?</strong> <a href="/call/">Book a free 30-minute intro call</a>.</li>
-        <li><strong>Want a plan for your situation?</strong> <a href={site.strategy}>Book an AI Strategy Planning session</a>.</li>
+        <li><strong>Want a plan for your business?</strong> <a href="/strategy/">Book an AI Strategy Planning session</a>.</li>
+        <li><strong>Building a career in AI?</strong> <a href="/career/">Book a career session</a>.</li>
+        <li><strong>More guides are coming.</strong> AI for Startups, the AI Portfolio Playbook and more. Subscribers get them first.</li>
       </ul>
-      <p class="fine-print">Kit handles email confirmation. This public page doesn't verify subscriber status, and a visit isn't recorded as a confirmed subscription.</p>
-      <p>Having trouble with the download? <a href={`mailto:${site.email}?subject=Help%20with%20the%20AI%20Strategy%20Starter`}>Email {site.email}</a>.</p>
+      <p>Having trouble with a download? <a href={`mailto:${site.email}?subject=Help%20with%20the%20free%20guides`}>Email {site.email}</a>.</p>
     </div>
   </div>
 </Layout>

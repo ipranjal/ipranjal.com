@@ -5,6 +5,7 @@ description: "Decide which tasks go to AI and which stay with people. A practica
 published: 2026-10-16
 draft: false
 author: Pranjal Pandey
+audience: business
 tags: [AI strategy, AI automation, human in the loop, multi-agent systems, fair division]
 ---
 
@@ -98,7 +99,7 @@ You don't need a PhD to use any of this. But someone does need to ask the questi
 
 "Who should do the work?" is as old as organisations themselves. AI just made it urgent again. Luckily, a small group of mathematicians has been thinking very hard about it for decades, mostly while talking about cake.
 
-If you've already picked a task but the workflow isn't sticking, read [why AI pilots fail](/writing/why-ai-pilots-fail/). For help applying the framework, see [how I work with teams](/work/).
+If you've already picked a task but the workflow isn't sticking, read [why AI pilots fail](/writing/why-ai-pilots-fail/). For help applying the framework, see [how I work with teams](/business/).
 
 ## FAQ
 
@@ -118,4 +119,4 @@ A workflow where AI does part of the work (drafting, sorting, checking) and a pe
 
 *Want a step-by-step way to pick your first AI workflows? My free guide, the* AI Strategy Starter for Founders & Leaders, *includes a scoring sheet for exactly this.* **[Get the free guide](/guides/#free-guide)**
 
-*Or work through it on your own business in an [AI Strategy Planning session](https://topmate.io/itspranjal/2359698). Cake not included, unfortunately.*
+*Or work through it on your own business in an [AI Strategy Planning session](/strategy/). Cake not included, unfortunately.*

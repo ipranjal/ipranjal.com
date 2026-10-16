@@ -1,7 +1,28 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Signup from '../components/Signup.astro';
+import portrait from '../../assets/pranjal-theme.png';
 ---
-<Layout title="Get the free AI Strategy Starter | Pranjal Pandey" description="Continue to the free guide signup on the Guides page." minimal noindex>
-  <meta slot="head" http-equiv="refresh" content="0;url=/guides/#free-guide" />
-  <div class="wrap"><div class="redirect"><h1>Get the free guide.</h1><p>The guide and signup now live together on one page.</p><a class="button" href="/guides/#free-guide">Continue to the free guide</a></div></div>
+<Layout title="Free AI Strategy Starter for Founders & Leaders" description="Five questions before an AI project, your first three workflows, and why pilots stall. Get the free AI Strategy Starter by Pranjal Pandey." minimal campaign>
+  <div class="wrap campaign">
+    <section class="guides-opening" aria-labelledby="campaign-title">
+      <div class="guides-promise">
+        <p class="eyebrow">A free guide for your next AI decision</p>
+        <h1 id="campaign-title">The AI Strategy Starter for Founders & Leaders</h1>
+        <p class="lead">A free, practical guide to working out where AI actually fits in your business, from someone who builds AI systems for a living.</p>
+        <ul class="guide-contents"><li>The five questions to ask before any AI project.</li><li>How to pick your first three workflows.</li><li>Why most AI pilots stall, and how to make yours stick.</li></ul>
+        <div class="campaign-author">
+          <Image src={portrait} width={96} height={120} format="webp" quality={78} alt="Pranjal Pandey in the website's Midnight Blueprint portrait treatment" />
+          <p>By Pranjal Pandey.<br /><span>Founder at 19. PhD researcher in multi-agent systems at IIT Jodhpur. Founder, Taskflo AI.</span></p>
+        </div>
+      </div>
+      <div class="guide-signup-panel" aria-labelledby="campaign-signup-title">
+        <p class="eyebrow">Free PDF + monthly letter</p>
+        <h2 id="campaign-signup-title">Start with the right questions.</h2>
+        <p>Confirm your email to get the guide.</p>
+        <Signup id="campaign-email" />
+      </div>
+    </section>
+  </div>
 </Layout>

@@ -5,14 +5,47 @@ import { publishedWriting, formatDate } from '../../lib/writing';
 import { site } from '../../data/site';
 const entries = await publishedWriting();
 ---
-<Layout title="Writing & Practical AI | Pranjal Pandey" description="Practical AI, a monthly letter from Pranjal Pandey on AI strategy, useful workflows and lessons from building.">
+<Layout title="Writing & Practical AI | Pranjal Pandey" description="Practical AI for your business and your life: what works, what stalls, and how to make it stick. One long letter a month." hasSignup>
   <div class="wrap writing-layout">
     <div class="writing-main">
-      <header class="writing-heading"><p class="eyebrow">Writing / Practical AI</p><h1>AI, in the work.</h1><p class="lead">Practical AI strategy for founders and leaders: what works, what stalls, and how to make AI stick.</p></header>
+      <header class="writing-heading"><p class="eyebrow">Writing / Practical AI</p><h1>The monthly letter</h1><p class="lead">Practical AI for your business and your life: what works, what stalls, and how to make it stick. One long letter a month, no fluff.</p></header>
+      <div class="writing-filter" hidden><label for="writing-audience">Show writing for</label><select id="writing-audience"><option value="all">All</option><option value="business">Business</option><option value="individuals">Individuals</option><option value="research">Research</option></select></div>
+      <p class="fine-print" id="filter-status" role="status"></p>
       <section aria-labelledby="essays-title"><div class="archive-heading"><h2 id="essays-title">The essays</h2><a class="text-link" href="/rss.xml">RSS feed</a></div>
-        {entries.length ? <div class="article-list">{entries.map(entry => <article><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time><h3><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.description}</p></article>)}</div> : <div class="empty-note"><p>No essays published here yet. You can <a href="/research/">read my public research</a> or <a href={site.linkedin}>follow my updates on LinkedIn</a> while the archive takes shape.</p></div>}
+        {entries.length ? <div class="article-list">{entries.map(entry => <article data-writing-audience={entry.data.audience}><p class="mono audience-label">{entry.data.audience}</p><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time><h3><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.description}</p></article>)}</div> : <div class="empty-note"><p>No essays published here yet. You can <a href="/research/">read my public research</a> or <a href={site.linkedin}>follow my updates on LinkedIn</a> while the archive takes shape.</p></div>}
+        <div class="empty-note" id="filter-empty" hidden><p>No essays in this lane yet. <a href="/kit/">Start with the personal kit</a>, <a href="/research/">explore the research</a>, or switch to All.</p></div>
       </section>
     </div>
-    <aside class="guide-signup-panel writing-subscribe" aria-labelledby="writing-signup-title"><p class="eyebrow">Practical AI / Once a month</p><h2 id="writing-signup-title">The monthly letter.</h2><p>Get new writing in your inbox, plus the free AI Strategy Starter. One long letter a month, no fluff.</p><Signup id="writing-email" /></aside>
+    <aside class="guide-signup-panel writing-subscribe" aria-labelledby="writing-signup-title"><p class="eyebrow">Practical AI / Once a month</p><h2 id="writing-signup-title">The monthly letter.</h2><p>Get new writing in your inbox, plus both free guides. Something for your business and something for you.</p><Signup id="writing-email" audience="all" button="Subscribe" /></aside>
   </div>
 </Layout>
+<script>
+  const select = document.querySelector<HTMLSelectElement>('#writing-audience');
+  const filter = document.querySelector<HTMLElement>('.writing-filter');
+  const status = document.querySelector<HTMLElement>('#filter-status');
+  const empty = document.querySelector<HTMLElement>('#filter-empty');
+  const articles = [...document.querySelectorAll<HTMLElement>('[data-writing-audience]')];
+  if (select && filter && status && empty) {
+    filter.hidden = false;
+    const apply = () => {
+      const audience = new URL(location.href).searchParams.get('audience') ?? 'all';
+      select.value = ['business', 'individuals', 'research'].includes(audience) ? audience : 'all';
+      let count = 0;
+      articles.forEach(article => {
+        article.hidden = select.value !== 'all' && article.dataset.writingAudience !== select.value;
+        if (!article.hidden) count++;
+      });
+      empty.hidden = count !== 0;
+      status.textContent = `${count} ${count === 1 ? 'essay' : 'essays'} shown.`;
+    };
+    select.addEventListener('change', () => {
+      const url = new URL(location.href);
+      if (select.value === 'all') url.searchParams.delete('audience');
+      else url.searchParams.set('audience', select.value);
+      history.pushState(null, '', url);
+      apply();
+    });
+    window.addEventListener('popstate', apply);
+    apply();
+  }
+</script>

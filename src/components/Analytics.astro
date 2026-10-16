@@ -1,0 +1,84 @@
+<script is:inline data-site-tracking>
+  (() => {
+    if (!['ipranjal.com', 'www.ipranjal.com'].includes(location.hostname)) return;
+    try {
+      if (localStorage.getItem('site-tracking') === 'disabled') return;
+    } catch (error) {
+      console.warn('Tracking is disabled because browser preferences could not be read.', error);
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    const campaign = {};
+    const query = new URLSearchParams(location.search);
+    for (const [parameter, field] of Object.entries({
+      utm_source: 'campaign_source', utm_medium: 'campaign_medium',
+      utm_campaign: 'campaign_name', utm_id: 'campaign_id',
+      utm_term: 'campaign_term', utm_content: 'campaign_content',
+    })) {
+      if (query.has(parameter)) campaign[field] = query.get(parameter);
+    }
+    gtag('config', 'G-TYBVMJLK06', {
+      page_location: location.origin + location.pathname,
+      page_referrer: document.referrer ? new URL(document.referrer).origin + new URL(document.referrer).pathname : '',
+      ...campaign,
+    });
+    const pageEvents = {
+      '/thanks/': 'guide_signup_page_view',
+      '/welcome/': 'guide_confirmation_page_view',
+    };
+    const pageEvent = pageEvents[location.pathname];
+    if (pageEvent) gtag('event', pageEvent);
+    document.addEventListener('click', event => {
+      const link = event.target instanceof Element ? event.target.closest('a') : null;
+      if (!link) return;
+      const guide = link.dataset.guide;
+      if (['business', 'personal', 'both'].includes(guide)) {
+        gtag('event', 'download_guide', { guide });
+      }
+      const destination = new URL(link.href, location.origin);
+      if (destination.origin !== location.origin) return;
+      const bookingEvents = {
+        '/call/': 'intro_call_click',
+        '/strategy/': 'strategy_session_click',
+        '/career/': 'career_session_click',
+      };
+      const bookingEvent = bookingEvents[destination.pathname];
+      if (bookingEvent) gtag('event', bookingEvent);
+    });
+    const google = document.createElement('script');
+    google.async = true;
+    google.src = 'https://www.googletagmanager.com/gtag/js?id=G-TYBVMJLK06';
+    document.head.append(google);
+
+    window._linkedin_partner_id = '10220252';
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+    window.lintrk = window.lintrk || function(a, b) { window.lintrk.q.push([a, b]); };
+    window.lintrk.q = window.lintrk.q || [];
+    const linkedin = document.createElement('script');
+    linkedin.async = true;
+    linkedin.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+    document.head.append(linkedin);
+
+    window.fbq = window.fbq || function() {
+      if (window.fbq.callMethod) window.fbq.callMethod.apply(window.fbq, arguments);
+      else window.fbq.queue.push(arguments);
+    };
+    window._fbq = window.fbq;
+    window.fbq.push = window.fbq;
+    window.fbq.loaded = true;
+    window.fbq.version = '2.0';
+    window.fbq.queue = window.fbq.queue || [];
+    window.fbq('set', 'autoConfig', false, '1002800556174711');
+    window.fbq('init', '1002800556174711');
+    window.fbq('track', 'PageView');
+    const meta = document.createElement('script');
+    meta.async = true;
+    meta.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    document.head.append(meta);
+  })();
+</script>
