@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../assets/pranjal-theme.png';
+
+interface Props { hero?: boolean }
+const { hero = false } = Astro.props;
+---
+<figure class:list={['portrait', { 'portrait-hero': hero }]}>
+  <Image
+    src={portrait}
+    alt="Pranjal Pandey in the existing Midnight Blueprint portrait treatment"
+    widths={[360, 540, 720, 960]}
+    sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) 38vw, 420px"
+    width={720}
+    height={895}
+    format="webp"
+    quality={78}
+    loading={hero ? 'eager' : 'lazy'}
+    fetchpriority={hero ? 'high' : 'auto'}
+  />
+  <figcaption><span>Pranjal Pandey</span><span>Builder. Advisor. Researcher.</span></figcaption>
+</figure>

@@ -1,0 +1,18 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Signup from '../../components/Signup.astro';
+import { publishedWriting, formatDate } from '../../lib/writing';
+
+export async function getStaticPaths() {
+  return (await publishedWriting()).map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Layout title={`${entry.data.title} | Pranjal Pandey`} description={entry.data.description}>
+  <article class="wrap">
+    <header class="page-heading"><p class="eyebrow">Writing / Pranjal Pandey</p><h1>{entry.data.title}</h1><p class="lead">{entry.data.description}</p><p class="fine-print"><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time>{entry.data.updated && <> / Updated <time datetime={entry.data.updated.toISOString()}>{formatDate(entry.data.updated)}</time></>}</p></header>
+    <div class="reading"><Content /><h2>Keep thinking with me.</h2><p>Get the AI Strategy Starter and my monthly letter.</p><Signup id="article-email" /></div>
+  </article>
+</Layout>

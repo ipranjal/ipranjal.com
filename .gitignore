@@ -1,0 +1,12 @@
+/about.md
+/website-pack.md
+/website-strategy.md
+/website-integrations.md
+/website-redesign-plan.md
+/website-copy.md
+/.tastemaker/
+/.agents/
+/node_modules/
+/dist/
+/.astro/
+/.venv/

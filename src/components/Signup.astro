@@ -1,0 +1,74 @@
+---
+import { site } from '../data/site';
+interface Props { id?: string }
+const { id = 'guide-signup' } = Astro.props;
+const options = JSON.stringify({
+  settings: {
+    after_subscribe: {
+      action: 'redirect',
+      success_message: 'Check your inbox for the confirmation email.',
+      redirect_url: `${site.url}/thanks/`,
+    },
+    analytics: { google: null, facebook: null },
+    powered_by: { show: true, url: 'https://kit.com/' },
+    recaptcha: { enabled: false },
+    return_visitor: { action: 'show' },
+  },
+  version: '5',
+});
+---
+<div class="signup">
+  <form action={site.kitAction} method="post" class="seva-form formkit-form"
+    data-sv-form="10053825" data-uid={site.kitUid} data-format="inline"
+    data-version="5" data-options={options} aria-label="Get the guide and Practical AI">
+    <div data-style="clean">
+      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" aria-live="polite" aria-atomic="true" tabindex="-1"></ul>
+      <div data-element="fields" class="formkit-fields">
+        <div class="formkit-field">
+          <label for={id}>Your email address</label>
+          <input id={id} class="formkit-input" name="email_address" required type="email"
+            autocomplete="email" inputmode="email" aria-describedby={`${id}-note`} />
+        </div>
+        <button class="button formkit-submit" data-element="submit" type="submit">
+          <span>Send me the guide</span>
+          <span class="formkit-spinner">Sending...</span>
+        </button>
+      </div>
+    </div>
+  </form>
+  <p class="fine-print" id={`${id}-note`}>Get the guide and <em>Practical AI</em>, my monthly letter. Confirm your email to download. Unsubscribe anytime. <a href="/privacy/">Privacy</a>.</p>
+  <p class="fine-print">Email powered by <a href="https://kit.com/" rel="nofollow">Kit</a>. <a href={`mailto:${site.email}?subject=Help%20with%20the%20AI%20Strategy%20Starter`}>Need help getting the guide?</a></p>
+  <noscript>
+    <style>.signup form { display: none; }</style>
+    <p>The inline form needs JavaScript for Kit's confirmation flow. <a href={`mailto:${site.email}?subject=AI%20Strategy%20Starter`}>Email me for help getting the guide</a>.</p>
+  </noscript>
+</div>
+<script is:inline src="https://f.convertkit.com/ckjs/ck.5.js" defer></script>
+<script>
+  document.querySelectorAll<HTMLFormElement>('.formkit-form').forEach(form => {
+    const errors = form.querySelector<HTMLUListElement>('[data-element="errors"]');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!errors || !submit) return;
+
+    form.addEventListener('submit', event => {
+      if (!('CK' in window)) {
+        event.preventDefault();
+        const message = document.createElement('li');
+        message.textContent = "The signup service hasn't loaded. Try again, or use the email help link below.";
+        errors.replaceChildren(message);
+      }
+    }, { capture: true });
+
+    new MutationObserver(() => {
+      for (const item of errors.children) {
+        if (/Failed to fetch|NetworkError|Load failed/i.test(item.textContent ?? '')) {
+          item.textContent = "Couldn't reach the signup service. Your email is still here. Try again, or use the email help link below.";
+        }
+      }
+      if (errors.childElementCount) errors.focus();
+    }).observe(errors, { childList: true });
+    new MutationObserver(() => {
+      form.setAttribute('aria-busy', String(submit.hasAttribute('data-active')));
+    }).observe(submit, { attributes: true, attributeFilter: ['data-active'] });
+  });
+</script>

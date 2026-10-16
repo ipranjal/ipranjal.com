@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Links | Pranjal Pandey" description="The free guide, intro call, paid sessions, writing and public profiles of Pranjal Pandey." minimal>
+  <div class="wrap"><div class="link-index"><p class="mono">Pranjal Pandey</p><h1>Practical AI strategy for founders & leaders</h1><p>Builder, advisor and PhD researcher.</p>
+    <a class="button" href="/guide/">Get the free AI Strategy Starter <span aria-hidden="true">&#8599;</span></a>
+    <a class="button button-secondary" href="/call/">Free company intro call <span aria-hidden="true">&#8599;</span></a>
+    <a class="button button-secondary" href={site.strategy}>90-minute strategy session <span aria-hidden="true">&#8599;</span></a>
+    <a class="button button-secondary" href="/session/">60-minute career session <span aria-hidden="true">&#8599;</span></a>
+    <a class="button button-secondary" href="/writing/">Writing & Practical AI <span aria-hidden="true">&#8599;</span></a>
+    <a class="text-link" href={site.taskflo}>Taskflo AI</a><a class="text-link" href="/guides/">AI for Startups (upcoming)</a><a class="text-link" href="/research/">Research</a><a class="text-link" href={site.linkedin}>LinkedIn</a><a class="text-link" href={site.github}>GitHub</a><a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>
+  </div></div>
+</Layout>

@@ -1,0 +1,108 @@
+---
+import '@fontsource/syne/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '../styles/global.css';
+import { site } from '../data/site';
+import { getImage } from 'astro:assets';
+import portrait from '../../assets/pranjal-theme.png';
+
+interface Props {
+  title: string;
+  description: string;
+  minimal?: boolean;
+  noindex?: boolean;
+  home?: boolean;
+}
+const { title, description, minimal = false, noindex = false, home = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, site.url);
+const social = await getImage({ src: portrait, width: 1200, height: 630, fit: 'cover', format: 'jpeg', quality: 80 });
+const navigation = [
+  ['/work/', 'Work with me'], ['/guides/', 'Guides'], ['/writing/', 'Writing'], ['/about/', 'About'],
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#05060F" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(social.src, site.url)} />
+    <meta property="og:image:alt" content="Pranjal Pandey" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Pranjal Pandey: Writing" href="/rss.xml" />
+    {home && <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'Person', name: site.name, url: site.url,
+      email: `mailto:${site.email}`, jobTitle: 'AI Strategy Advisor; Founder, Taskflo AI',
+      affiliation: { '@type': 'CollegeOrUniversity', name: 'Indian Institute of Technology Jodhpur' },
+      sameAs: [site.linkedin, site.github],
+    }).replace(/</g, '\\u003c')} />}
+    <slot name="head" />
+  </head>
+  <body data-home={home ? 'true' : undefined}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Pranjal Pandey home"><span class="brand-mark">PP<span>/</span></span><span class="brand-name">Pranjal Pandey</span></a>
+        {!minimal && <>
+          <nav class="desktop-nav" aria-label="Main navigation">
+            {navigation.map(([href, text]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{text}</a>)}
+          </nav>
+          <a class="header-cta" href="/call/">Book a call <span aria-hidden="true">&#8599;</span></a>
+          <details class="mobile-nav">
+            <summary>Menu <span aria-hidden="true">+</span></summary>
+            <nav aria-label="Mobile navigation">
+              {navigation.map(([href, text]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{text}</a>)}
+              <a href="/research/">Research</a><a href="/call/">Book a call</a>
+            </nav>
+          </details>
+        </>}
+        {minimal && <a class="quiet-link" href="/">Back to the website</a>}
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer wrap">
+      {!minimal && <div class="footer-top">
+        <div><p class="mono">Practical AI, once a month.</p><h2>A useful next thought.<br />Not more noise.</h2></div>
+        <a class="text-link" href="/guide/">Get the guide & monthly letter <span aria-hidden="true">&#8599;</span></a>
+      </div>}
+      <div class="footer-bottom">
+        <p>Pranjal Pandey<br /><span>Practical AI strategy for founders & leaders.</span></p>
+        <nav aria-label="Footer navigation">
+          {!minimal && <><a href="/research/">Research</a><a href="/press/">Press</a><a href={site.taskflo}>Taskflo AI</a><a href={site.linkedin}>LinkedIn</a><a href={site.github}>GitHub</a></>}
+          <a href={`mailto:${site.email}`}>{site.email}</a><a href="/privacy/">Privacy</a>
+        </nav>
+      </div>
+      <p class="colophon">Written by a human. Typos are mine.</p>
+    </footer>
+    <script>
+      document.querySelectorAll<HTMLDetailsElement>('.mobile-nav').forEach(menu => {
+        const summary = menu.querySelector('summary');
+        menu.addEventListener('keydown', event => {
+          if (event.key === 'Escape' && menu.open) {
+            menu.open = false;
+            summary?.focus();
+          }
+        });
+        menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.open = false; }));
+        document.addEventListener('click', event => {
+          if (event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+        });
+        const desktop = matchMedia('(min-width: 1000px)');
+        desktop.addEventListener('change', () => { menu.open = false; });
+      });
+    </script>
+  </body>
+</html>

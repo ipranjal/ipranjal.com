@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import guideUrl from '../../assets/ai-strategy-starter.pdf?url';
+---
+<Layout title="Your AI Strategy Starter guide | Pranjal Pandey" description="Download your AI Strategy Starter for Founders & Leaders and find your next step." minimal noindex>
+  <div class="wrap">
+    <header class="page-heading"><p class="eyebrow">Welcome to Practical AI</p><h1>You're in. Here's your guide.</h1><p class="lead">Start with the five questions before choosing your first AI workflow.</p><a class="button" href={guideUrl} download="ai-strategy-starter.pdf">Download the AI Strategy Starter guide (PDF)</a></header>
+    <div class="reading">
+      <p>You'll also get <em>Practical AI</em>, my monthly letter on making AI work in a business. Move my emails to your primary inbox so the letter doesn't land in promotions. You can unsubscribe anytime.</p>
+      <h2>Want to go further?</h2>
+      <ul>
+        <li><strong>Founders:</strong> <em>AI for Startups</em> is an upcoming playbook. It's not for sale yet. <a href="/guides/">Explore the guides</a>.</li>
+        <li><strong>Leading a team or company?</strong> <a href="/call/">Book a free 30-minute intro call</a>.</li>
+        <li><strong>Want a plan for your situation?</strong> <a href={site.strategy}>Book an AI Strategy Planning session</a>.</li>
+      </ul>
+      <p class="fine-print">Kit handles email confirmation. This public page doesn't verify subscriber status, and a visit isn't recorded as a confirmed subscription.</p>
+      <p>Having trouble with the download? <a href={`mailto:${site.email}?subject=Help%20with%20the%20AI%20Strategy%20Starter`}>Email {site.email}</a>.</p>
+    </div>
+  </div>
+</Layout>

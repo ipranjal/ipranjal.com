@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Preview redesigned website",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"preview",
+				"--",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"4321"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

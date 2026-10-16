@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Signup from '../../components/Signup.astro';
+import { publishedWriting, formatDate } from '../../lib/writing';
+import { site } from '../../data/site';
+const entries = await publishedWriting();
+---
+<Layout title="Writing & Practical AI | Pranjal Pandey" description="Practical AI, a monthly letter from Pranjal Pandey on AI strategy, useful workflows and lessons from building.">
+  <div class="wrap">
+    <header class="page-heading"><p class="eyebrow">Writing / Practical AI</p><h1>The monthly letter</h1><p class="lead">Practical AI strategy for founders and leaders: what works, what stalls, and how to make AI stick. One long letter a month, no fluff.</p></header>
+    <div class="reading">
+      <Signup id="writing-email" />
+      <h2>The essay archive</h2>
+      {entries.length ? <div class="article-list">{entries.map(entry => <a href={`/writing/${entry.id}/`}><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time><h2>{entry.data.title}</h2><p>{entry.data.description}</p></a>)}</div> : <div class="empty-note"><p>No essays published here yet. You can <a href="/research/">read my public research</a> or <a href={site.linkedin}>follow my updates on LinkedIn</a> while the archive takes shape.</p></div>}
+      <p class="fine-print"><a href="/rss.xml">RSS feed</a>. Published essays will appear here and in the feed. Drafts won't.</p>
+    </div>
+  </div>
+</Layout>

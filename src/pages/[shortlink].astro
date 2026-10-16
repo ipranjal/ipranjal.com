@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+export function getStaticPaths() {
+  return [
+    { params: { shortlink: 'call' }, props: { target: site.call, label: 'Book your free company intro call', provider: 'Cal.com' } },
+    { params: { shortlink: 'session' }, props: { target: site.career, label: 'Book your career & portfolio session', provider: 'Topmate' } },
+    { params: { shortlink: 'newsletter' }, props: { target: '/writing/', label: 'Read about Practical AI', provider: 'the writing page' } },
+  ];
+}
+const { target, label, provider } = Astro.props;
+---
+<Layout title={`${label} | Pranjal Pandey`} description={`Continue to ${provider}.`} minimal noindex>
+  <meta slot="head" http-equiv="refresh" content={`0;url=${target}`} />
+  <div class="wrap"><div class="redirect"><h1>{label}</h1><p>Taking you to {provider}. If you're not redirected, use the link below.</p><a class="button" href={target}>Continue to {provider} <span aria-hidden="true">&#8599;</span></a></div></div>
+</Layout>

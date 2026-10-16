@@ -1,0 +1,25 @@
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
+
+const writing = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
+  schema: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    published: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    draft: z.boolean().default(true),
+  }),
+});
+
+const research = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/research' }),
+  schema: z.object({
+    title: z.string().min(1),
+    status: z.enum(['preprint', 'peer-reviewed']),
+    url: z.url(),
+  }),
+});
+
+export const collections = { writing, research };

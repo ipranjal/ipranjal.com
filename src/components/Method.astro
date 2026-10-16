@@ -1,0 +1,21 @@
+---
+import { method } from '../data/site';
+---
+<div class="method-map">
+  <div class="method-line" aria-hidden="true"><span></span></div>
+  <ol class="method-steps">
+    {method.map((step, index) => (
+      <li>
+        <span class="step-number" aria-hidden="true">0{index + 1}</span>
+        <h3>{step.name}</h3>
+        <p class="step-title">{step.title}</p>
+        <p>{step.detail}</p>
+        <div class="method-artifact">
+          <span class="mono">{step.output}</span>
+          <ul>{step.checks.map(check => <li>{check}</li>)}</ul>
+        </div>
+      </li>
+    ))}
+  </ol>
+  <p class="fine-print">Illustrative outputs, not client deliverables. The scope depends on the problem.</p>
+</div>

@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Page not found | Pranjal Pandey" description="This page doesn't exist. Find your way back to Pranjal Pandey's homepage or writing." noindex>
+  <div class="wrap"><header class="page-heading"><p class="eyebrow">404 / Page not found</p><h1>This page wandered off.</h1><p class="lead">Even well-designed workflows lose things sometimes. Try the homepage, or tell me what you were looking for at <a href={`mailto:${site.email}`}>{site.email}</a>.</p><div class="actions"><a class="button" href="/">Back to the homepage</a><a class="text-link" href="/writing/">Browse writing</a></div></header></div>
+</Layout>
