@@ -114,9 +114,3 @@ Rare tasks, high-stakes decisions with no human review, work where the data does
 ### What is human-in-the-loop AI?
 
 A workflow where AI does part of the work (drafting, sorting, checking) and a person reviews, approves or handles the exceptions. It's a useful way to start. Reduce review only when evidence, risk and accountability requirements support doing so.
-
----
-
-*Want a step-by-step way to pick your first AI workflows? My free guide, the* AI Strategy Starter for Founders & Leaders, *includes a scoring sheet for exactly this.* **[Get the free guide](/guides/#free-guide)**
-
-*Or work through it on your own business in an [AI Strategy Planning session](/strategy/). Cake not included, unfortunately.*

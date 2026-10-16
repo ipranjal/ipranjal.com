@@ -2,16 +2,18 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
-const papers = await getCollection('research');
+const papers = (await getCollection('research')).sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 const rendered = await Promise.all(papers.map(async paper => ({ paper, ...await render(paper) })));
+const dateFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 <Layout title="Multi-agent systems research | Pranjal Pandey" description="PhD research at IIT Jodhpur on multi-agent systems, fair division and allocation. Public preprints and collaboration contact.">
   <div class="wrap">
     <header class="page-heading"><p class="eyebrow">Research / IIT Jodhpur</p><h1>How should agents divide the work?</h1><p class="lead">I'm a PhD researcher in Theoretical Computer Science at IIT Jodhpur, working on multi-agent systems, fair division and allocation.</p><p class="fine-print">2025 - 2028 expected. M.Tech in Artificial Intelligence, 2023 - 2025.</p></header>
     <div class="reading"><p>When several agents want different things, how should we allocate resources? My research studies fairness and allocation, alongside my practical work on AI workflows.</p>
+      <p><a class="text-link" href={site.scholar}>View my Google Scholar profile <span aria-hidden="true">&#8599;</span></a></p>
       <h2>Public preprints</h2>
-      {rendered.map(({ paper, Content }) => <article class="ledger-entry"><span class="mono">{paper.data.status === 'preprint' ? 'Preprint' : 'Peer-reviewed'}</span><h3><a href={paper.data.url}>{paper.data.title}</a></h3><Content /><a class="text-link" href={paper.data.url}>Read on arXiv <span aria-hidden="true">&#8599;</span></a></article>)}
-      <h2>Research conversations</h2><p>For questions about the public work or possible collaboration, <a href={`mailto:${site.email}?subject=Research%20conversation`}>email me</a>. Unpublished submissions and private drafts aren't listed here.</p>
+      {rendered.map(({ paper, Content }) => <article class="ledger-entry"><span class="mono">{paper.data.status === 'preprint' ? 'Preprint' : 'Peer-reviewed'}</span><h3><a href={paper.data.url}>{paper.data.title}</a></h3><p class="fine-print">{paper.data.authors.join(', ')}<br />{paper.data.status === 'preprint' ? 'Submitted' : 'Published'} <time datetime={paper.data.published.toISOString().slice(0, 10)}>{dateFormat.format(paper.data.published)}</time></p><Content /><a class="text-link" href={paper.data.url}>Read on arXiv <span aria-hidden="true">&#8599;</span></a></article>)}
+      <h2>Research conversations</h2><p>For questions about the public work or possible collaboration, <a href={`mailto:${site.email}?subject=Research%20conversation`}>email me</a>.</p>
     </div>
   </div>
 </Layout>

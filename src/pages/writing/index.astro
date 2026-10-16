@@ -4,12 +4,17 @@ import Signup from '../../components/Signup.astro';
 import { publishedWriting, formatDate } from '../../lib/writing';
 import { site } from '../../data/site';
 const entries = await publishedWriting();
+const audiences = [
+  { value: 'business', label: 'Business' },
+  { value: 'individuals', label: 'Individuals' },
+  { value: 'research', label: 'Research' },
+].filter(audience => entries.some(entry => entry.data.audience === audience.value));
 ---
 <Layout title="Writing & Practical AI | Pranjal Pandey" description="Practical AI for your business and your life: what works, what stalls, and how to make it stick. One long letter a month." hasSignup>
   <div class="wrap writing-layout">
     <div class="writing-main">
       <header class="writing-heading"><p class="eyebrow">Writing / Practical AI</p><h1>The monthly letter</h1><p class="lead">Practical AI for your business and your life: what works, what stalls, and how to make it stick. One long letter a month, no fluff.</p></header>
-      <div class="writing-filter" hidden><label for="writing-audience">Show writing for</label><select id="writing-audience"><option value="all">All</option><option value="business">Business</option><option value="individuals">Individuals</option><option value="research">Research</option></select></div>
+      <div class="writing-filter" hidden><label for="writing-audience">Show writing for</label><select id="writing-audience"><option value="all">All</option>{audiences.map(audience => <option value={audience.value}>{audience.label}</option>)}</select></div>
       <p class="fine-print" id="filter-status" role="status"></p>
       <section aria-labelledby="essays-title"><div class="archive-heading"><h2 id="essays-title">The essays</h2><a class="text-link" href="/rss.xml">RSS feed</a></div>
         {entries.length ? <div class="article-list">{entries.map(entry => <article data-writing-audience={entry.data.audience}><p class="mono audience-label">{entry.data.audience}</p><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time><h3><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.description}</p></article>)}</div> : <div class="empty-note"><p>No essays published here yet. You can <a href="/research/">read my public research</a> or <a href={site.linkedin}>follow my updates on LinkedIn</a> while the archive takes shape.</p></div>}
@@ -29,7 +34,7 @@ const entries = await publishedWriting();
     filter.hidden = false;
     const apply = () => {
       const audience = new URL(location.href).searchParams.get('audience') ?? 'all';
-      select.value = ['business', 'individuals', 'research'].includes(audience) ? audience : 'all';
+      select.value = [...select.options].some(option => option.value === audience) ? audience : 'all';
       let count = 0;
       articles.forEach(article => {
         article.hidden = select.value !== 'all' && article.dataset.writingAudience !== select.value;

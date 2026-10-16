@@ -21,10 +21,10 @@ import { individualGuides } from '../data/guides';
         <p class="eyebrow">Free PDF + monthly letter</p>
         <h2 id="signup-title">Get the AI Strategy Starter.</h2>
         <p>Confirm your email to get the PDF.</p>
-        <Signup id="guides-email" audience="all" />
+        <Signup id="guides-email" audience="business" />
       </div>
     </section>
-    <section class="section" id="upcoming"><h2>On the writing desk.</h2><p class="lead">Coming soon. Subscribers to Practical AI get them first.</p><div class="offer-list">
+    <section class="section" id="upcoming"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="offer-list">
       <article class="offer-row"><span class="mono">Upcoming</span><div><h3>AI for Startups</h3><p>The planned playbook for founders: where AI gives a small team leverage, what to build vs buy, how to keep costs sane, and how not to burn months on demos.</p></div></article>
       <article class="offer-row"><span class="mono">Upcoming</span><div><h3>AI for Business</h3><p>For managers and leadership teams: choosing the right AI projects, getting security and teams on board, and turning pilots into everyday workflows.</p></div></article>
     </div></section>
@@ -32,7 +32,7 @@ import { individualGuides } from '../data/guides';
     </div>
     <div id="individual-guides" data-audience-panel="individuals">
       <section class="section"><div class="section-intro"><div><p class="eyebrow">Free / Personal AI Starter Kit</p><h2>Ten workflows.<br />Your own week.</h2></div><p>Copy-paste AI workflows for planning, learning, writing and deciding. Works with Claude, ChatGPT or Gemini.</p></div><a class="button" href="/kit/">Get the free kit</a></section>
-      <section class="section"><h2>On the writing desk.</h2><p class="lead">Coming soon. Subscribers to Practical AI get new guides first.</p><div class="offer-list">{individualGuides.map(guide => <article class="offer-row"><span class="mono">Coming soon</span><div><h3>{guide.title}</h3><p>{guide.description}</p></div></article>)}</div></section>
+      <section class="section"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="offer-list">{individualGuides.map(guide => <article class="offer-row"><span class="mono">Coming soon</span><div><h3>{guide.title}</h3><p>{guide.description}</p></div></article>)}</div></section>
       <section class="close"><h2>Want 1:1 help?</h2><p>Build a direction and portfolio projects around your own background.</p><a class="button" href="/career/">Book a career session</a></section>
     </div>
   </div>

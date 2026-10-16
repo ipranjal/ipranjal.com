@@ -21,9 +21,65 @@ test('business migration keeps a noindex compatibility route and new audience pa
   }
   assert.equal(images.size, 3);
   const business = await readFile('dist/business/index.html', 'utf8');
-  for (const offer of ['AI Workflow Audit', 'AI Strategy Planning', 'Leadership AI workshop', 'Build it with me', 'Fractional AI advisor', 'Applied R&amp;D', 'AI Career &amp; Portfolio Kickstart']) {
+  for (const offer of ['AI Workflow Audit', 'AI Strategy Planning', 'Leadership AI workshop', 'Build it with me', 'Fractional AI advisor', 'Applied R&amp;D']) {
     assert(business.includes(offer) || business.includes(offer.replaceAll('&amp;', '&')), `Missing migrated offer: ${offer}`);
   }
+  assert(!business.includes('AI Career &amp; Portfolio Kickstart'));
+  assert(!business.includes('href="/career/"'));
+  const individuals = await readFile('dist/individuals/index.html', 'utf8');
+  assert.match(individuals, /AI Career &(?:amp;)? Portfolio Kickstart/);
+});
+
+test('critique fixes keep one concise, audience-matched form and one essay CTA block', async () => {
+  for (const [path, button] of [['index', 'Send me the guide'], ['guides/index', 'Send me the guide'], ['guide/index', 'Send me the guide'], ['kit/index', 'Send me the kit'], ['writing/index', 'Subscribe']]) {
+    const html = await readFile(`dist/${path}.html`, 'utf8');
+    assert(html.includes(`<span>${button}</span>`), `Wrong signup action on ${path}`);
+    assert(html.includes('one email a month. Unsubscribe anytime.'));
+    assert(!html.includes('Email powered by'));
+    assert(!html.includes('Need help getting the guides?'));
+  }
+  const home = await readFile('dist/index.html', 'utf8');
+  const hero = home.match(/<section class="hero"[\s\S]*?<\/section>/)?.[0];
+  assert(hero?.includes('href="#guide"'));
+  for (const slug of ['why-ai-pilots-fail', 'which-tasks-to-automate-with-ai']) {
+    const html = await readFile(`dist/writing/${slug}/index.html`, 'utf8');
+    assert(!html.includes('<hr'));
+    assert(!html.includes('Want a structured way'));
+    assert(!html.includes('Want a step-by-step way'));
+    const cta = html.match(/<aside class="essay-subscribe[\s\S]*?<\/aside>/)?.[0];
+    assert(cta?.includes('id="article-email"'));
+    assert(cta.includes('Get the AI Strategy Starter.'));
+    assert(cta.includes('Send me the guide'));
+    assert.equal((cta.match(/href="\/call\/"/g) || []).length, 1);
+    assert(!cta.includes('href="/guide/"'), 'Inline form must not repeat a separate guide CTA');
+    assert(!cta.includes('mailto:'));
+    assert.equal((html.match(/class="seva-form formkit-form"/g) || []).length, 1);
+  }
+});
+
+test('empty audiences stay out of discovery while existing routes and dates remain', async () => {
+  const individuals = await readFile('dist/individuals/index.html', 'utf8');
+  assert(!individuals.includes('From the writing.'));
+  assert(!individuals.includes('/writing/?audience=individuals'));
+  assert(!individuals.includes('Where can I check session terms?'));
+  assert(individuals.includes('Price and booking on Topmate.'));
+  const writing = await readFile('dist/writing/index.html', 'utf8');
+  const select = writing.match(/<select id="writing-audience"[\s\S]*?<\/select>/)?.[0];
+  assert(select?.includes('value="business"'));
+  assert(!select.includes('value="individuals"'));
+  assert(!select.includes('value="research"'));
+  assert(!individuals.includes('On the writing desk.'));
+  const guides = await readFile('dist/guides/index.html', 'utf8');
+  assert(!guides.includes('On the writing desk.'));
+  const business = await readFile('dist/business/index.html', 'utf8');
+  assert.equal((business.match(/Every engagement is scoped with you first./g) || []).length, 1);
+  assert(business.includes('What results can we expect?'));
+  const guide = await readFile('dist/guide/index.html', 'utf8');
+  assert.match(guide, /<title>Free AI Strategy Starter for Founders &(?:amp;)? Leaders \| Pranjal Pandey<\/title>/);
+  const research = await readFile('dist/research/index.html', 'utf8');
+  assert(!research.includes('See the paper for'));
+  assert(!research.includes('private drafts'));
+  assert(research.includes('reduce envy between neighbours'));
 });
 
 test('single shared Kit identity serves the kit, business, individuals, writing and footer', async () => {

@@ -4,6 +4,7 @@ export const site = {
   url: 'https://ipranjal.com',
   linkedin: 'https://www.linkedin.com/in/its-pranjalpandey',
   github: 'https://github.com/ipranjal',
+  scholar: 'https://scholar.google.com/citations?user=nFk7jM8AAAAJ&hl=en',
   taskflo: 'https://taskflo.ai',
   call: 'https://cal.com/ipranjal/ai-pilot',
   strategy: 'https://topmate.io/itspranjal/2359698',

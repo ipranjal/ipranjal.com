@@ -23,6 +23,8 @@ const research = defineCollection({
     title: z.string().min(1),
     status: z.enum(['preprint', 'peer-reviewed']),
     url: z.url(),
+    authors: z.array(z.string().min(1)).min(1),
+    published: z.coerce.date(),
   }),
 });
 

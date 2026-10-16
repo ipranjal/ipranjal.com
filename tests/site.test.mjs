@@ -33,10 +33,9 @@ test('provider short links preserve the user-specified destinations', async () =
   assert(call.includes('noindex,follow'));
   assert(session.includes('Continue to Topmate'));
   const home = await readFile('dist/index.html', 'utf8');
-  assert.match(home, /href="\/strategy\/"/);
-  const individualOffer = home.match(/<article class="offer-row"><span class="mono">For individuals[\s\S]*?<\/article>/)?.[0];
-  assert(individualOffer?.includes('href="/career/"'));
-  assert(!individualOffer?.includes('90-minute'), 'Individual careers must not be mixed with business strategy');
+  assert.match(home, /href="\/business\/"/);
+  assert.match(home, /href="\/individuals\/"/);
+  assert(!home.includes('A company decision.'), 'The lower offer split must not duplicate the audience chooser');
 });
 
 test('signup and confirmation have separate thanks and welcome pages', async () => {
@@ -64,7 +63,7 @@ test('Guides retains its library and Guide is a real minimal campaign signup pag
   assert(guides.includes('data-uid="1a8706f0e9"'));
   assert(guides.includes('https://f.convertkit.com/ckjs/ck.5.js'));
   assert(guides.includes('name="email_address"'));
-  assert(guides.includes('Send me the free guides'));
+  assert(guides.includes('Send me the guide'));
   assert.equal((guides.match(/<form\b/g) || []).length, 1);
   const guide = await readFile('dist/guide/index.html', 'utf8');
   assert(!guide.includes('http-equiv="refresh"'));
@@ -89,7 +88,7 @@ test('homepage guide section uses the prominent signup panel and one real Kit fo
   assert(section.includes('name="email_address"'));
   assert(section.includes('https://app.kit.com/forms/10053825/subscriptions'));
   assert(section.includes('data-uid="1a8706f0e9"'));
-  assert(section.includes('Send me the free guides'));
+  assert(section.includes('Send me the guide'));
   assert.equal((home.match(/<form\b/g) || []).length, 1);
   assert(!section.includes('guide-title-card'));
 });
@@ -141,7 +140,8 @@ test('both approved essays appear across archive, homepage, RSS and sitemap with
     assert(schema.headline.length > title.length, 'Schema must retain the full essay headline');
     assert(html.includes('<table>'));
     assert(html.includes('>FAQ</h2>'));
-    assert(html.includes('href="/guides/#free-guide"'));
+    assert(html.includes('id="article-email"'));
+    assert(!html.includes('href="/guides/#free-guide"'));
     assert(html.includes('href="/business/"'));
     assert(archive.includes(`href="/writing/${slug}/"`));
     assert(home.includes(`href="/writing/${slug}/"`));
@@ -149,7 +149,7 @@ test('both approved essays appear across archive, homepage, RSS and sitemap with
     assert(sitemap.includes(`<loc>${url}</loc>`));
   }
   const allocation = await readFile('dist/writing/which-tasks-to-automate-with-ai/index.html', 'utf8');
-  assert(allocation.includes('href="/strategy/"'));
+  assert(allocation.includes('href="/call/"'));
   assert(!allocation.includes('href="https://ipranjal.com/session"'));
   assert(!allocation.includes('href="/session/"'));
 });
@@ -170,4 +170,26 @@ test('press, privacy and research retain useful public content without defensive
   assert(!research.includes('Not a peer-review claim'));
   assert(!thanks.includes('Opening it alone'));
   assert(!welcome.includes("doesn't verify subscriber status"));
+});
+
+test('research lists all four verified preprints once, newest first, with authors and submission dates', async () => {
+  const html = await readFile('dist/research/index.html', 'utf8');
+  const entries = [...html.matchAll(/<article class="ledger-entry">([\s\S]*?)<\/article>/g)].map(match => match[1]);
+  const papers = [
+    ['2610.09610', 'Envy-free Allocations with Individual Payments', '2026-10-07', 'Robert Bredereck, Eva Deltl, Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],
+    ['2609.28308', 'Envy-Free Allocation of Indivisible Goods under Leontief Preferences', '2026-09-23', 'Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],
+    ['2608.30669', 'Reaching Fairness by Reallocating Goods', '2026-08-31', 'Robert Bredereck, Eva Deltl, Tanmay Inamdar, Pallavi Jain, Pranjal Pandey, Bin Sun'],
+    ['2601.15864', 'Minimum Envy Graphical House Allocation Beyond Identical Valuations', '2026-01-22', 'Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],
+  ];
+  assert.equal(entries.length, papers.length);
+  papers.forEach(([id, title, date, authors], index) => {
+    assert(entries[index].includes(`href="https://arxiv.org/abs/${id}"`));
+    assert(entries[index].includes(title));
+    assert(entries[index].includes(`datetime="${date}"`));
+    assert(entries[index].includes(authors));
+    assert(entries[index].includes('>Preprint</span>'));
+    assert(entries[index].includes('Submitted'));
+  });
+  assert(html.includes('https://scholar.google.com/citations?user=nFk7jM8AAAAJ'));
+  assert(!html.includes('>Peer-reviewed</span>'));
 });

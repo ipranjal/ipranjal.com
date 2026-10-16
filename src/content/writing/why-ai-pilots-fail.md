@@ -104,9 +104,3 @@ Start with one specific, frequent task. Test it on real work with real users, ke
 ### How long should an AI pilot run?
 
 For most business workflows, around 30 days of use on real work is a useful initial checkpoint to decide whether to scale it, fix it or stop it. High-risk or infrequent workflows need longer evaluation. Agree the decision criteria before you start.
-
----
-
-*Want a structured way to avoid all five? I've put the questions I use with founders and leadership teams into a free guide, the* AI Strategy Starter for Founders & Leaders. **[Get the free guide](/guides/#free-guide)**
-
-*Staring at a stalled AI pilot right now? [Book a free 30-minute call](/call/). No pitch deck needed. Mild despair welcome.*

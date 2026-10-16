@@ -71,6 +71,9 @@ test('thanks and welcome are measured as funnel page views, not verified subscri
     assert.equal(events.length, 1);
     assert.equal(events[0][1], event);
     assert(!events.some(args => args[1] === 'sign_up'));
+    const metaEvents = window.fbq.queue.filter(args => args[0] === 'track');
+    assert.equal(metaEvents.length, 1);
+    assert.equal(metaEvents[0][1], 'PageView');
   }
   assert(!runTracking().window.dataLayer.some(args => args[0] === 'event'));
 });
