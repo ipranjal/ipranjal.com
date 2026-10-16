@@ -31,7 +31,22 @@ import { individualGuides } from '../data/guides';
     <section class="close"><h2>Want to apply it to your business?</h2><p>A paid strategy session gives your question dedicated working time.</p><a class="button" href="/strategy/">Book a strategy session</a></section>
     </div>
     <div id="individual-guides" data-audience-panel="individuals">
-      <section class="section"><div class="section-intro"><div><p class="eyebrow">Free / Personal AI Starter Kit</p><h2>Ten workflows.<br />Your own week.</h2></div><p>Copy-paste AI workflows for planning, learning, writing and deciding. Works with Claude, ChatGPT or Gemini.</p></div><a class="button" href="/kit/">Get the free kit</a></section>
+      <section class="guides-opening" aria-labelledby="individual-guides-title">
+        <div class="guides-promise">
+          <p class="eyebrow">Guides & playbooks / Practical AI</p>
+          <h2 id="individual-guides-title">Ten workflows.<br />Your own week.</h2>
+          <p class="lead">The free Personal AI Starter Kit: copy-paste workflows for planning, learning, writing and deciding. Works with Claude, ChatGPT or Gemini.</p>
+          <ul class="guide-contents"><li>Plan your week in 20 minutes.</li><li>Turn an overflowing inbox into a five-item to-do list.</li><li>Learn a topic, prepare for a meeting and make a decision.</li></ul>
+          <p class="fine-print">By Pranjal Pandey. Founder, Taskflo AI. PhD researcher in multi-agent systems at IIT Jodhpur.</p>
+          <a class="text-link" href="/kit/">Explore the free personal kit</a>
+        </div>
+        <div class="guide-signup-panel" aria-labelledby="individual-signup-title">
+          <p class="eyebrow">Free PDF + monthly letter</p>
+          <h2 id="individual-signup-title">Get the Personal AI Starter Kit.</h2>
+          <p>Confirm your email to get the PDF.</p>
+          <Signup id="individual-guides-email" audience="individuals" />
+        </div>
+      </section>
       <section class="section"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="offer-list">{individualGuides.map(guide => <article class="offer-row"><span class="mono">Coming soon</span><div><h3>{guide.title}</h3><p>{guide.description}</p></div></article>)}</div></section>
       <section class="close"><h2>Want 1:1 help?</h2><p>Build a direction and portfolio projects around your own background.</p><a class="button" href="/career/">Book a career session</a></section>
     </div>

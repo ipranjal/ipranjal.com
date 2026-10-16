@@ -64,7 +64,7 @@ test('Guides retains its library and Guide is a real minimal campaign signup pag
   assert(guides.includes('https://f.convertkit.com/ckjs/ck.5.js'));
   assert(guides.includes('name="email_address"'));
   assert(guides.includes('Send me the guide'));
-  assert.equal((guides.match(/<form\b/g) || []).length, 1);
+  assert.equal((guides.match(/<form\b/g) || []).length, 2);
   const guide = await readFile('dist/guide/index.html', 'utf8');
   assert(!guide.includes('http-equiv="refresh"'));
   assert(guide.includes('href="https://ipranjal.com/guide/"'));

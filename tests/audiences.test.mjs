@@ -82,13 +82,32 @@ test('empty audiences stay out of discovery while existing routes and dates rema
   assert(research.includes('reduce envy between neighbours'));
 });
 
+test('both guide audiences use the same split layout and boxed signup with unique email fields', async () => {
+  const html = await readFile('dist/guides/index.html', 'utf8');
+  assert.equal((html.match(/class="guides-opening"/g) || []).length, 2);
+  assert.equal((html.match(/class="guides-promise"/g) || []).length, 2);
+  assert.equal((html.match(/class="guide-signup-panel"/g) || []).length, 2);
+  for (const [id, button] of [['guides-email', 'Send me the guide'], ['individual-guides-email', 'Send me the kit']]) {
+    assert.equal((html.match(new RegExp(`id="${id}"`, 'g')) || []).length, 1);
+    assert(html.includes(`for="${id}"`));
+    assert(html.includes(`<span>${button}</span>`));
+  }
+  const forms = [...html.matchAll(/<form\b[\s\S]*?<\/form>/g)].map(match => match[0]);
+  assert.equal(forms.length, 2);
+  for (const form of forms) {
+    assert(form.includes('https://app.kit.com/forms/10053825/subscriptions'));
+    assert(form.includes('data-uid="1a8706f0e9"'));
+    assert(form.includes('https://ipranjal.com/thanks/'));
+  }
+});
+
 test('single shared Kit identity serves the kit, business, individuals, writing and footer', async () => {
   for (const audience of ['kit', 'guide', 'business', 'individuals']) {
     for (const step of ['thanks', 'welcome']) assert(!existsSync(`dist/${audience}/${step}/index.html`), `Do not create a separate ${audience} ${step} page`);
   }
   for (const path of ['kit', 'business', 'individuals', 'guides', 'writing', 'about']) {
     const html = await readFile(`dist/${path}/index.html`, 'utf8');
-    assert.equal((html.match(/class="seva-form formkit-form"/g) || []).length, 1, `Duplicate Kit form on ${path}`);
+    assert.equal((html.match(/class="seva-form formkit-form"/g) || []).length, path === 'guides' ? 2 : 1, `Unexpected Kit form count on ${path}`);
     assert(html.includes('data-sv-form="10053825"'));
     assert(html.includes('data-uid="1a8706f0e9"'));
     assert(html.includes('https://ipranjal.com/thanks/'));
