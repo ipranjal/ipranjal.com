@@ -132,11 +132,6 @@ main:focus { outline: none; }
 .ledger-entry p { color: var(--muted); }
 .ledger-entry .text-link { margin-top: var(--s3); color: var(--link); }
 .guide-section { display: grid; grid-template-columns: .85fr 1fr; gap: var(--s24); padding-block: var(--s32); align-items: center; }
-.guide-title-card { padding: var(--s12); border: 1px solid var(--rule); border-radius: var(--panel-radius); background: var(--surface); min-height: 29rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-.guide-title-card::before { content: ''; position: absolute; inset: 1rem; border: 1px solid var(--rule); pointer-events: none; }
-.guide-title-card .mono { color: var(--blue); }
-.guide-title-card h3 { font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.13; letter-spacing: -.025em; max-width: 11ch; margin-block: var(--s12); }
-.guide-title-card .guide-line { height: 1px; background: var(--blue); width: 4rem; margin-bottom: var(--s4); }
 .guide-copy h2 { max-width: 15ch; margin-bottom: var(--s6); }
 .guide-contents { padding-left: 1.25rem; color: var(--muted); margin-block: var(--s6); }
 .guide-contents li { margin-bottom: var(--s2); padding-left: var(--s2); }
@@ -199,21 +194,53 @@ main:focus { outline: none; }
 .faq details { padding-block: var(--s6); border-bottom: 1px solid var(--rule); }
 .faq summary { cursor: pointer; font-size: 1.125rem; }
 .faq details p { margin-top: var(--s4); color: var(--muted); }
-.campaign { display: grid; grid-template-columns: 1.2fr .75fr; gap: var(--s24); padding-block: var(--s24); align-items: start; }
-.campaign h1 { font-size: clamp(2.5rem, 4.5vw, 3.75rem); max-width: 15ch; }
-.campaign .lead { margin-top: var(--s6); }
-.campaign .signup { margin-top: var(--s8); }
-.campaign .portrait { max-width: 14rem; margin-top: var(--s8); }
+.guides-opening { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s16); padding-block: var(--s16); align-items: center; }
+.guides-promise h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); max-width: 17ch; }
+.guides-promise .lead { margin-top: var(--s6); }
+.guide-signup-panel { min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--panel-radius); padding: var(--s8); }
+.guide-signup-panel h2 { font-size: 2rem; margin-bottom: var(--s4); }
+.guide-signup-panel > p:not(.eyebrow) { color: var(--muted); }
+.guide-signup-panel .signup { margin-top: var(--s6); }
+.guide-signup-panel .formkit-fields { flex-direction: column; align-items: stretch; gap: var(--s4); }
+.guide-signup-panel .formkit-field { flex: auto; }
+.guide-signup-panel .eyebrow { margin-bottom: var(--s4); }
 .link-index { max-width: 38rem; margin-inline: auto; padding-block: var(--s16); }
 .link-index h1 { font-size: 2.5rem; }
 .link-index > p { color: var(--muted); margin-block: var(--s6); }
 .link-index > a { display: flex; justify-content: space-between; margin-block: var(--s4); }
 .redirect { padding-block: var(--s32); max-width: 45rem; }
 .redirect p { margin-block: var(--s6); }
-.article-list { margin-top: var(--s8); }
-.article-list a { display: block; padding-block: var(--s6); border-top: 1px solid var(--rule); text-decoration: none; }
+.writing-layout { max-width: 52rem; padding-block: var(--s16) var(--s24); }
+.writing-main { min-width: 0; }
+.writing-heading { margin-bottom: var(--s16); text-align: center; }
+.writing-heading h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); }
+.writing-heading .lead { margin-top: var(--s6); }
+.writing-subscribe { margin-top: var(--s12); }
+.archive-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
+.archive-heading h2 { font-size: 1.5rem; }
+.article-list { margin-top: var(--s6); }
+.article-list article { padding-block: var(--s8); border-top: 1px solid var(--rule); }
+.article-list h3 { font-size: 1.625rem; margin-top: var(--s3); }
+.article-list a { color: var(--text); text-decoration: none; }
+.article-list p { margin-top: var(--s4); color: var(--muted); }
 .article-list time { color: var(--muted); font-size: .875rem; }
-.article-list h2 { font-size: 1.75rem; margin-top: var(--s3); }
+.essay { padding-block: var(--s12) var(--s24); }
+.essay-heading, .essay-body, .essay-subscribe { max-width: 43rem; margin-inline: auto; }
+.essay-heading { margin-bottom: var(--s12); }
+.essay-heading .eyebrow { margin-top: var(--s8); }
+.essay-heading h1 { font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1.15; }
+.essay-heading .lead { margin-top: var(--s6); }
+.essay-body { font-size: 1.125rem; color: var(--muted); }
+.essay-body h2 { color: var(--text); font-size: 2rem; margin-block: var(--s12) var(--s6); }
+.essay-body h3 { color: var(--text); margin-block: var(--s8) var(--s4); }
+.essay-body p + p { margin-top: var(--s6); }
+.essay-body li { margin-bottom: var(--s3); }
+.essay-body strong { color: var(--text); font-weight: 500; }
+.essay-body hr { border: 0; border-top: 1px solid var(--border); margin-block: var(--s12); }
+.essay-body table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin-block: var(--s8); font-size: 1rem; }
+.essay-body th, .essay-body td { padding: var(--s4); text-align: left; border: 1px solid var(--border); min-width: 10rem; vertical-align: top; }
+.essay-body th { color: var(--text); background: var(--surface); font-weight: 500; }
+.essay-subscribe { margin-top: var(--s16); }
 
 @media (hover: hover) and (pointer: fine) {
   a:hover { color: var(--text); }
@@ -230,7 +257,7 @@ main:focus { outline: none; }
   .header-inner { gap: var(--s6); }
   .brand-name { display: none; }
   .hero { gap: var(--s12); }
-  .blockers, .proof-grid, .guide-section, .writing-preview, .about-intro, .campaign { gap: var(--s12); }
+  .blockers, .proof-grid, .guide-section, .writing-preview, .about-intro, .guides-opening { gap: var(--s12); }
   .offer-row { gap: var(--s8); }
 }
 @media (max-width: 999px) {
@@ -245,7 +272,6 @@ main:focus { outline: none; }
   .hero h1 { font-size: clamp(2.5rem, 5.7vw, 4rem); }
   .method-steps { gap: var(--s8); }
   .method-artifact { padding: var(--s6); }
-  .guide-title-card { padding: var(--s8); }
   .offer-row { grid-template-columns: .4fr 1fr; }
   .offer-row > a { grid-column: 2; justify-self: start; }
 }
@@ -261,7 +287,7 @@ main:focus { outline: none; }
   .portrait-hero img { aspect-ratio: 4 / 3; object-position: 50% 32%; }
   .portrait figcaption { font-size: .6875rem; }
   .credentials { gap: var(--s4); flex-direction: column; }
-  .section-intro, .blockers, .proof-grid, .guide-section, .writing-preview, .about-intro, .campaign { grid-template-columns: 1fr; gap: var(--s8); }
+  .section-intro, .blockers, .proof-grid, .guide-section, .writing-preview, .about-intro, .guides-opening { grid-template-columns: 1fr; gap: var(--s8); }
   .blockers h2, .proof-intro h2, .guide-copy h2 { max-width: 19ch; }
   .blocker-list { margin-top: var(--s4); }
   .method-steps { grid-template-columns: 1fr; gap: var(--s12); }
@@ -269,9 +295,6 @@ main:focus { outline: none; }
   .method-steps > li { padding-left: var(--s16); }
   .step-number { position: absolute; left: 0; top: 0; }
   .method-artifact { margin-top: var(--s6); }
-  .guide-title-card { min-height: 23rem; max-width: 28rem; width: 100%; margin-inline: auto; }
-  .guide-title-card h3 { font-size: 2.5rem; margin-block: var(--s8); }
-  .guide-copy { margin-top: var(--s4); }
   .offer-row { grid-template-columns: 1fr; gap: var(--s4); }
   .offer-row > a { grid-column: 1; }
   .close { padding-block: var(--s24); }
@@ -282,8 +305,17 @@ main:focus { outline: none; }
   .timeline article { grid-template-columns: 1fr; gap: var(--s3); }
   .education, .service { grid-template-columns: 1fr; gap: var(--s6); }
   .about-intro .portrait { max-width: 25rem; }
-  .campaign { padding-block: var(--s16); }
-  .campaign > aside { display: none; }
+  .guides-opening { padding-block: var(--s8) var(--s16); }
+  .guides-promise h1 { font-size: 2.25rem; }
+  .guides-promise .lead { margin-top: var(--s4); font-size: 1.0625rem; }
+  .guides-promise .eyebrow { margin-bottom: var(--s4); }
+  .guide-signup-panel { padding: var(--s6); }
+  .guide-signup-panel h2 { font-size: 1.75rem; }
+  .guides-promise .guide-contents, .guides-promise > .fine-print { display: none; }
+  .writing-layout { padding-block: var(--s8) var(--s16); }
+  .writing-heading { margin-bottom: var(--s12); }
+  .essay { padding-block: var(--s8) var(--s16); }
+  .essay-body { font-size: 1.0625rem; }
   .actions { gap: var(--s4) var(--s6); }
   .reading p, .reading li { font-size: 1.0625rem; }
 }
@@ -296,7 +328,7 @@ main:focus { outline: none; }
   :root { --rule: #9da7ba; }
 }
 @media (forced-colors: active) {
-  .site-header, .method-artifact, .guide-title-card { border: 1px solid CanvasText; }
+  .site-header, .method-artifact, .guide-signup-panel { border: 1px solid CanvasText; }
   .button { border: 1px solid ButtonText; }
   .method-line span { background: CanvasText; }
 }

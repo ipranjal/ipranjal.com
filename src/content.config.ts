@@ -6,7 +6,10 @@ const writing = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
   schema: z.object({
     title: z.string().min(1),
+    seo_title: z.string().min(1).max(60).optional(),
     description: z.string().min(1),
+    author: z.literal('Pranjal Pandey').default('Pranjal Pandey'),
+    tags: z.array(z.string().min(1)).default([]),
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
     draft: z.boolean().default(true),

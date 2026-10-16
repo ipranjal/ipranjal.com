@@ -4,10 +4,20 @@ import Signup from '../components/Signup.astro';
 ---
 <Layout title="AI Strategy Guides for Startups & Business | Pranjal Pandey" description="Start with the free AI Strategy Starter for Founders & Leaders. Practical resources for choosing workflows and making better AI decisions.">
   <div class="wrap">
-    <header class="page-heading"><p class="eyebrow">Guides & playbooks</p><h1>Guides</h1><p class="lead">Practical AI strategy, written down. No hype, no 50-tool listicles: just what to do, in what order, and why.</p></header>
-    <section class="guide-section">
-      <div class="guide-title-card"><span class="mono">Free guide</span><h3>AI Strategy Starter</h3><div><div class="guide-line" aria-hidden="true"></div><p>For Founders & Leaders</p><p class="fine-print">Pranjal Pandey</p></div></div>
-      <div class="guide-copy"><h2>The questions before the project.</h2><ul class="guide-contents"><li>Five questions to ask before starting.</li><li>How to choose your first three workflows.</li><li>Common reasons pilots don't stick.</li></ul><Signup id="guides-email" /></div>
+    <section class="guides-opening" aria-labelledby="guides-title">
+      <div class="guides-promise">
+        <p class="eyebrow">Guides & playbooks / Practical AI</p>
+        <h1 id="guides-title">Choose the workflow.<br />Then the tool.</h1>
+        <p class="lead">A free guide to choosing your first AI workflows, before building another pilot. For founders & leaders.</p>
+        <ul class="guide-contents"><li>Five questions to ask before any AI project.</li><li>How to pick your first three workflows.</li><li>Why most AI pilots stall, and how to make yours stick.</li></ul>
+        <p class="fine-print">By Pranjal Pandey. Founder, Taskflo AI. PhD researcher in multi-agent systems at IIT Jodhpur.</p>
+      </div>
+      <div class="guide-signup-panel" id="free-guide" aria-labelledby="signup-title">
+        <p class="eyebrow">Free PDF + monthly letter</p>
+        <h2 id="signup-title">Get the AI Strategy Starter.</h2>
+        <p>Confirm your email to get the PDF.</p>
+        <Signup id="guides-email" />
+      </div>
     </section>
     <section class="section"><h2>On the writing desk.</h2><p class="lead">Two deeper playbooks are planned. Neither is for sale yet.</p><div class="offer-list">
       <article class="offer-row"><span class="mono">Upcoming</span><div><h3>AI for Startups</h3><p>The planned playbook for founders: where AI gives a small team leverage, what to build vs buy, how to keep costs sane, and how not to burn months on demos.</p></div></article>

@@ -26,18 +26,20 @@ The build verifier checks routes, internal links and fragments, private-source e
 
 - [website-copy.md](website-copy.md) is the private copy reference. Public copy follows its positioning, offers and two-step guide flow while retaining the approved design. Placeholder prices, unconfirmed belief/Now notes, unpublished essays, unreleased playbooks and private research submissions are not published. Verified paper titles and detailed chronology take precedence over abbreviated draft wording. Provider profile/email copy and Kit redirects must be configured in the provider dashboards; editing the site does not update those.
 - Canonical contact details, provider URLs, chronology and method live in [src/data/site.ts](src/data/site.ts).
-- Essays are Markdown files in [src/content/writing/](src/content/writing/) with `title`, `description`, `published`, optional `updated`, and `draft`. `draft` defaults to true. Draft and future-dated essays do not generate pages or appear in RSS.
+- Essays are Markdown files in [src/content/writing/](src/content/writing/) with `title`, `description`, `published`, optional `updated`, optional `seo_title` (up to 60 characters), optional `tags`, and `draft`. The author is Pranjal Pandey. `draft` defaults to true. Draft and future-dated essays do not generate pages or appear in RSS, the sitemap or previews. Static scheduled publication requires a rebuild on or after the publication date.
 - Research entries live in [src/content/research/](src/content/research/), with an explicit `preprint` or `peer-reviewed` status. The public paper title is linked to arXiv; no unpublished submissions are listed.
 - Shared typography, colors, responsive layout and preference fallbacks live in [src/styles/global.css](src/styles/global.css).
 - The approved existing themed portrait is imported from [assets/pranjal-theme.png](assets/pranjal-theme.png) and optimised by Astro. Original HEIC/video/large images are not copied to production. The themed image is not presented as an unaltered press photograph.
 
-There are no published essays yet, so the writing archive and RSS feed intentionally start empty. The homepage writing note should be updated when the first essay is approved. Upcoming paid playbooks have no purchase links.
+The two initial essays cover AI pilot failure and AI task allocation, both dated 16 October 2026 by owner approval. The homepage previews, archive, RSS and sitemap derive from the same published collection. Article pages include canonical metadata, article Open Graph metadata, the shared branded portrait social image and BlogPosting structured data. The supplied root drafts and SEO plan are private inputs; only their adapted public Markdown entries are published. Upcoming paid playbooks have no purchase links.
 
 ## Integrations
 
 - `/call/` redirects to the supplied free 30-minute Cal.com event.
 - `/session/` redirects to the supplied 60-minute Topmate career session. The separate 90-minute strategy session links directly to its specific Topmate service.
 - `/newsletter/` redirects to the writing page.
+- `/guides/#free-guide` is the single guide signup destination, with a visible Kit email form near the top and upcoming playbooks below. `/guide/` is a noindex compatibility redirect with a manual continuation link, not a duplicate landing page.
+- The homepage free-guide section uses the same bordered signup-panel styling and shared Kit form as Guides, with the guide benefits beside it on desktop and above it on mobile.
 - [Signup.astro](src/components/Signup.astro) uses the supplied Kit form ID 10053825 and Kit's own form controller. Set the after-signup redirect in Kit to `https://ipranjal.com/thanks/`. Separately, set the incentive email's after-confirmation redirect to `https://ipranjal.com/welcome/`. These provider-side settings cannot be changed by the static site. Live email delivery has not been tested by the build.
 - Without JavaScript, signup pages offer an explicitly labelled email-help path instead of pretending a submission succeeded.
 - `/thanks/` is public, `noindex` and conditional. It never counts a visit as a confirmed subscription, booking or payment. Use provider reporting for actual outcomes.
