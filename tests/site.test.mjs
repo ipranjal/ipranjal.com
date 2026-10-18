@@ -199,6 +199,7 @@ test('writing banners are optimized across archive, homepage, essays and social 
   const archive = await readFile('dist/writing/index.html', 'utf8');
   const home = await readFile('dist/index.html', 'utf8');
   assert(archive.includes('article-list writing-grid'));
+  assert(home.includes('article-list writing-grid home-writing-grid'));
   assert.equal((archive.match(/class="writing-cover"/g) || []).length, 3);
   assert.equal((home.match(/class="writing-cover"/g) || []).length, 3);
   const socialImages = new Set();

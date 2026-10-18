@@ -35,6 +35,8 @@ The two initial essays cover AI pilot failure and AI task allocation, both dated
 
 ## Integrations
 
+The homepage monthly-letter preview places its introduction above the three latest essays, rather than beside a vertical stack. Preview cards use three columns above 1000px, two on tablets and one below 700px. The writing archive retains its separate two-column layout.
+
 The token-usage essay is published at `/writing/optimising-token-usage/`, dated 18 October 2026, using the owner-supplied content and banner. Its frontmatter follows the collection's `published`, `audience`, `draft` and `cover` fields; the root source draft remains ignored. The shared article template supplies the single guide/signup CTA, rather than duplicating the draft's closing promotion. Installation examples are displayed as horizontally scrollable code blocks, never executed by the website.
 
 - `/call/` redirects to the supplied free 30-minute Cal.com event.
