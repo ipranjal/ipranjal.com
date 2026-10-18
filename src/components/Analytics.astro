@@ -76,6 +76,8 @@
     window.fbq('set', 'autoConfig', false, '1002800556174711');
     window.fbq('init', '1002800556174711');
     window.fbq('track', 'PageView');
+    if (location.pathname === '/thanks/') window.fbq('track', 'Lead');
+    if (location.pathname === '/welcome/') window.fbq('track', 'CompleteRegistration');
     const meta = document.createElement('script');
     meta.async = true;
     meta.src = 'https://connect.facebook.net/en_US/fbevents.js';

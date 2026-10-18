@@ -101,6 +101,7 @@ const navigation = [
         {minimal && <a class="quiet-link" href="/">Back to the website</a>}
       </div>
     </header>}
+    {article && <div class="read-progress" aria-hidden="true"></div>}
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer wrap">
       {!minimal && !hasSignup && <div class="footer-top">
@@ -133,5 +134,6 @@ const navigation = [
         desktop.addEventListener('change', () => { menu.open = false; });
       });
     </script>
+    <script type="module" src="/motion.js"></script>
   </body>
 </html>

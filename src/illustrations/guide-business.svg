@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" role="img" aria-labelledby="guidebusin-t" class="illus illus-guide-business"><title id="guidebusin-t">A guide book</title><defs><linearGradient id="guidebusin-violet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B2BD6"/><stop offset="1" stop-color="#8F6BFF"/></linearGradient><linearGradient id="guidebusin-violet-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#4B2BD6"/><stop offset="1" stop-color="#8F6BFF"/></linearGradient><linearGradient id="guidebusin-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF6B6B"/><stop offset="1" stop-color="#FFB38A"/></linearGradient><linearGradient id="guidebusin-coral-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF6B6B"/><stop offset="1" stop-color="#FFB38A"/></linearGradient></defs><ellipse cx="160" cy="216" rx="90" ry="10" fill="#000" opacity="0.35"/>
+<g class="lift">
+<path d="M100 40 H220 C232 40 240 48 240 60 V196 H112 C104 196 100 192 100 184 Z" fill="url(#guidebusin-violet)"/>
+<path d="M100 184 C100 176 106 172 114 172 H240 V196 H112 C104 196 100 192 100 184 Z" fill="#D8ECF8" opacity=".9"/>
+<rect x="122" y="70" width="90" height="10" rx="5" fill="#fff" opacity=".85"/><rect x="122" y="90" width="64" height="10" rx="5" fill="#fff" opacity=".5"/>
+<path d="M150 120 C170 112 190 140 210 130 L212 146 C190 156 172 128 152 136 Z" fill="url(#guidebusin-coral)"/>
+</g></svg>

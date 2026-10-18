@@ -64,16 +64,17 @@ test('saved opt-out and inaccessible storage prevent all three tracking tags', (
   assert.equal(result.warnings.length, 1);
 });
 
-test('thanks and welcome are measured as funnel page views, not verified subscriptions', () => {
-  for (const [pathname, event] of [['/thanks/', 'guide_signup_page_view'], ['/welcome/', 'guide_confirmation_page_view']]) {
+test('thanks and welcome are measured as funnel page views plus a Meta intent event', () => {
+  for (const [pathname, event, metaEvent] of [['/thanks/', 'guide_signup_page_view', 'Lead'], ['/welcome/', 'guide_confirmation_page_view', 'CompleteRegistration']]) {
     const { window } = runTracking({ pathname });
     const events = window.dataLayer.filter(args => args[0] === 'event');
     assert.equal(events.length, 1);
     assert.equal(events[0][1], event);
     assert(!events.some(args => args[1] === 'sign_up'));
     const metaEvents = window.fbq.queue.filter(args => args[0] === 'track');
-    assert.equal(metaEvents.length, 1);
+    assert.equal(metaEvents.length, 2);
     assert.equal(metaEvents[0][1], 'PageView');
+    assert.equal(metaEvents[1][1], metaEvent);
   }
   assert(!runTracking().window.dataLayer.some(args => args[0] === 'event'));
 });

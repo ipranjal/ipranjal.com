@@ -90,7 +90,8 @@ test('homepage guide section uses the prominent signup panel and one real Kit fo
   assert(section.includes('https://app.kit.com/forms/10053825/subscriptions'));
   assert(section.includes('data-uid="1a8706f0e9"'));
   assert(section.includes('Send me the guide'));
-  assert.equal((home.match(/<form\b/g) || []).length, 1);
+  assert.equal((home.match(/<form\b/g) || []).length, 2);
+  assert.equal((home.match(/<form\b[^>]*data-scorer/g) || []).length, 1);
   assert(!section.includes('guide-title-card'));
 });
 
@@ -175,7 +176,7 @@ test('press, privacy and research retain useful public content without defensive
 
 test('research lists all four verified preprints once, newest first, with authors and submission dates', async () => {
   const html = await readFile('dist/research/index.html', 'utf8');
-  const entries = [...html.matchAll(/<article class="ledger-entry">([\s\S]*?)<\/article>/g)].map(match => match[1]);
+  const entries = [...html.matchAll(/<article class="[^"]*\bledger-entry\b[^"]*">([\s\S]*?)<\/article>/g)].map(match => match[1]);
   const papers = [
     ['2610.09610', 'Envy-free Allocations with Individual Payments', '2026-10-07', 'Robert Bredereck, Eva Deltl, Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],
     ['2609.28308', 'Envy-Free Allocation of Indivisible Goods under Leontief Preferences', '2026-09-23', 'Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],

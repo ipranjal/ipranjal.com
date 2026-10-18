@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Signup from '../components/Signup.astro';
+import Illustration from '../components/Illustration.astro';
 import { individualGuides } from '../data/guides';
 ---
 <Layout title="Practical AI Guides for Business & Individuals | Pranjal Pandey" description="Free and upcoming practical AI guides: AI strategy for founders and leaders, and AI workflows and career guides for individuals." hasSignup>
   <div class="wrap">
     <header class="page-heading"><h1>Guides</h1><p class="lead">Practical AI, written down. No hype, no 50-tool listicles: just what to do, in what order, and why. Pick your lane.</p></header>
-    <nav class="audience-switch" aria-label="Guide audience"><a href="#business-guides" data-guide-choice="business" aria-current="true">For Business</a><a href="#individual-guides" data-guide-choice="individuals">For Individuals</a></nav>
+    <nav class="audience-switch tablist" aria-label="Guide audience"><a class="tab" href="#business-guides" data-guide-choice="business" aria-current="true">For Business</a><a class="tab" href="#individual-guides" data-guide-choice="individuals">For Individuals</a></nav>
     <div id="business-guides" data-audience-panel="business">
     <section class="guides-opening" aria-labelledby="guides-title">
       <div class="guides-promise">
@@ -16,6 +17,7 @@ import { individualGuides } from '../data/guides';
         <ul class="guide-contents"><li>Five questions to ask before any AI project.</li><li>How to pick your first three workflows.</li><li>Why most AI pilots stall, and how to make yours stick.</li></ul>
         <p class="fine-print">By Pranjal Pandey. Founder, Taskflo AI. PhD researcher in multi-agent systems at IIT Jodhpur.</p>
         <a class="text-link" href="/guide/">Explore the free business guide</a>
+        <Illustration name="guide-business" />
       </div>
       <div class="guide-signup-panel" id="free-guide" aria-labelledby="signup-title">
         <p class="eyebrow">Free PDF + monthly letter</p>
@@ -39,6 +41,7 @@ import { individualGuides } from '../data/guides';
           <ul class="guide-contents"><li>Plan your week in 20 minutes.</li><li>Turn an overflowing inbox into a five-item to-do list.</li><li>Learn a topic, prepare for a meeting and make a decision.</li></ul>
           <p class="fine-print">By Pranjal Pandey. Founder, Taskflo AI. PhD researcher in multi-agent systems at IIT Jodhpur.</p>
           <a class="text-link" href="/kit/">Explore the free personal kit</a>
+          <Illustration name="guide-personal" />
         </div>
         <div class="guide-signup-panel" aria-labelledby="individual-signup-title">
           <p class="eyebrow">Free PDF + monthly letter</p>

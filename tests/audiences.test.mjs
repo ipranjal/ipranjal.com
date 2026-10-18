@@ -143,7 +143,7 @@ test('guide picker offers byte-identical PDFs and a current two-file ZIP, only a
 test('audience chooser, guides navigation, writing labels and links groups use real destinations', async () => {
   const home = await readFile('dist/index.html', 'utf8');
   assert(home.indexOf('id="chooser-title"') > home.indexOf('id="hero-title"'));
-  assert(home.indexOf('id="chooser-title"') < home.indexOf('class="credentials"'));
+  assert(home.indexOf('id="chooser-title"') < home.indexOf('class="credentials chip-row"'));
   for (const path of ['/business/', '/individuals/', '/kit/']) assert(home.includes(`href="${path}"`));
   const guides = await readFile('dist/guides/index.html', 'utf8');
   assert(guides.includes('id="business-guides" data-audience-panel="business"'));

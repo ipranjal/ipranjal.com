@@ -33,6 +33,14 @@ It sounds abstract, but the more AI workflows I build for companies, the more th
 
 These are starting points, not universal rules. The right split depends on the workflow, the people and the cost of getting it wrong.
 
+<form class="scorer" data-scorer>
+  <p class="mono">Try it on your own task</p>
+  <div class="scorer-field"><label for="essay-scorer-freq">How often does it come up? <span>Rare &#8594; constant</span></label><input id="essay-scorer-freq" name="freq" type="range" min="1" max="5" value="3" /></div>
+  <div class="scorer-field"><label for="essay-scorer-check">How easy is a wrong answer to catch? <span>Hard &#8594; easy</span></label><input id="essay-scorer-check" name="check" type="range" min="1" max="5" value="3" /></div>
+  <div class="scorer-field"><label for="essay-scorer-risk">How much does a mistake cost? <span>Low &#8594; high</span></label><input id="essay-scorer-risk" name="risk" type="range" min="1" max="5" value="3" /></div>
+  <div class="scorer-verdict" data-verdict><strong></strong><span></span><div class="scorer-meter" data-meter aria-hidden="true"></div></div>
+</form>
+
 ## 1. "Efficient" and "fair" are two different questions
 
 Fair division asks two separate questions about any way of splitting things up:

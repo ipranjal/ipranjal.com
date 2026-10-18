@@ -1,0 +1,34 @@
+---
+// Inlines one of the "Fluid forms, vibrant colours" illustrations (src/illustrations/*.svg) so its
+// motion classes (float-a/b/c, lift, pebble) are reachable from global.css and motion.js.
+import hero from '../illustrations/hero.svg?raw';
+import chooseBusiness from '../illustrations/choose-business.svg?raw';
+import chooseIndividual from '../illustrations/choose-individual.svg?raw';
+import guideBusiness from '../illustrations/guide-business.svg?raw';
+import guidePersonal from '../illustrations/guide-personal.svg?raw';
+import methodDiagnose from '../illustrations/method-diagnose.svg?raw';
+import methodDecide from '../illustrations/method-decide.svg?raw';
+import methodBuild from '../illustrations/method-build.svg?raw';
+import problemIdeas from '../illustrations/problem-ideas.svg?raw';
+import problemPermissions from '../illustrations/problem-permissions.svg?raw';
+import problemHabit from '../illustrations/problem-habit.svg?raw';
+import research from '../illustrations/research.svg?raw';
+import taskflo from '../illustrations/taskflo.svg?raw';
+
+const set = {
+  hero, 'choose-business': chooseBusiness, 'choose-individual': chooseIndividual,
+  'guide-business': guideBusiness, 'guide-personal': guidePersonal,
+  'method-diagnose': methodDiagnose, 'method-decide': methodDecide, 'method-build': methodBuild,
+  'problem-ideas': problemIdeas, 'problem-permissions': problemPermissions, 'problem-habit': problemHabit,
+  research, taskflo,
+};
+
+interface Props {
+  name: keyof typeof set;
+  decorative?: boolean;
+}
+const { name, decorative = true } = Astro.props;
+// Decorative illustrations are hidden from the accessibility tree; the card heading already names the idea.
+const markup = decorative ? set[name].replace('<svg ', '<svg aria-hidden="true" focusable="false" ') : set[name];
+---
+<Fragment set:html={markup} />

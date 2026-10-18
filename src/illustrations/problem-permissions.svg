@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" role="img" aria-labelledby="problemper-t" class="illus illus-problem-permissions"><title id="problemper-t">A shield with a keyhole and a key beside it</title><defs><linearGradient id="problemper-violet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B2BD6"/><stop offset="1" stop-color="#8F6BFF"/></linearGradient><linearGradient id="problemper-violet-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#4B2BD6"/><stop offset="1" stop-color="#8F6BFF"/></linearGradient><linearGradient id="problemper-violetblue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#663AF3"/><stop offset="1" stop-color="#5AA2FF"/></linearGradient><linearGradient id="problemper-violetblue-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#663AF3"/><stop offset="1" stop-color="#5AA2FF"/></linearGradient><linearGradient id="problemper-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF6B6B"/><stop offset="1" stop-color="#FFB38A"/></linearGradient><linearGradient id="problemper-coral-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF6B6B"/><stop offset="1" stop-color="#FFB38A"/></linearGradient><linearGradient id="problemper-blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2F6BFF"/><stop offset="1" stop-color="#B6D9FC"/></linearGradient><linearGradient id="problemper-blue-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2F6BFF"/><stop offset="1" stop-color="#B6D9FC"/></linearGradient></defs><ellipse cx="150" cy="214" rx="82" ry="10" fill="#000" opacity="0.35"/>
+<g class="lift">
+<path d="M150 38 C178 54 208 60 232 60 C232 130 208 178 150 204 C92 178 68 130 68 60 C92 60 122 54 150 38 Z" fill="url(#problemper-violet)"/>
+<path d="M150 38 C178 54 208 60 232 60 C232 130 208 178 150 204 Z" fill="url(#problemper-violetblue)"/>
+<circle cx="150" cy="108" r="17" fill="#05060F"/><path d="M142 116 H158 L162 150 H138 Z" fill="#05060F"/>
+</g>
+<g class="float-c" transform="rotate(-32 240 170)">
+<circle cx="250" cy="170" r="21" fill="url(#problemper-coral)"/><circle cx="250" cy="170" r="8" fill="#05060F"/>
+<rect x="186" y="164" width="48" height="12" rx="6" fill="url(#problemper-coral)"/>
+<rect x="192" y="174" width="9" height="13" rx="3" fill="#FF7F72"/><rect x="206" y="174" width="9" height="9" rx="3" fill="#FF7F72"/>
+</g>
+<g class="float-b">
+<rect x="34" y="96" width="30" height="38" rx="7" fill="url(#problemper-blue)"/><rect x="40" y="106" width="16" height="4" rx="2" fill="#05060F" opacity=".5"/><rect x="40" y="114" width="12" height="4" rx="2" fill="#05060F" opacity=".5"/>
+</g>
+<path d="M66 120 C80 124 84 130 92 132" stroke="#9DA7BA" stroke-width="2" stroke-dasharray="3 5" fill="none"/></svg>

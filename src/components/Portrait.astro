@@ -1,11 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import portrait from '../../assets/pranjal-theme.png';
+import Illustration from './Illustration.astro';
 
 interface Props { hero?: boolean }
 const { hero = false } = Astro.props;
 ---
 <figure class:list={['portrait', { 'portrait-hero': hero }]}>
+  {hero && <Illustration name="hero" />}
   <Image
     src={portrait}
     alt="Pranjal Pandey in the existing Midnight Blueprint portrait treatment"
