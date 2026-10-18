@@ -4,13 +4,14 @@ import { glob } from 'astro/loaders';
 
 const writing = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string().min(1),
     seo_title: z.string().min(1).max(60).optional(),
     description: z.string().min(1),
     author: z.literal('Pranjal Pandey').default('Pranjal Pandey'),
     tags: z.array(z.string().min(1)).default([]),
     audience: z.enum(['business', 'individuals', 'research']).default('business'),
+    cover: z.object({ image: image(), alt: z.string().min(1) }).optional(),
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
     draft: z.boolean().default(true),

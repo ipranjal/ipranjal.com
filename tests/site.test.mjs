@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { localTarget, verifyBuild } from '../scripts/verify-build.mjs';
 
 test('local URL resolver handles relative links, fragments, XML entities and external providers', () => {
@@ -192,4 +193,58 @@ test('research lists all four verified preprints once, newest first, with author
   });
   assert(html.includes('https://scholar.google.com/citations?user=nFk7jM8AAAAJ'));
   assert(!html.includes('>Peer-reviewed</span>'));
+});
+
+test('writing banners are optimized across archive, homepage, essays and social metadata', async () => {
+  const archive = await readFile('dist/writing/index.html', 'utf8');
+  const home = await readFile('dist/index.html', 'utf8');
+  assert(archive.includes('article-list writing-grid'));
+  assert.equal((archive.match(/class="writing-cover"/g) || []).length, 3);
+  assert.equal((home.match(/class="writing-cover"/g) || []).length, 3);
+  const socialImages = new Set();
+  for (const slug of ['why-ai-pilots-fail', 'which-tasks-to-automate-with-ai', 'optimising-token-usage']) {
+    const html = await readFile(`dist/writing/${slug}/index.html`, 'utf8');
+    const banner = html.match(/<img\b[^>]*class="essay-banner"[^>]*>/)?.[0];
+    assert(banner, `Missing banner for ${slug}`);
+    assert.match(banner, /alt="[^"]+"/);
+    assert.match(banner, /width="1280"/);
+    assert.match(banner, /height="\d+"/);
+    assert.match(banner, /loading="eager"/);
+    assert.match(banner, /srcset="[^"]+400w[^"]+(?:1200|1280)w"/);
+    const src = banner.match(/\bsrc="([^"]+)"/)?.[1];
+    assert(src?.endsWith('.webp'));
+    assert((await readFile(`dist${src}`)).length < 100_000);
+    const social = html.match(/property="og:image" content="([^"]+)"/)?.[1];
+    assert(social?.includes(slug));
+    const schema = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+    assert.equal(schema.image, social);
+    socialImages.add(social);
+  }
+  assert.equal(socialImages.size, 3);
+  assert(!existsSync('dist/which-task-you-should-automate.png'));
+  assert(!existsSync('dist/why-ai-pilot-fail.png'));
+});
+
+test('token usage article is published first with supplied content, banner and one shared CTA', async () => {
+  const slug = 'optimising-token-usage';
+  const url = `https://ipranjal.com/writing/${slug}/`;
+  const html = await readFile(`dist/writing/${slug}/index.html`, 'utf8');
+  assert(html.match(/<title>(.*?)<\/title>/)[1].length <= 60);
+  assert(html.match(/<meta name="description" content="([^"]+)"/)[1].length <= 155);
+  const schema = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+  assert.equal(schema.datePublished, '2026-10-18T00:00:00.000Z');
+  assert.equal(schema.url, url);
+  for (const text of ['The input diet: lean-ctx', 'The output diet: Ponytail', 'A 30-minute token audit', '>FAQ</h2>', 'https://github.com/yvgude/lean-ctx', 'https://github.com/DietrichGebert/ponytail']) assert(html.includes(text), `Missing article content: ${text}`);
+  assert(html.replace(/<[^>]*>/g, '').includes('lean-ctx wrap claude'));
+  assert.equal((html.match(/<pre\b/g) || []).length, 2);
+  assert.equal((html.match(/class="seva-form formkit-form"/g) || []).length, 1);
+  assert(!html.includes('<hr'));
+  for (const file of ['dist/writing/index.html', 'dist/index.html']) {
+    const listing = await readFile(file, 'utf8');
+    assert(listing.indexOf(`href="/writing/${slug}/"`) < listing.indexOf('href="/writing/which-tasks-to-automate-with-ai/"'));
+  }
+  const rss = await readFile('dist/rss.xml', 'utf8');
+  assert(rss.includes(`<link>${url}</link>`));
+  assert(rss.indexOf(`<link>${url}</link>`) < rss.indexOf('<link>https://ipranjal.com/writing/why-ai-pilots-fail/</link>'));
+  assert((await readFile('dist/sitemap.xml', 'utf8')).includes(`<loc>${url}</loc>`));
 });

@@ -151,7 +151,7 @@ test('audience chooser, guides navigation, writing labels and links groups use r
   const writing = await readFile('dist/writing/index.html', 'utf8');
   assert(writing.includes('id="writing-audience"'));
   assert(writing.includes('id="filter-empty" hidden'));
-  assert.equal((writing.match(/data-writing-audience="business"/g) || []).length, 2);
+  assert.equal((writing.match(/data-writing-audience="business"/g) || []).length, 3);
   const links = await readFile('dist/links/index.html', 'utf8');
   assert(links.indexOf('<h2>For you') < links.indexOf('<h2>For your company'));
   const sitemap = await readFile('dist/sitemap.xml', 'utf8');

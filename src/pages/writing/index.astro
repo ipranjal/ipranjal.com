@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Signup from '../../components/Signup.astro';
-import { publishedWriting, formatDate } from '../../lib/writing';
+import WritingCard from '../../components/WritingCard.astro';
+import { publishedWriting } from '../../lib/writing';
 import { site } from '../../data/site';
 const entries = await publishedWriting();
 const audiences = [
@@ -17,7 +18,7 @@ const audiences = [
       <div class="writing-filter" hidden><label for="writing-audience">Show writing for</label><select id="writing-audience"><option value="all">All</option>{audiences.map(audience => <option value={audience.value}>{audience.label}</option>)}</select></div>
       <p class="fine-print" id="filter-status" role="status"></p>
       <section aria-labelledby="essays-title"><div class="archive-heading"><h2 id="essays-title">The essays</h2><a class="text-link" href="/rss.xml">RSS feed</a></div>
-        {entries.length ? <div class="article-list">{entries.map(entry => <article data-writing-audience={entry.data.audience}><p class="mono audience-label">{entry.data.audience}</p><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time><h3><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.description}</p></article>)}</div> : <div class="empty-note"><p>No essays published here yet. You can <a href="/research/">read my public research</a> or <a href={site.linkedin}>follow my updates on LinkedIn</a> while the archive takes shape.</p></div>}
+        {entries.length ? <div class="article-list writing-grid">{entries.map(entry => <WritingCard entry={entry} />)}</div> : <div class="empty-note"><p>No essays published here yet. You can <a href="/research/">read my public research</a> or <a href={site.linkedin}>follow my updates on LinkedIn</a> while the archive takes shape.</p></div>}
         <div class="empty-note" id="filter-empty" hidden><p>No essays in this lane yet. <a href="/kit/">Start with the personal kit</a>, <a href="/research/">explore the research</a>, or switch to All.</p></div>
       </section>
     </div>

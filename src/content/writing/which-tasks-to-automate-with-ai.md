@@ -6,6 +6,9 @@ published: 2026-10-16
 draft: false
 author: Pranjal Pandey
 audience: business
+cover:
+  image: ../../assets/writing/which-tasks-to-automate-with-ai.png
+  alt: "Blueprint of a workflow branching into tasks for AI and tasks for a person."
 tags: [AI strategy, AI automation, human in the loop, multi-agent systems, fair division]
 ---
 

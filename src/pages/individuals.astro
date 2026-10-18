@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Portrait from '../components/Portrait.astro';
+import WritingCard from '../components/WritingCard.astro';
 import { individualGuides } from '../data/guides';
-import { publishedWriting, formatDate } from '../lib/writing';
+import { publishedWriting } from '../lib/writing';
 const essays = (await publishedWriting()).filter(entry => entry.data.audience === 'individuals').slice(0, 3);
 ---
 <Layout title="Practical AI for Individuals: Workflows, Guides & Career Help | Pranjal Pandey" description="Practical AI workflows for your week, step-by-step guides, and 1:1 help building a career in AI and workflow automation. Start with the free Personal AI Starter Kit." audience="individuals" social="individuals">
@@ -19,7 +20,7 @@ const essays = (await publishedWriting()).filter(entry => entry.data.audience ==
     <section class="section"><div class="section-intro"><h2>Coming soon.<br />For your own next move.</h2><p>Subscribers to Practical AI get new guides first.</p></div><div class="offer-list">{individualGuides.map(guide => <article class="offer-row"><span class="mono">Coming soon</span><div><h3>{guide.title}</h3><p>{guide.description}</p></div></article>)}</div></section>
     <section class="section" id="career"><div class="section-intro"><div><p class="eyebrow">60 minutes / Paid working session</p><h2>AI Career & Portfolio Kickstart</h2></div><p>For professionals, developers, product and ops people, and serious final-year students moving into AI and workflow automation.</p></div><p class="lead">A clear direction for your background, two or three portfolio project ideas that show real skill, what to learn next and what to skip, and a written summary.</p><div class="actions"><a class="button" href="/career/">Book a career session</a><p class="fine-print">Price and booking on Topmate. Review its booking and refund terms before paying.</p></div></section>
     <section class="section about-intro"><div><h2>Builder. Advisor.<br />Still learning.</h2><p>I started coding at 15, founded my first company at 19, and now design AI workflows for companies while doing a PhD in multi-agent systems at IIT Jodhpur.</p><a class="text-link" href="/about/">The longer story</a></div><Portrait /></section>
-    {essays.length > 0 && <section class="section"><div class="archive-heading"><h2>From the writing.</h2><a class="text-link" href="/writing/?audience=individuals">All individual writing</a></div><div class="article-list">{essays.map(entry => <article><p class="mono">Individuals</p><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time><h3><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h3><p>{entry.data.description}</p></article>)}</div></section>}
+    {essays.length > 0 && <section class="section"><div class="archive-heading"><h2>From the writing.</h2><a class="text-link" href="/writing/?audience=individuals">All individual writing</a></div><div class="article-list">{essays.map(entry => <WritingCard entry={entry} />)}</div></section>}
     <section class="section"><h2>A few practical questions.</h2><div class="faq">
       <details><summary>Do I need to know how to code?</summary><p>No. Start with the workflows in a normal AI chat app.</p></details>
       <details><summary>Which AI tool should I use?</summary><p>Whichever you already have. The workflows are designed for Claude, ChatGPT or Gemini. Features and free-tier limits vary by provider.</p></details>

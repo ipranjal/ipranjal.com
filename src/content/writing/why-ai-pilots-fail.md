@@ -6,6 +6,9 @@ published: 2026-10-16
 draft: false
 author: Pranjal Pandey
 audience: business
+cover:
+  image: ../../assets/writing/why-ai-pilots-fail.png
+  alt: "Blueprint of a workflow dropping pieces between a promising prototype and a production system."
 tags: [AI strategy, AI pilots, AI adoption, AI implementation, leadership]
 ---
 
