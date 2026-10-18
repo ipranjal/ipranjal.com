@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" width="560" height="300" role="img" aria-labelledby="taskfloflo-t" class="illus illus-taskflo-flow"><title id="taskfloflo-t">Design in Studio, a sealed bundle, then running in your own cloud with four checks</title><defs><linearGradient id="taskfloflo-violet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B2BD6"/><stop offset="1" stop-color="#8F6BFF"/></linearGradient><linearGradient id="taskfloflo-violet-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#4B2BD6"/><stop offset="1" stop-color="#8F6BFF"/></linearGradient><linearGradient id="taskfloflo-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF6B6B"/><stop offset="1" stop-color="#FFB38A"/></linearGradient><linearGradient id="taskfloflo-coral-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF6B6B"/><stop offset="1" stop-color="#FFB38A"/></linearGradient><linearGradient id="taskfloflo-amber" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9F43"/><stop offset="1" stop-color="#FFD166"/></linearGradient><linearGradient id="taskfloflo-amber-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF9F43"/><stop offset="1" stop-color="#FFD166"/></linearGradient><linearGradient id="taskfloflo-blueteal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient><linearGradient id="taskfloflo-blueteal-r" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient></defs><ellipse cx="280" cy="272" rx="230" ry="10" fill="#000" opacity="0.35"/>
+<g class="lift">
+<rect x="24" y="78" width="150" height="128" rx="24" fill="url(#taskfloflo-violet)"/>
+<rect x="24" y="150" width="150" height="56" rx="24" fill="#3A22A8" opacity=".55"/>
+<circle cx="62" cy="114" r="10" fill="#fff" opacity=".9"/><circle cx="136" cy="114" r="10" fill="#fff" opacity=".55"/><circle cx="99" cy="160" r="10" fill="#fff" opacity=".75"/>
+<path d="M72 114 H126 M66 122 L92 152 M132 122 L106 152" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+</g>
+<path d="M178 142 H222" stroke="#8F6BFF" stroke-width="8" stroke-linecap="round"/>
+<g class="float-c">
+<path d="M232 112 L280 90 L328 112 L328 170 L280 192 L232 170 Z" fill="url(#taskfloflo-coral)"/>
+<path d="M232 112 L280 134 L328 112 L280 90 Z" fill="#FFC9A8" opacity=".85"/>
+<path d="M280 134 V192" stroke="#E5534B" stroke-width="2" opacity=".6"/>
+<circle cx="304" cy="168" r="15" fill="url(#taskfloflo-amber)"/><path d="M297 168 l5 5 l9 -10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M338 142 H378" stroke="#5AA2FF" stroke-width="8" stroke-linecap="round"/>
+<g class="lift">
+<path d="M396 214 C362 214 352 176 380 162 C372 126 410 104 436 120 C450 92 504 92 514 128 C546 128 552 172 530 186 C540 206 520 214 506 214 Z" fill="url(#taskfloflo-blueteal)"/>
+<rect x="410" y="150" width="20" height="38" rx="7" fill="#05060F" opacity=".35"/><path d="M415 169 l4 5 l8 -10" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="440" y="150" width="20" height="38" rx="7" fill="#05060F" opacity=".35"/><path d="M445 169 l4 5 l8 -10" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="470" y="150" width="20" height="38" rx="7" fill="#05060F" opacity=".35"/><path d="M475 169 l4 5 l8 -10" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="500" y="150" width="20" height="38" rx="7" fill="#05060F" opacity=".35"/><path d="M505 169 l4 5 l8 -10" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</g></svg>

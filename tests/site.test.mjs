@@ -167,7 +167,7 @@ test('press, privacy and research retain useful public content without defensive
   assert(privacy.includes('G-TYBVMJLK06'));
   assert(privacy.includes("window._linkedin_partner_id = '10220252'"));
   assert(privacy.includes('id="tracking"'));
-  assert(research.includes('>Preprint</span>'));
+  assert(research.includes('Preprint ·'));
   assert(research.includes('Minimum Envy Graphical House Allocation Beyond Identical Valuations'));
   assert(!research.includes('Not a peer-review claim'));
   assert(!thanks.includes('Opening it alone'));
@@ -176,7 +176,7 @@ test('press, privacy and research retain useful public content without defensive
 
 test('research lists all four verified preprints once, newest first, with authors and submission dates', async () => {
   const html = await readFile('dist/research/index.html', 'utf8');
-  const entries = [...html.matchAll(/<article class="[^"]*\bledger-entry\b[^"]*">([\s\S]*?)<\/article>/g)].map(match => match[1]);
+  const entries = [...html.matchAll(/<a class="card research-card"([^>]*>[\s\S]*?)<\/a>/g)].map(match => match[1]);
   const papers = [
     ['2610.09610', 'Envy-free Allocations with Individual Payments', '2026-10-07', 'Robert Bredereck, Eva Deltl, Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],
     ['2609.28308', 'Envy-Free Allocation of Indivisible Goods under Leontief Preferences', '2026-09-23', 'Tanmay Inamdar, Pallavi Jain, Pranjal Pandey'],
@@ -188,9 +188,8 @@ test('research lists all four verified preprints once, newest first, with author
     assert(entries[index].includes(`href="https://arxiv.org/abs/${id}"`));
     assert(entries[index].includes(title));
     assert(entries[index].includes(`datetime="${date}"`));
-    assert(entries[index].includes(authors));
-    assert(entries[index].includes('>Preprint</span>'));
-    assert(entries[index].includes('Submitted'));
+    assert(entries[index].replace(/<[^>]*>/g, '').includes(authors));
+    assert(entries[index].includes('Preprint ·'));
   });
   assert(html.includes('https://scholar.google.com/citations?user=nFk7jM8AAAAJ'));
   assert(!html.includes('>Peer-reviewed</span>'));
@@ -243,7 +242,9 @@ test('token usage article is published first with supplied content, banner and o
   assert(!html.includes('<hr'));
   for (const file of ['dist/writing/index.html', 'dist/index.html']) {
     const listing = await readFile(file, 'utf8');
-    assert(listing.indexOf(`href="/writing/${slug}/"`) < listing.indexOf('href="/writing/which-tasks-to-automate-with-ai/"'));
+    const cards = [...listing.matchAll(/<article\b[^>]*data-writing-audience="[^"]+"[^>]*>([\s\S]*?)<\/article>/g)];
+    assert(cards[0]?.[1].includes(`href="/writing/${slug}/"`));
+    assert(cards[1]?.[1].includes('href="/writing/which-tasks-to-automate-with-ai/"'));
   }
   const rss = await readFile('dist/rss.xml', 'utf8');
   assert(rss.includes(`<link>${url}</link>`));

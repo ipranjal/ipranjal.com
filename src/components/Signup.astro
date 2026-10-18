@@ -1,9 +1,11 @@
 ---
 import { site } from '../data/site';
-interface Props { id?: string; audience?: 'business' | 'individuals' | 'all'; button?: string }
-const { id = 'guide-signup', audience = 'business', button } = Astro.props;
+interface Props { id?: string; audience?: 'business' | 'individuals' | 'all'; button?: string; titleId?: string; kitLink?: boolean }
+const { id = 'guide-signup', audience = 'business', button, titleId, kitLink = false } = Astro.props;
 const buttonText = button ?? (audience === 'individuals' ? 'Send me the kit' : audience === 'all' ? 'Send me the free guides' : 'Send me the guide');
 const resource = audience === 'individuals' ? 'personal kit' : audience === 'all' ? 'free guides' : 'business guide';
+const newsletter = buttonText === 'Subscribe';
+const label = newsletter ? 'Practical AI, monthly' : audience === 'individuals' ? 'The free kit' : audience === 'all' ? 'The free guides' : 'The free guide';
 const options = JSON.stringify({
   settings: {
     after_subscribe: {
@@ -19,30 +21,34 @@ const options = JSON.stringify({
   version: '5',
 });
 ---
-<div class="signup">
+<div class="signup signup-card">
+  <p class="eyebrow" id={titleId ?? `${id}-title`}>{label}</p>
   <form action={site.kitAction} method="post" class="seva-form formkit-form"
     data-sv-form="10053825" data-uid={site.kitUid} data-format="inline"
     data-version="5" data-options={options} aria-label={`Get the ${resource} and Practical AI`}>
     <div data-style="clean">
-      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" aria-live="polite" aria-atomic="true" tabindex="-1"></ul>
       <div data-element="fields" class="formkit-fields">
         <div class="formkit-field">
-          <label for={id}>Your email address</label>
+          <label class="sr-only" for={id}>Your email address</label>
           <input id={id} class="formkit-input" name="email_address" required type="email"
-            autocomplete="email" inputmode="email" aria-describedby={`${id}-note`} />
+            autocomplete="email" inputmode="email" placeholder={audience === 'business' && !newsletter ? 'you@company.com' : 'you@email.com'}
+            aria-describedby={`${id}-note ${id}-errors`} />
         </div>
         <button class="button formkit-submit" data-element="submit" type="submit">
           <span>{buttonText}</span>
           <span class="formkit-spinner">Sending...</span>
         </button>
       </div>
+      <ul id={`${id}-errors`} class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" aria-live="polite" aria-atomic="true" tabindex="-1"></ul>
     </div>
   </form>
+  <p class="signup-success" role="status" tabindex="-1" hidden>Check your inbox. Confirm your email to get your free guides.</p>
   <div class="subscription-alternative" hidden>
     <p class="subscription-unavailable" hidden role="status">The inline signup is unavailable. A content blocker or connection issue may be preventing it from loading. You can subscribe directly on Kit instead.</p>
     <a class="text-link" href={site.kitHosted}>Open signup on Kit</a>
   </div>
-  <p class="fine-print" id={`${id}-note`}>Plus <em>Practical AI</em>, one email a month. Unsubscribe anytime. <a href="/privacy/">Privacy</a>.</p>
+  <ul class="signup-trust" id={`${id}-note`}><li>Free PDF</li><li>1 email a month</li><li>Unsubscribe anytime</li></ul>
+  <p class="signup-meta"><a href="/privacy/">Privacy</a>{kitLink && <> <span aria-hidden="true">&middot;</span> Here for yourself? <a href="/kit/">Get the free kit <span aria-hidden="true">&#8594;</span></a></>}</p>
   <noscript>
     <style>.signup form { display: none; } .signup .subscription-alternative { display: block !important; }</style>
     <p>The inline form needs JavaScript for Kit's confirmation flow. Use the Kit signup link above to request the free guides.</p>
@@ -57,7 +63,21 @@ const options = JSON.stringify({
     const alternative = form.parentElement?.querySelector<HTMLElement>('.subscription-alternative');
     const unavailable = alternative?.querySelector<HTMLElement>('.subscription-unavailable');
     const hostedLink = alternative?.querySelector<HTMLAnchorElement>('a');
-    if (!errors || !submit || !input || !alternative || !unavailable || !hostedLink) return;
+    const success = form.parentElement?.querySelector<HTMLElement>('.signup-success');
+    if (!errors || !submit || !input || !alternative || !unavailable || !hostedLink || !success) return;
+
+    input.addEventListener('invalid', event => {
+      event.preventDefault();
+      input.setAttribute('aria-invalid', 'true');
+      const message = document.createElement('li');
+      message.textContent = input.validity.valueMissing ? 'Enter your email address.' : "That email doesn't look right.";
+      errors.replaceChildren(message);
+      input.focus();
+    });
+    input.addEventListener('input', () => {
+      input.removeAttribute('aria-invalid');
+      errors.replaceChildren();
+    });
 
     const showAlternative = () => {
       alternative.hidden = false;
@@ -65,7 +85,15 @@ const options = JSON.stringify({
       alternative.classList.add('subscription-alternative-active');
       hostedLink.classList.replace('text-link', 'button');
     };
+    const showSuccess = () => {
+      alternative.hidden = true;
+      form.hidden = true;
+      success.hidden = false;
+      success.focus();
+    };
+    form.addEventListener('ckjs:submission:complete', showSuccess);
     const checkVisibility = () => {
+      if (!success.hidden) return;
       if (form.closest('[data-audience-panel][hidden]')) return;
       if (!form.getClientRects().length || !input.getClientRects().length || !submit.getClientRects().length ||
           getComputedStyle(form).visibility === 'hidden' || getComputedStyle(input).visibility === 'hidden' ||
@@ -99,10 +127,17 @@ const options = JSON.stringify({
           item.textContent = "Couldn't reach the signup service. Your email is still here. Try again, or use the Kit signup link below.";
         }
       }
-      if (errors.childElementCount) errors.focus();
+      if (errors.childElementCount) {
+        input.setAttribute('aria-invalid', 'true');
+        errors.focus();
+      }
     }).observe(errors, { childList: true });
-    new MutationObserver(() => {
-      form.setAttribute('aria-busy', String(submit.hasAttribute('data-active')));
-    }).observe(submit, { attributes: true, attributeFilter: ['data-active'] });
+    const syncLoading = () => {
+      const busy = submit.hasAttribute('data-active');
+      form.setAttribute('aria-busy', String(busy));
+      submit.disabled = busy;
+    };
+    new MutationObserver(syncLoading).observe(submit, { attributes: true, attributeFilter: ['data-active'] });
+    syncLoading();
   });
 </script>

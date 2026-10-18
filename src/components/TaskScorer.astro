@@ -1,0 +1,24 @@
+---
+interface Props { id: string }
+const { id } = Astro.props;
+const fields = [
+  { name: 'freq', label: 'How often does it happen?', endpoints: 'Rarely to daily' },
+  { name: 'check', label: 'How easy is it to check the result?', endpoints: 'Hard to easy' },
+  { name: 'risk', label: 'How costly is a mistake?', endpoints: 'Cheap to serious' },
+];
+---
+<form class="scorer" data-scorer>
+  <div class="scorer-fields">
+    {fields.map(field => <div class="scorer-field">
+      <label for={`${id}-${field.name}`}>{field.label}<span>{field.endpoints}</span></label>
+      <input id={`${id}-${field.name}`} name={field.name} type="range" min="1" max="5" value="3" />
+    </div>)}
+  </div>
+  <div class="scorer-verdict" data-verdict role="status" aria-live="polite" aria-atomic="true">
+    <strong>AI drafts, a person decides.</strong>
+    <span>Let AI do the first pass and keep a human review step.</span>
+    <div class="scorer-meter" data-meter aria-hidden="true"></div>
+    <div class="scorer-scale" aria-hidden="true"><small>Keep human</small><small>AI assists</small><small>Automate</small></div>
+  </div>
+  <noscript><p class="fine-print">The live scorer needs JavaScript. Use the written framework to weigh frequency, review and risk.</p></noscript>
+</form>

@@ -2,12 +2,15 @@
 title: "Which Tasks Should You Automate with AI? A Practical Framework"
 seo_title: "Which Tasks to Automate with AI | Pranjal Pandey"
 description: "Decide which tasks go to AI and which stay with people. A practical framework for task allocation and human review, borrowed from fair division."
+card_title: "Which tasks should AI do?"
+card_description: "A practical framework, borrowed from the maths of fair division."
 published: 2026-10-16
 draft: false
 author: Pranjal Pandey
 audience: business
 cover:
   image: ../../assets/writing/which-tasks-to-automate-with-ai.png
+  thumbnail: ../../assets/writing/which-tasks-to-automate-with-ai-art.png
   alt: "Blueprint of a workflow branching into tasks for AI and tasks for a person."
 tags: [AI strategy, AI automation, human in the loop, multi-agent systems, fair division]
 ---
@@ -32,14 +35,6 @@ It sounds abstract, but the more AI workflows I build for companies, the more th
 | Rare exceptions | A person handles them | Whether enough evidence exists to automate |
 
 These are starting points, not universal rules. The right split depends on the workflow, the people and the cost of getting it wrong.
-
-<form class="scorer" data-scorer>
-  <p class="mono">Try it on your own task</p>
-  <div class="scorer-field"><label for="essay-scorer-freq">How often does it come up? <span>Rare &#8594; constant</span></label><input id="essay-scorer-freq" name="freq" type="range" min="1" max="5" value="3" /></div>
-  <div class="scorer-field"><label for="essay-scorer-check">How easy is a wrong answer to catch? <span>Hard &#8594; easy</span></label><input id="essay-scorer-check" name="check" type="range" min="1" max="5" value="3" /></div>
-  <div class="scorer-field"><label for="essay-scorer-risk">How much does a mistake cost? <span>Low &#8594; high</span></label><input id="essay-scorer-risk" name="risk" type="range" min="1" max="5" value="3" /></div>
-  <div class="scorer-verdict" data-verdict><strong></strong><span></span><div class="scorer-meter" data-meter aria-hidden="true"></div></div>
-</form>
 
 ## 1. "Efficient" and "fair" are two different questions
 

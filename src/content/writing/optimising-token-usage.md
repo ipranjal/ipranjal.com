@@ -2,12 +2,15 @@
 title: "Optimising Token Usage: How to Cut Your AI Bill Without Making Your AI Dumber"
 seo_title: "Reduce AI Token Usage: Tools & Tactics | Pranjal Pandey"
 description: "Reduce AI token usage and cost with leaner context, simpler code, model routing, prompt caching and batching. A practical token audit for AI teams."
+card_title: "Optimising token usage"
+card_description: "Cut your AI bill with leaner context, simpler code and a practical token audit."
 published: 2026-10-18
 draft: false
 author: Pranjal Pandey
 audience: business
 cover:
   image: ../../assets/writing/optimising-token-usage.png
+  thumbnail: ../../assets/writing/optimising-token-usage-art.png
   alt: "Blueprint of scattered context tokens passing through a filter into a compact AI system, with a usage gauge."
 tags: [AI costs, token optimisation, AI coding agents, context engineering, LLM]
 ---

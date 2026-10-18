@@ -1,7 +1,9 @@
 ---
 import '@fontsource/syne/latin-500.css';
+import '@fontsource/syne/latin-600.css';
 import '@fontsource/ibm-plex-sans/latin-400.css';
 import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
 import '@fontsource/ibm-plex-mono/latin-400.css';
 import '../styles/global.css';
 import { site } from '../data/site';
@@ -89,7 +91,7 @@ const navigation = [
           <nav class="desktop-nav" aria-label="Main navigation">
             {navigation.map(([href, text]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{text}</a>)}
           </nav>
-          <a class="header-cta" href={headerAction[0]}>{headerAction[1]} <span aria-hidden="true">&#8599;</span></a>
+          <a class="header-cta" href={headerAction[0]}>{headerAction[1]} <span aria-hidden="true">{audience === 'individuals' ? '\u2192' : '\u2197'}</span></a>
           <details class="mobile-nav">
             <summary>Menu <span aria-hidden="true">+</span></summary>
             <nav aria-label="Mobile navigation">
@@ -109,13 +111,13 @@ const navigation = [
         <div class="footer-signup"><Signup id="footer-email" audience={audience} button="Subscribe" /></div>
       </div>}
       <div class="footer-bottom">
-        <p>Pranjal Pandey<br /><span>Practical AI for your business and your life.</span></p>
-        <nav aria-label="Footer navigation">
-          {!minimal && <><a href="/business/">Business</a><a href="/individuals/">Individuals</a><a href="/guides/">Guides</a><a href="/writing/">Writing</a><a href="/research/">Research</a><a href="/press/">Press</a><a href={site.taskflo}>Taskflo AI</a><a href={site.linkedin}>LinkedIn</a><a href={site.github}>GitHub</a></>}
-          {!campaign && <a href={`mailto:${site.email}`}>{site.email}</a>}<a href="/privacy/">Privacy</a>{!campaign && <a href="/privacy/#tracking">Tracking settings</a>}
-        </nav>
+        <div class="footer-identity"><a class="brand" href="/" aria-label="Pranjal Pandey home"><span class="brand-mark">PP<span>/</span></span></a><p>Pranjal Pandey<br /><span>Practical AI for your business and your life.</span></p></div>
+        <div class="footer-links">
+          {!minimal && <nav aria-label="Explore"><h2>Explore</h2><a href="/business/">Business</a><a href="/individuals/">Individuals</a><a href="/guides/">Guides</a><a href="/writing/">Writing</a><a href="/research/">Research</a><a href="/press/">Press</a></nav>}
+          {!campaign && <nav aria-label="Connect"><h2>Connect</h2>{!minimal && <><a href={site.taskflo}>Taskflo AI</a><a href={site.linkedin}>LinkedIn</a><a href={site.github}>GitHub</a></>}<a href={`mailto:${site.email}`}>{site.email}</a></nav>}
+        </div>
       </div>
-      <p class="colophon">Written by a human. Typos are mine.</p>
+      <p class="colophon"><a href="/privacy/">Privacy</a>{!campaign && <a href="/privacy/#tracking">Tracking settings</a>}<span>Written by a human. Typos are mine.</span></p>
     </footer>
     <script>
       document.querySelectorAll<HTMLDetailsElement>('.mobile-nav').forEach(menu => {

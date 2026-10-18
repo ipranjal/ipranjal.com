@@ -6,14 +6,20 @@ const shortBio = 'Pranjal Pandey is an independent AI advisor, founder of Taskfl
 <Layout title="Press & speaking | Pranjal Pandey" description="Pranjal Pandey's verified biography, speaking topics and contact for interviews, podcasts and events.">
   <div class="wrap">
     <header class="page-heading"><p class="eyebrow">Press & speaking</p><h1>A useful conversation about practical AI.</h1><p class="lead">For interviews, podcasts and events, contact me directly with the subject, format and timing.</p><div class="actions"><a class="button" href={`mailto:${site.email}?subject=Press%20or%20speaking%20enquiry`}>Email Pranjal</a></div></header>
-    <div class="reading">
+    <div class="doc-layout press-layout">
+      <aside class="press-facts card" aria-labelledby="press-facts-title">
+        <h2 id="press-facts-title">Quick facts</h2>
+        <dl><dt>Name</dt><dd>{site.name}</dd><dt>Role</dt><dd>AI advisor, founder & researcher</dd><dt>Time zone</dt><dd>India Standard Time (UTC+5:30)</dd><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></dl>
+        <div class="actions"><button class="button button-secondary" id="copy-bio" type="button" hidden>Copy short bio</button><a class="text-link" href={`mailto:${site.email}?subject=Press%20photos`}>Request press photos</a></div>
+        <p class="fine-print" id="copy-bio-status" role="status"></p>
+      </aside>
+      <div class="doc-prose">
       <h2>One line</h2><p>Pranjal Pandey helps founders and leaders turn AI pilots into real workflows.</p>
       <h2>Short biography</h2><p id="short-bio">{shortBio}</p>
-      <div class="actions"><button class="button button-secondary" id="copy-bio" type="button" hidden>Copy short bio</button></div>
-      <p class="fine-print" id="copy-bio-status" role="status"></p>
       <h2>Longer biography</h2><p>Pranjal started programming at 15 and founded Corpusvision Technologies in March 2018. His experience spans mobile products, e-commerce, enterprise platforms and AI integrations, including work at PureSoftware and as a Partner Consultant with Happiest Minds Technologies.</p><p>He now advises companies on AI strategy and workflow automation while building Taskflo AI, a platform for AI agent workflows inside a company's own cloud. At IIT Jodhpur, his PhD research focuses on multi-agent systems, fair division and allocation. Expected completion is 2028.</p>
-      <h2>Topics I can discuss</h2><ul><li>Why AI pilots stop before becoming useful workflows.</li><li>Choosing AI use cases before choosing tools.</li><li>Permissions, ownership and human checkpoints in agent workflows.</li><li>What fair division asks of multi-agent systems.</li><li>Lessons from founding, building and returning to research.</li></ul>
+      <h2>Topics I can discuss</h2><ul class="outs"><li>Why AI pilots stall</li><li>Use cases before tools</li><li>Permissions and human checkpoints</li><li>Fair division and multi-agent systems</li><li>Founding, building and research</li></ul>
       <h2>Photos & supporting material</h2><p><a href={`mailto:${site.email}?subject=Press%20photos`}>Request press photos and supporting material</a>.</p>
+      </div>
     </div>
   </div>
 </Layout>
@@ -30,7 +36,7 @@ const shortBio = 'Pranjal Pandey is an independent AI advisor, founder of Taskfl
         status.textContent = 'Short biography copied.';
       } catch (error) {
         console.warn('Could not copy the short biography.', error);
-        status.textContent = 'Could not access the clipboard. Select the biography text above and copy it manually.';
+        status.textContent = 'Could not access the clipboard. Select the short biography text and copy it manually.';
       }
     });
   }

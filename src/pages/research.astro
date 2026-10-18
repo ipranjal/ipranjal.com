@@ -5,16 +5,18 @@ import Illustration from '../components/Illustration.astro';
 import { site } from '../data/site';
 const papers = (await getCollection('research')).sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 const rendered = await Promise.all(papers.map(async paper => ({ paper, ...await render(paper) })));
-const dateFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const dateFormat = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+const years = [...new Set(papers.map(paper => paper.data.published.getUTCFullYear()))].sort();
 ---
 <Layout title="Multi-agent systems research | Pranjal Pandey" description="PhD research at IIT Jodhpur on multi-agent systems, fair division and allocation. Public preprints and collaboration contact.">
-  <div class="wrap">
-    <header class="page-heading"><div class="page-heading-copy"><p class="eyebrow">Research / IIT Jodhpur</p><h1>How should agents divide the work?</h1><p class="lead">I'm a PhD researcher in Theoretical Computer Science at IIT Jodhpur, working on multi-agent systems, fair division and allocation.</p><p class="fine-print">2025 - 2028 expected. M.Tech in Artificial Intelligence, 2023 - 2025.</p></div><Illustration name="research" /></header>
-    <div class="reading"><p>When several agents want different things, how should we allocate resources? My research studies fairness and allocation, alongside my practical work on AI workflows.</p>
-      <p><a class="text-link" href={site.scholar}>View my Google Scholar profile <span aria-hidden="true">&#8599;</span></a></p>
-      <h2>Public preprints</h2>
-      {rendered.map(({ paper, Content }) => <article class="card ledger-entry"><span class="mono">{paper.data.status === 'preprint' ? 'Preprint' : 'Peer-reviewed'}</span><h3><a href={paper.data.url}>{paper.data.title}</a></h3><p class="fine-print">{paper.data.authors.join(', ')}<br />{paper.data.status === 'preprint' ? 'Submitted' : 'Published'} <time datetime={paper.data.published.toISOString().slice(0, 10)}>{dateFormat.format(paper.data.published)}</time></p><Content /><a class="text-link" href={paper.data.url}>Read on arXiv <span aria-hidden="true">&#8599;</span></a></article>)}
-      <h2>Research conversations</h2><p>For questions about the public work or possible collaboration, <a href={`mailto:${site.email}?subject=Research%20conversation`}>email me</a>.</p>
-    </div>
+  <div class="wrap section-frame">
+    <header class="page-heading"><div class="page-heading-copy"><p class="eyebrow">Research / IIT Jodhpur</p><h1>How should agents divide the work?</h1><p class="lead">I'm a PhD researcher in Theoretical Computer Science at IIT Jodhpur. When several agents want different things, how should we allocate resources? My research studies fairness and allocation, alongside my practical work on AI workflows.</p><ul class="outs" aria-label="Research topics"><li>Fair division</li><li>Envy-freeness</li><li>Resource allocation</li><li>Multi-agent systems</li></ul><p class="fine-print">2025 - 2028 expected. M.Tech in Artificial Intelligence, 2023 - 2025.</p><div class="actions"><a class="button button-secondary" href={site.scholar}>Google Scholar <span aria-hidden="true">&#8599;</span></a><a class="text-link" href={`mailto:${site.email}?subject=Research%20conversation`}>Email about research</a></div></div><Illustration name="research" /></header>
+    <section class="section research-papers" aria-labelledby="papers-title">
+      <header class="sec-head"><p class="eyebrow">Public preprints</p><div class="archive-heading"><h2 id="papers-title">{papers.length} papers</h2><p>{years.length > 1 ? `${years[0]} - ${years.at(-1)}` : years[0]}</p></div></header>
+      <div class="research-grid">
+        {rendered.map(({ paper, Content }, index) => <a class="card research-card" href={paper.data.url} aria-labelledby={`paper-title-${index}`}><p class="eyebrow">{paper.data.status === 'preprint' ? 'Preprint' : 'Peer-reviewed'} · <time datetime={paper.data.published.toISOString().slice(0, 10)}>{dateFormat.format(paper.data.published)}</time></p><h3 id={`paper-title-${index}`}>{paper.data.title}</h3><p class="paper-authors">{paper.data.authors.map((author, i) => <Fragment>{i > 0 && ', '}{author === site.name ? <strong>{author}</strong> : author}</Fragment>)}</p><div class="paper-summary"><Content /></div><span class="text-link">Read on arXiv <span aria-hidden="true">&#8599;</span></span></a>)}
+      </div>
+    </section>
+    <section class="section band research-close"><h2>Working on allocation, scheduling or multi-agent coordination?</h2><div class="actions"><a class="button" href={`mailto:${site.email}?subject=Research%20conversation`}>Email me about research</a><a class="button button-secondary" href="/business/">Applied R&D for companies <span aria-hidden="true">&#8594;</span></a></div></section>
   </div>
 </Layout>

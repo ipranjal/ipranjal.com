@@ -14,13 +14,14 @@ import problemPermissions from '../illustrations/problem-permissions.svg?raw';
 import problemHabit from '../illustrations/problem-habit.svg?raw';
 import research from '../illustrations/research.svg?raw';
 import taskflo from '../illustrations/taskflo.svg?raw';
+import taskfloFlow from '../illustrations/taskflo-flow.svg?raw';
 
 const set = {
   hero, 'choose-business': chooseBusiness, 'choose-individual': chooseIndividual,
   'guide-business': guideBusiness, 'guide-personal': guidePersonal,
   'method-diagnose': methodDiagnose, 'method-decide': methodDecide, 'method-build': methodBuild,
   'problem-ideas': problemIdeas, 'problem-permissions': problemPermissions, 'problem-habit': problemHabit,
-  research, taskflo,
+  research, taskflo, 'taskflo-flow': taskfloFlow,
 };
 
 interface Props {
@@ -29,6 +30,11 @@ interface Props {
 }
 const { name, decorative = true } = Astro.props;
 // Decorative illustrations are hidden from the accessibility tree; the card heading already names the idea.
-const markup = decorative ? set[name].replace('<svg ', '<svg aria-hidden="true" focusable="false" ') : set[name];
+const suffix = crypto.randomUUID();
+const unique = set[name]
+  .replace(/\bid="([^"]+)"/g, (_, id) => `id="${id}-${suffix}"`)
+  .replace(/url\(#([^)]+)\)/g, (_, id) => `url(#${id}-${suffix})`)
+  .replace(/aria-labelledby="([^"]+)"/g, (_, ids: string) => `aria-labelledby="${ids.split(' ').map(id => `${id}-${suffix}`).join(' ')}"`);
+const markup = decorative ? unique.replace('<svg ', '<svg aria-hidden="true" focusable="false" ') : unique;
 ---
 <Fragment set:html={markup} />

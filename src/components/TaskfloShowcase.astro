@@ -1,0 +1,47 @@
+---
+import Illustration from './Illustration.astro';
+import { site } from '../data/site';
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+{compact ? (
+  <aside class="tf-callout" aria-labelledby="taskflo-callout-title">
+    <Illustration name="taskflo-flow" />
+    <div>
+      <p class="eyebrow">What I'm building</p>
+      <h3 id="taskflo-callout-title">Taskflo AI, the trust layer for enterprise AI agents.</h3>
+      <p>Agents that run in your cloud, use only approved tools, and log every action.</p>
+    </div>
+    <div class="tf-callout-actions">
+      <a class="button button-secondary" href={site.taskflo} data-taskflo="visit" data-taskflo-location="home">Visit taskflo.ai <span aria-hidden="true">&#8599;</span></a>
+      <a class="text-link" href="/business/#taskflo">How it fits my work <span aria-hidden="true">&#8594;</span></a>
+    </div>
+  </aside>
+) : (
+<section class="section taskflo-showcase band" id="taskflo" aria-labelledby="taskflo-title">
+  <div class="tf-panel">
+    <header class="sec-head">
+      <p class="eyebrow">What I'm building</p>
+      <h2 id="taskflo-title">Taskflo AI: the trust layer for enterprise AI agents.</h2>
+      <p class="lead">Your teams want agents doing real work. Your security and compliance teams keep saying no, and they're right to. Taskflo is being built to give them a defensible way to say yes.</p>
+    </header>
+    <div class="tf-body">
+      <ul class="tf-points">
+        <li><span class="tf-check" aria-hidden="true"></span><span><strong>Where does our data go?</strong> The runtime runs in your cloud account, not ours.</span></li>
+        <li><span class="tf-check" aria-hidden="true"></span><span><strong>Who can act on our behalf?</strong> Only declared tools, within limits your teams set.</span></li>
+        <li><span class="tf-check" aria-hidden="true"></span><span><strong>Can we prove what happened?</strong> Every action leaves a tamper-evident record.</span></li>
+      </ul>
+      <div class="tf-diagram"><Illustration name="taskflo-flow" /><ol class="tf-labels"><li>Design in Studio</li><li>Sealed bundle</li><li>Runs in your cloud</li></ol><p class="fine-print">Design in Studio. Run in your cloud. The sealed bundle connects them, without handing over your runtime.</p></div>
+    </div>
+    <div class="tf-bounds">
+        <h3 class="eyebrow">Declared bounds · Before go-live</h3>
+        <dl class="tf-stats"><div><dt>Max cost per run</dt><dd>$2.50</dd></div><div><dt>Reachable systems</dt><dd>3</dd></div><div><dt>Irreversible action</dt><dd>1</dd></div><div><dt>Human approval</dt><dd>1</dd></div></dl>
+        <p class="fine-print">Illustrative reference workflow (invoice triage), not a customer result.</p>
+    </div>
+    <p class="tf-advisory">My advisory work and Taskflo answer the same question at different scales. In an audit or build, I'll recommend what fits your stack, whether or not that's Taskflo.</p>
+    <div class="actions"><a class="button" href={site.taskflo} data-taskflo="visit" data-taskflo-location="business">Visit taskflo.ai <span aria-hidden="true">&#8599;</span></a><a class="button button-secondary" href="/call/" data-taskflo="workflow" data-taskflo-location="business">Talk about your workflow <span aria-hidden="true">&#8599;</span></a><a class="text-link" href={`${site.taskflo}/resources/ai-agent-approval-playbook`}>Read the AI Agent Approval Playbook <span aria-hidden="true">&#8599;</span></a></div>
+  </div>
+</section>
+)}

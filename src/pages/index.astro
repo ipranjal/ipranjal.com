@@ -5,82 +5,72 @@ import Method from '../components/Method.astro';
 import Signup from '../components/Signup.astro';
 import WritingCard from '../components/WritingCard.astro';
 import Illustration from '../components/Illustration.astro';
+import TaskScorer from '../components/TaskScorer.astro';
+import TaskfloShowcase from '../components/TaskfloShowcase.astro';
 import { site } from '../data/site';
 import { publishedWriting } from '../lib/writing';
 const latestWriting = (await publishedWriting()).slice(0, 3);
 ---
 <Layout title="Pranjal Pandey | Practical AI Strategy for Founders & Leaders"
   description="Practical AI for your business and your life. AI strategy for companies, workflows and career help for individuals. Builder, advisor and PhD researcher." home hasSignup>
-  <div class="wrap">
+  <div class="wrap section-frame">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">Practical AI strategy for founders & leaders</p>
         <h1 id="hero-title">AI strategy that survives <span>Monday morning.</span></h1>
-        <p class="lead">I help founders and leadership teams work out where AI actually fits, and turn AI pilots into workflows their teams use every day.</p>
+        <p class="lead">I help founders and leadership teams work out where AI actually fits, and turn pilots into workflows people use every day.</p>
         <div class="actions">
           <a class="button" href="#guide">Get the free guide <span aria-hidden="true">&#8595;</span></a>
-          <a class="text-link" href="/call/">Book a call <span aria-hidden="true">&#8599;</span></a>
+          <a class="button button-secondary" href="/call/">Book a call <span aria-hidden="true">&#8599;</span></a>
         </div>
       </div>
       <Portrait hero />
     </section>
     <section class="audience-chooser" aria-labelledby="chooser-title">
-      <h2 id="chooser-title">What brings you here?</h2>
-      <div class="audience-doors"><a href="/business/"><Illustration name="choose-business" /><span class="mono">For my company</span><h3>Choose the AI work that matters.</h3><p>Strategy, audits and AI workflows for founders and leadership teams.</p><span class="text-link">Explore business <span aria-hidden="true">&#8599;</span></span></a><a href="/individuals/"><Illustration name="choose-individual" /><span class="mono">For myself</span><h3>Make AI work for your week.</h3><p>AI workflows, guides and career help for people who'd rather use AI well than read another hype thread.</p><span class="text-link">Explore for individuals <span aria-hidden="true">&#8599;</span></span></a></div>
+      <p class="eyebrow">What brings you here?</p><h2 id="chooser-title">Two doors. Same practical approach.</h2>
+      <div class="audience-doors"><a href="/business/"><Illustration name="choose-business" /><div><p class="eyebrow">For my company</p><h3>Choose the AI work that matters.</h3><p>Strategy, audits and AI workflows for founders and leadership teams.</p><span class="text-link">Explore business <span aria-hidden="true">&#8594;</span></span></div></a><a href="/individuals/"><Illustration name="choose-individual" /><div><p class="eyebrow">For myself</p><h3>Make AI work for your week.</h3><p>Workflows, guides and career help, for people who'd rather use AI well than read another hype thread.</p><span class="text-link">Explore for individuals <span aria-hidden="true">&#8594;</span></span></div></a></div>
     </section>
-    <div class="credentials chip-row" aria-label="Background">
-      <span class="chip">Building software <strong>since 2013</strong>. Founder <strong>at 19</strong>.</span>
-      <span class="chip">Founder, <strong>Taskflo AI</strong></span>
-      <span class="chip">PhD researcher, <strong>IIT Jodhpur</strong></span>
-    </div>
     <section class="section blockers band" data-reveal-group>
-      <div data-reveal><h2>Everyone has an AI strategy deck. Few have AI that works.</h2></div>
+      <div data-reveal><p class="eyebrow">Why pilots stall</p><h2>Everyone has an AI strategy deck. Few have AI that works.</h2></div>
       <div class="card-grid">
-        <div class="card" data-reveal><Illustration name="problem-ideas" /><h3>Too many ideas. No clear priority.</h3><p>Twenty possible use cases, but no shared answer to which one matters first.</p></div>
+        <div class="card" data-reveal><Illustration name="problem-ideas" /><h3>Too many ideas, no priority.</h3><p>Twenty use cases, and no shared answer to which one comes first.</p></div>
         <div class="card" data-reveal><Illustration name="problem-permissions" /><h3>Permissions are an afterthought.</h3><p>Nobody can say where the data goes or what the AI is allowed to touch.</p></div>
-        <div class="card" data-reveal><Illustration name="problem-habit" /><h3>The pilot never becomes a habit.</h3><p>It worked in the demo. It didn't fit the people and process doing the work.</p></div>
+        <div class="card" data-reveal><Illustration name="problem-habit" /><h3>The pilot never becomes a habit.</h3><p>The demo worked, but it didn't fit the people doing the work.</p></div>
       </div>
+      <TaskfloShowcase compact />
     </section>
     <section class="section method-section" id="method">
-      <div class="section-intro"><div><h2>Diagnose. Decide. Build.</h2></div><p>Find the blocker, choose the trade-off, then build something your team can own. The output is a useful next move, not a giant report.</p></div>
+      <div class="section-intro"><div><p class="eyebrow">How I work</p><h2>Diagnose. Decide. Build.</h2></div><p>The output is a useful next move, not a giant report.</p></div>
       <Method />
-      <div class="actions"><a class="text-link" href="/business/">See how we can work together <span aria-hidden="true">&#8599;</span></a></div>
+      <div class="actions"><a class="text-link" href="/business/">See how we can work together <span aria-hidden="true">&#8594;</span></a></div>
     </section>
     <section class="section band" aria-labelledby="scorer-title">
-      <div class="section-intro"><div><p class="eyebrow">Try it</p><h2 id="scorer-title">Should AI do this task?</h2></div><p>Move the three sliders for any task you're weighing up. The verdict updates as you go.</p></div>
-      <form class="scorer" data-scorer>
-        <div class="scorer-field"><label for="scorer-freq">How often does it come up? <span>Rare &#8594; constant</span></label><input id="scorer-freq" name="freq" type="range" min="1" max="5" value="3" /></div>
-        <div class="scorer-field"><label for="scorer-check">How easy is a wrong answer to catch? <span>Hard &#8594; easy</span></label><input id="scorer-check" name="check" type="range" min="1" max="5" value="3" /></div>
-        <div class="scorer-field"><label for="scorer-risk">How much does a mistake cost? <span>Low &#8594; high</span></label><input id="scorer-risk" name="risk" type="range" min="1" max="5" value="3" /></div>
-        <div class="scorer-verdict" data-verdict><strong></strong><span></span><div class="scorer-meter" data-meter aria-hidden="true"></div></div>
-      </form>
+      <div class="section-intro"><div><p class="eyebrow">Try it</p><h2 id="scorer-title">Should AI do this task?</h2></div><p>Pick one task from your week and move the sliders.</p></div>
+      <TaskScorer id="scorer" />
+      <a class="text-link" href="/writing/which-tasks-to-automate-with-ai/">Read the full framework <span aria-hidden="true">&#8594;</span></a>
     </section>
     <section class="section proof-grid">
-      <div class="proof-intro"><h2>One question.<br />Different scales.</h2><p>What does it take for a system to stay useful? I've followed that question from my first software at 15 to enterprise workflows and multi-agent research.</p><a class="text-link" href="/about/">The longer story <span aria-hidden="true">&#8599;</span></a></div>
-      <div class="ledger">
-        <a class="card ledger-entry" href={site.taskflo}><Illustration name="taskflo" /><span class="mono">01 / Building</span><h3>Taskflo AI</h3><p>A platform that lets companies run AI agent workflows inside their own cloud, with every action checked and logged. Built for teams whose security people ask good questions.</p></a>
-        <a class="card ledger-entry" href="/business/"><span class="mono">02 / Applied work</span><h3>From architecture to the workflow.</h3><p>Enterprise platforms, AI integrations and the practical decisions around permissions, ownership and delivery.</p></a>
-        <a class="card ledger-entry" href="/research/"><Illustration name="research" /><span class="mono">03 / Research</span><h3>How should agents divide the work?</h3><p>PhD research at IIT Jodhpur in multi-agent systems, fair division and allocation. Expected completion: 2028.</p></a>
+      <div class="proof-intro"><p class="eyebrow">One question, different scales</p><h2>What keeps a system useful?</h2><p>From my first software at 15 to enterprise workflows and <a href="/research/">multi-agent research</a>, I've followed the same question.</p><a class="text-link" href="/about/">The longer story <span aria-hidden="true">&#8594;</span></a></div>
+      <div class="card-grid">
+        <a class="card ledger-entry" href="/business/"><Illustration name="choose-business" /><span class="eyebrow">Advising</span><h3>AI strategy for founders & leaders</h3><p>Strategy, audits and AI workflows, scoped with your team and built to stick.</p><span class="text-link">How I work with teams <span aria-hidden="true">&#8594;</span></span></a>
+        <a class="card ledger-entry" href="/business/"><Illustration name="method-build" /><span class="eyebrow">Applied work</span><h3>From architecture to workflow.</h3><p>Enterprise platforms, AI integrations, and the decisions about permissions and ownership.</p><span class="text-link">How I work with teams <span aria-hidden="true">&#8594;</span></span></a>
+        <a class="card ledger-entry" href="/research/"><Illustration name="research" /><span class="eyebrow">Research</span><h3>How should agents divide the work?</h3><p>PhD research at IIT Jodhpur in multi-agent systems and fair division.</p><span class="text-link">Explore the research <span aria-hidden="true">&#8594;</span></span></a>
       </div>
     </section>
     <section class="section guide-section band" id="guide" aria-labelledby="home-guide-title">
-      <div class="guide-copy"><p class="eyebrow">Start with the right questions</p><h2 id="home-guide-title">Before you build another pilot.</h2><p class="muted">A short, practical guide to working out where AI fits in your business. For founders & leaders.</p>
+      <div class="guide-covers"><Illustration name="guide-business" /><Illustration name="guide-personal" /></div>
+      <div class="guide-copy"><p class="eyebrow">Free PDF + monthly letter</p><h2 id="home-guide-title">Before you build another pilot.</h2>
         <ul class="guide-contents"><li>Five questions to ask before an AI project.</li><li>How to choose your first three workflows.</li><li>The mistakes that stop a pilot becoming useful.</li></ul>
-        <Illustration name="guide-business" />
-      </div>
       <div class="guide-signup-panel" aria-labelledby="home-signup-title">
-        <p class="eyebrow">Free PDF + monthly letter</p>
-        <h2 id="home-signup-title">Get the AI Strategy Starter.</h2>
-        <p>Confirm your email to get the PDF.</p>
-        <Signup id="home-email" audience="business" />
+        <Signup id="home-email" audience="business" titleId="home-signup-title" kitLink />
+      </div>
       </div>
     </section>
-    <p>Here for yourself? <a class="text-link" href="/kit/">Get the free kit <span aria-hidden="true">&#8599;</span></a></p>
     <section class="section writing-preview">
-      <div class="section-intro"><div><p class="eyebrow">Practical AI</p><h2>From the monthly letter.</h2></div><div class="writing-preview-intro"><p>Practical AI for your business and your life: what works, what stalls, and how to make it stick. One long letter a month, no fluff.</p><a class="text-link" href="/writing/">Writing & the monthly letter <span aria-hidden="true">&#8599;</span></a></div></div>
-      {latestWriting.length ? <div class="article-list writing-grid home-writing-grid">{latestWriting.map(entry => <WritingCard entry={entry} />)}</div> : <div class="empty-note"><p>No essays published here yet. <a href={site.linkedin}>Follow my updates on LinkedIn</a>.</p></div>}
+      <div class="section-intro"><div><p class="eyebrow">From the monthly letter</p><h2>Practical AI, written down.</h2></div><a class="text-link" href="/writing/">All writing <span aria-hidden="true">&#8594;</span></a></div>
+      {latestWriting.length ? <div class="article-list writing-grid home-writing-grid">{latestWriting.map(entry => <WritingCard entry={entry} showDate={false} />)}</div> : <div class="empty-note"><p>No essays published here yet. <a href={site.linkedin}>Follow my updates on LinkedIn</a>.</p></div>}
     </section>
-    <section class="section close band"><h2>Got an AI idea that's stuck?</h2><p>If you're trying to work out where AI fits in your team or your company, I'm always happy to talk. No pitch deck needed.</p><div class="actions"><a class="button" href="/call/">Book a call <span aria-hidden="true">&#8599;</span></a><a class="text-link" href={`mailto:${site.email}`}>Or email me</a></div></section>
+    <section class="section close band"><Illustration name="choose-business" /><h2>Got an AI idea that's stuck?</h2><p>If you're working out where AI fits in your team or company, I'm happy to talk. No pitch deck needed.</p><div class="actions"><a class="button" href="/call/">Book a call <span aria-hidden="true">&#8599;</span></a><a class="button button-secondary" href={`mailto:${site.email}`}>Email me</a></div></section>
   </div>
   <script>
     import '../scripts/home';

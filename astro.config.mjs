@@ -13,7 +13,7 @@ export default defineConfig({
     hooks: {
       'astro:build:done': async ({ dir }) => {
         await mkdir(new URL('licenses/', dir), { recursive: true });
-        for (const name of ['@fontsource/syne', '@fontsource/ibm-plex-sans', '@fontsource/ibm-plex-mono', 'lenis']) {
+        for (const name of ['@fontsource/syne', '@fontsource/ibm-plex-sans', '@fontsource/ibm-plex-mono']) {
           await copyFile(
             new URL(`./node_modules/${name}/LICENSE`, import.meta.url),
             new URL(`licenses/${name.replace('@fontsource/', '')}.txt`, dir),

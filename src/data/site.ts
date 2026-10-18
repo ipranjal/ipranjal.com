@@ -26,7 +26,7 @@ export const timeline = [
 ];
 
 export const method = [
-  { name: 'Diagnose', title: 'Find the real blocker.', output: 'A workflow map', detail: 'Trace the work, the people and the data. Separate the symptom from the constraint.', checks: ['Current workflow', 'Data & permissions', 'One clear problem'] },
-  { name: 'Decide', title: 'Make the trade-off explicit.', output: 'A decision sheet', detail: 'Put value, risk, cost and team capability on the same page before choosing the build.', checks: ['Value & feasibility', 'Risk & ownership', 'A scoped next move'] },
-  { name: 'Build', title: 'Leave a path forward.', output: 'A working next step', detail: 'Turn the decision into an architecture, a delivery plan or the first focused workflow.', checks: ['Human checkpoints', 'Observable actions', 'Team handover'] },
+  { name: 'Diagnose', title: 'Find the real blocker.', detail: 'Trace the work, the people and the data. Separate the symptom from the constraint.', checks: ['Workflow map', 'Data & permissions', 'One clear problem'] },
+  { name: 'Decide', title: 'Make the trade-off explicit.', detail: 'Put value, risk, cost and team capability on one page before choosing the build.', checks: ['Decision sheet', 'Risk & ownership', 'A scoped next move'] },
+  { name: 'Build', title: 'Leave a path forward.', detail: 'Turn the decision into an architecture, a delivery plan or the first working workflow.', checks: ['Human checkpoints', 'Observable actions', 'Team handover'] },
 ];

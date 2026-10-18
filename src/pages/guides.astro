@@ -7,7 +7,7 @@ import { individualGuides } from '../data/guides';
 <Layout title="Practical AI Guides for Business & Individuals | Pranjal Pandey" description="Free and upcoming practical AI guides: AI strategy for founders and leaders, and AI workflows and career guides for individuals." hasSignup>
   <div class="wrap">
     <header class="page-heading"><h1>Guides</h1><p class="lead">Practical AI, written down. No hype, no 50-tool listicles: just what to do, in what order, and why. Pick your lane.</p></header>
-    <nav class="audience-switch tablist" aria-label="Guide audience"><a class="tab" href="#business-guides" data-guide-choice="business" aria-current="true">For Business</a><a class="tab" href="#individual-guides" data-guide-choice="individuals">For Individuals</a></nav>
+    <nav class="audience-switch tablist" data-link-tabs aria-label="Guide audience"><a class="tab" href="#business-guides" data-guide-choice="business" aria-current="page">For Business</a><a class="tab" href="#individual-guides" data-guide-choice="individuals">For Individuals</a><span class="tab-indicator" aria-hidden="true"></span></nav>
     <div id="business-guides" data-audience-panel="business">
     <section class="guides-opening" aria-labelledby="guides-title">
       <div class="guides-promise">
@@ -20,15 +20,12 @@ import { individualGuides } from '../data/guides';
         <Illustration name="guide-business" />
       </div>
       <div class="guide-signup-panel" id="free-guide" aria-labelledby="signup-title">
-        <p class="eyebrow">Free PDF + monthly letter</p>
-        <h2 id="signup-title">Get the AI Strategy Starter.</h2>
-        <p>Confirm your email to get the PDF.</p>
-        <Signup id="guides-email" audience="business" />
+        <Signup id="guides-email" audience="business" titleId="signup-title" />
       </div>
     </section>
-    <section class="section" id="upcoming"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="offer-list">
-      <article class="offer-row"><span class="mono">Upcoming</span><div><h3>AI for Startups</h3><p>The planned playbook for founders: where AI gives a small team leverage, what to build vs buy, how to keep costs sane, and how not to burn months on demos.</p></div></article>
-      <article class="offer-row"><span class="mono">Upcoming</span><div><h3>AI for Business</h3><p>For managers and leadership teams: choosing the right AI projects, getting security and teams on board, and turning pilots into everyday workflows.</p></div></article>
+    <section class="section" id="upcoming"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="card-grid-2">
+      <article class="card"><span class="chip is-quiet">Coming soon</span><h3>AI for Startups</h3><p>A playbook for founders: choose AI workflows, decide what to build or buy, and keep costs under control.</p></article>
+      <article class="card"><span class="chip is-quiet">Coming soon</span><h3>AI for Business</h3><p>Choose the right AI projects, get security and teams on board, and turn pilots into everyday workflows.</p></article>
     </div></section>
     <section class="close"><h2>Want to apply it to your business?</h2><p>A paid strategy session gives your question dedicated working time.</p><a class="button" href="/strategy/">Book a strategy session</a></section>
     </div>
@@ -44,13 +41,10 @@ import { individualGuides } from '../data/guides';
           <Illustration name="guide-personal" />
         </div>
         <div class="guide-signup-panel" aria-labelledby="individual-signup-title">
-          <p class="eyebrow">Free PDF + monthly letter</p>
-          <h2 id="individual-signup-title">Get the Personal AI Starter Kit.</h2>
-          <p>Confirm your email to get the PDF.</p>
-          <Signup id="individual-guides-email" audience="individuals" />
+          <Signup id="individual-guides-email" audience="individuals" titleId="individual-signup-title" />
         </div>
       </section>
-      <section class="section"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="offer-list">{individualGuides.map(guide => <article class="offer-row"><span class="mono">Coming soon</span><div><h3>{guide.title}</h3><p>{guide.description}</p></div></article>)}</div></section>
+      <section class="section"><h2>Coming soon.</h2><p class="lead">Subscribers to Practical AI get new guides first.</p><div class="card-grid">{individualGuides.map(guide => <article class="card"><span class="chip is-quiet">Coming soon</span><h3>{guide.title}</h3><p>{guide.description}</p></article>)}</div></section>
       <section class="close"><h2>Want 1:1 help?</h2><p>Build a direction and portfolio projects around your own background.</p><a class="button" href="/career/">Book a career session</a></section>
     </div>
   </div>
@@ -68,14 +62,19 @@ import { individualGuides } from '../data/guides';
     const audience = selectedAudience();
     panels.forEach(panel => { panel.hidden = panel.dataset.audiencePanel !== audience; });
     choices.forEach(choice => {
-      if (choice.dataset.guideChoice === audience) choice.setAttribute('aria-current', 'true');
+      if (choice.dataset.guideChoice === audience) choice.setAttribute('aria-current', 'page');
       else choice.removeAttribute('aria-current');
     });
   };
-  choices.forEach(choice => choice.addEventListener('click', () => {
+  choices.forEach(choice => choice.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
     try { localStorage.setItem('guide-audience', choice.dataset.guideChoice ?? 'business'); }
     catch (error) { console.warn('Could not save guide audience preference.', error); }
+    history.pushState(null, '', choice.href);
+    showAudience();
   }));
   window.addEventListener('hashchange', showAudience);
+  window.addEventListener('popstate', showAudience);
   showAudience();
 </script>

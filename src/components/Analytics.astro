@@ -39,6 +39,9 @@
       if (['business', 'personal', 'both'].includes(guide)) {
         gtag('event', 'download_guide', { guide });
       }
+      if (['visit', 'workflow'].includes(link.dataset.taskflo)) {
+        gtag('event', 'taskflo_click', { action: link.dataset.taskflo, location: link.dataset.taskfloLocation });
+      }
       const destination = new URL(link.href, location.origin);
       if (destination.origin !== location.origin) return;
       const bookingEvents = {

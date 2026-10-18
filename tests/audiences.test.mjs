@@ -34,7 +34,8 @@ test('critique fixes keep one concise, audience-matched form and one essay CTA b
   for (const [path, button] of [['index', 'Send me the guide'], ['guides/index', 'Send me the guide'], ['guide/index', 'Send me the guide'], ['kit/index', 'Send me the kit'], ['writing/index', 'Subscribe']]) {
     const html = await readFile(`dist/${path}.html`, 'utf8');
     assert(html.includes(`<span>${button}</span>`), `Wrong signup action on ${path}`);
-    assert(html.includes('one email a month. Unsubscribe anytime.'));
+    assert(html.includes('class="signup-trust"'));
+    for (const text of ['Free PDF', '1 email a month', 'Unsubscribe anytime']) assert(html.includes(`<li>${text}</li>`));
     assert(!html.includes('Email powered by'));
     assert(!html.includes('Need help getting the guides?'));
   }
@@ -48,8 +49,8 @@ test('critique fixes keep one concise, audience-matched form and one essay CTA b
     assert(!html.includes('Want a step-by-step way'));
     const cta = html.match(/<aside class="essay-subscribe[\s\S]*?<\/aside>/)?.[0];
     assert(cta?.includes('id="article-email"'));
-    assert(cta.includes('Get the AI Strategy Starter.'));
-    assert(cta.includes('Send me the guide'));
+    assert(cta.includes('The monthly letter.'));
+    assert(cta.includes('<span>Subscribe</span>'));
     assert.equal((cta.match(/href="\/call\/"/g) || []).length, 1);
     assert(!cta.includes('href="/guide/"'), 'Inline form must not repeat a separate guide CTA');
     assert(!cta.includes('mailto:'));
@@ -64,10 +65,10 @@ test('empty audiences stay out of discovery while existing routes and dates rema
   assert(!individuals.includes('Where can I check session terms?'));
   assert(individuals.includes('Price and booking on Topmate.'));
   const writing = await readFile('dist/writing/index.html', 'utf8');
-  const select = writing.match(/<select id="writing-audience"[\s\S]*?<\/select>/)?.[0];
-  assert(select?.includes('value="business"'));
-  assert(!select.includes('value="individuals"'));
-  assert(!select.includes('value="research"'));
+  const filter = writing.match(/<nav[^>]*id="writing-audience"[\s\S]*?<\/nav>/)?.[0];
+  assert(filter?.includes('data-writing-choice="business"'));
+  assert(!filter.includes('data-writing-choice="individuals"'));
+  assert(!filter.includes('data-writing-choice="research"'));
   assert(!individuals.includes('On the writing desk.'));
   const guides = await readFile('dist/guides/index.html', 'utf8');
   assert(!guides.includes('On the writing desk.'));
@@ -143,7 +144,10 @@ test('guide picker offers byte-identical PDFs and a current two-file ZIP, only a
 test('audience chooser, guides navigation, writing labels and links groups use real destinations', async () => {
   const home = await readFile('dist/index.html', 'utf8');
   assert(home.indexOf('id="chooser-title"') > home.indexOf('id="hero-title"'));
-  assert(home.indexOf('id="chooser-title"') < home.indexOf('class="credentials chip-row"'));
+  const hero = home.match(/<section class="hero"[\s\S]*?<\/section>/)?.[0];
+  assert(hero && !hero.includes('class="credentials chip-row"'));
+  assert(hero.includes('Founder, Taskflo AI'));
+  assert(hero.includes('PhD researcher, IIT Jodhpur'));
   for (const path of ['/business/', '/individuals/', '/kit/']) assert(home.includes(`href="${path}"`));
   const guides = await readFile('dist/guides/index.html', 'utf8');
   assert(guides.includes('id="business-guides" data-audience-panel="business"'));

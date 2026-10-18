@@ -2,14 +2,14 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { formatDate } from '../lib/writing';
-interface Props { entry: CollectionEntry<'writing'> }
-const { entry } = Astro.props;
+interface Props { entry: CollectionEntry<'writing'>; showDate?: boolean }
+const { entry, showDate = true } = Astro.props;
 const href = `/writing/${entry.id}/`;
 ---
-<article data-writing-audience={entry.data.audience}>
-  {entry.data.cover && <a class="writing-cover-link" href={href} tabindex="-1" aria-hidden="true"><Image class="writing-cover" src={entry.data.cover.image} alt="" width={1280} widths={[400, 640, 960, 1280]} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1280px) 45vw, 600px" format="webp" quality={82} loading="lazy" /></a>}
+<article class="card writing-card" data-writing-audience={entry.data.audience}>
+  {entry.data.cover && <a class="writing-cover-link" href={href} tabindex="-1" aria-hidden="true"><Image class="writing-cover" src={entry.data.cover.thumbnail ?? entry.data.cover.image} alt="" width={1280} height={720} fit="cover" widths={[400, 640, 960, 1280]} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1280px) 45vw, 600px" format="webp" quality={82} loading="lazy" /></a>}
   <p class="mono audience-label">{entry.data.audience}</p>
-  <time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time>
-  <h3><a href={href}>{entry.data.title}</a></h3>
-  <p>{entry.data.description}</p>
+  {showDate && <time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time>}
+  <h3><a href={href}>{entry.data.card_title ?? entry.data.title}</a></h3>
+  <p class="writing-description">{entry.data.card_description ?? entry.data.description}</p>
 </article>

@@ -25,7 +25,7 @@ export async function verifyBuild(directory = 'dist') {
   const paths = new Set(files.map(file => relative(root, file)));
   const required = ['index.html', '404.html', 'work/index.html', 'business/index.html', 'individuals/index.html', 'kit/index.html', 'about/index.html', 'guides/index.html', 'guide/index.html', 'thanks/index.html', 'welcome/index.html', 'writing/index.html', 'research/index.html', 'press/index.html', 'links/index.html', 'privacy/index.html', 'call/index.html', 'session/index.html', 'strategy/index.html', 'career/index.html', 'playbook/index.html', 'newsletter/index.html', 'files/ai-strategy-starter.pdf', 'files/personal-ai-starter-kit.pdf', 'files/practical-ai-free-guides.zip', 'rss.xml', 'sitemap.xml', 'robots.txt', 'CNAME', '.nojekyll'];
   for (const path of required) assert(paths.has(path), `Missing required output: ${path}`);
-  for (const name of ['syne', 'ibm-plex-sans', 'ibm-plex-mono', 'lenis', 'gsap-core', 'CSSPlugin', 'ScrollTrigger', 'Observer']) assert(paths.has(`licenses/${name}.txt`), `Missing bundled license: ${name}`);
+  for (const name of ['syne', 'ibm-plex-sans', 'ibm-plex-mono', 'gsap-core', 'CSSPlugin', 'ScrollTrigger', 'Observer']) assert(paths.has(`licenses/${name}.txt`), `Missing bundled license: ${name}`);
   for (const path of paths) {
     assert(!/(^|\/)(\.agents|\.tastemaker|node_modules|about\.md|website-.*\.md|skills-lock\.json|IMG_5046\.HEIC)(\/|$)/i.test(path), `Private source leaked: ${path}`);
     assert(!/\.(mp4|heic|md|ts|astro)$/i.test(path), `Unexpected source/media in output: ${path}`);

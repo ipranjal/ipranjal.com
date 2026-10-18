@@ -2,12 +2,15 @@
 title: "Why AI Pilots Fail (It's Rarely the Model): 5 Reasons and How to Fix Them"
 seo_title: "Why AI Pilots Fail: 5 Reasons and Fixes | Pranjal Pandey"
 description: "AI pilots stall on ownership, messy data, security and missing metrics. Learn the five reasons AI projects fail and how to move from pilot to production."
+card_title: "Why AI pilots fail"
+card_description: "It's rarely the model. Five reasons, and how to fix them."
 published: 2026-10-16
 draft: false
 author: Pranjal Pandey
 audience: business
 cover:
   image: ../../assets/writing/why-ai-pilots-fail.png
+  thumbnail: ../../assets/writing/why-ai-pilots-fail-art.png
   alt: "Blueprint of a workflow dropping pieces between a promising prototype and a production system."
 tags: [AI strategy, AI pilots, AI adoption, AI implementation, leadership]
 ---

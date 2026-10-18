@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Signup from '../../components/Signup.astro';
+import TaskScorer from '../../components/TaskScorer.astro';
 import { publishedWriting, formatDate } from '../../lib/writing';
 
 export async function getStaticPaths() {
@@ -16,10 +17,12 @@ const audience = entry.data.audience === 'research' ? 'all' : entry.data.audienc
   <article class="wrap essay">
     <header class="essay-heading"><a class="text-link" href="/writing/">All writing</a><p class="eyebrow">Practical AI / {entry.data.author}</p><h1>{entry.data.title}</h1><p class="lead">{entry.data.description}</p><p class="fine-print"><time datetime={entry.data.published.toISOString()}>{formatDate(entry.data.published)}</time>{entry.data.updated && <> / Updated <time datetime={entry.data.updated.toISOString()}>{formatDate(entry.data.updated)}</time></>}</p></header>
     {entry.data.cover && <Image class="essay-banner" src={entry.data.cover.image} alt={entry.data.cover.alt} width={1280} widths={[400, 640, 960, 1280]} sizes="(max-width: 1280px) calc(100vw - 40px), 1200px" format="webp" quality={85} loading="eager" />}
-    <div class="essay-body"><Content /></div>
-    <aside class="essay-subscribe guide-signup-panel" aria-labelledby="article-signup-title"><p class="mono audience-label">{entry.data.audience}</p>
-      {entry.data.audience === 'individuals' ? <><h2 id="article-signup-title">Get the Personal AI Starter Kit.</h2><p>Ten workflows for your week. Confirm your email to get the kit.</p></> : entry.data.audience === 'business' ? <><h2 id="article-signup-title">Get the AI Strategy Starter.</h2><p>Five questions before an AI project, your first three workflows, and why pilots stall. Confirm your email to get the guide.</p></> : <><h2 id="article-signup-title">Get the free Practical AI guides.</h2><p>Confirm your email, then choose the business guide, personal kit or both.</p></>}
-      <Signup id="article-email" audience={audience} />
+    <div class="essay-body"><Content />
+      {entry.id === 'which-tasks-to-automate-with-ai' && <section aria-labelledby="essay-scorer-title"><h2 id="essay-scorer-title">Try it on your own task</h2><TaskScorer id="essay-scorer" /></section>}
+    </div>
+    <aside class="essay-subscribe guide-signup-panel" aria-labelledby="article-signup-title">
+      <h2 id="article-signup-title">The monthly letter.</h2><p>Get new writing in your inbox, plus both free guides. Confirm your email, then choose the business guide, personal kit or both.</p>
+      <Signup id="article-email" audience="all" button="Subscribe" />
       <div class="actions">{entry.data.audience === 'individuals' ? <a class="text-link" href="/career/">Book a career session</a> : entry.data.audience === 'business' ? <a class="text-link" href="/call/">Book a free intro call</a> : <a class="text-link" href="/research/">Explore the research</a>}</div>
     </aside>
   </article>

@@ -16,7 +16,7 @@ const { target, label, provider } = Astro.props;
 ---
 <Layout title={`${label} | Pranjal Pandey`} description={`Continue to ${provider}.`} minimal noindex>
   <noscript slot="head"><meta http-equiv="refresh" content={`0;url=${target}`} /></noscript>
-  <div class="wrap"><div class="redirect"><h1>{label}</h1><p>Taking you to {provider}. If you're not redirected, use the link below.</p><a class="button" data-redirect-target href={target}>Continue to {provider} <span aria-hidden="true">&#8599;</span></a></div></div>
+  <div class="wrap"><div class="redirect"><h1>{label}</h1><p>Taking you to {provider}. If you're not redirected, use the link below.</p><a class="button" data-redirect-target href={target}>Continue to {provider} <span aria-hidden="true">{target.startsWith('/') ? '\u2192' : '\u2197'}</span></a></div></div>
   <script>
     const link = document.querySelector<HTMLAnchorElement>('[data-redirect-target]');
     if (link) {

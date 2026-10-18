@@ -6,7 +6,7 @@ import Illustration from './Illustration.astro';
 interface Props { hero?: boolean }
 const { hero = false } = Astro.props;
 ---
-<figure class:list={['portrait', { 'portrait-hero': hero }]}>
+<figure class:list={['portrait', { 'portrait-hero hero-visual': hero }]}>
   {hero && <Illustration name="hero" />}
   <Image
     src={portrait}
@@ -20,5 +20,5 @@ const { hero = false } = Astro.props;
     loading={hero ? 'eager' : 'lazy'}
     fetchpriority={hero ? 'high' : 'auto'}
   />
-  <figcaption><span>Pranjal Pandey</span><span>Builder. Advisor. Researcher.</span></figcaption>
+  <figcaption><span>Pranjal Pandey</span><span>{hero ? <Fragment>Founder, Taskflo AI · <a href="/research/">PhD researcher, IIT Jodhpur</a></Fragment> : 'Builder. Advisor. Researcher.'}</span></figcaption>
 </figure>

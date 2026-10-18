@@ -14,13 +14,9 @@ const illustrations = ['method-diagnose', 'method-decide', 'method-build'] as co
     <div class="tabpanel method-panel-grid" id={`method-panel-${index}`} role="tabpanel" aria-labelledby={`method-tab-${index}`} hidden={index !== 0}>
       <div class="illus-host"><Illustration name={illustrations[index]} /></div>
       <div>
-        <span class="step-number" aria-hidden="true">0{index + 1}</span>
         <h3>{step.title}</h3>
         <p>{step.detail}</p>
-        <div class="method-artifact">
-          <span class="mono">{step.output}</span>
-          <ul>{step.checks.map(check => <li>{check}</li>)}</ul>
-        </div>
+        <ul class="outs" aria-label={`${step.name} outputs`}>{step.checks.map(check => <li>{check}</li>)}</ul>
       </div>
     </div>
   ))}
